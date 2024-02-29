@@ -5,30 +5,19 @@ import Users from '../Users/Users';
 import BlogPortal from '../Blog/BlogPortal';
 import TopNav from '../TopNav/TopNav';
 
+import { Outlet } from 'react-router-dom';
+
 
 const PortalPage = () => {
-    const [activeComponent, setActiveComponent] = useState('dashboard');
 
-    const renderComponent = () => {
-        switch (activeComponent) {
-            case 'dashboard':
-                return <Dashboard />;
-            case 'users':
-                return <Users />;
-            case 'blog':
-                return <BlogPortal />;
-            default:
-                return null;
-        }
-    };
 
     return (
         <div className="flex">
-            <SideBar setActiveComponent={setActiveComponent} />
-            {/* <TopNav /> */}
+            <SideBar />
             <div className=" flex-1 h-screen">
                 <TopNav />
-                {renderComponent()}
+                <Outlet />
+
             </div>
         </div>
     )
