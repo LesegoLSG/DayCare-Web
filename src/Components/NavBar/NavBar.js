@@ -17,7 +17,7 @@ const NavBar = () => {
     const [activeSection, setActiveSection] = useState('home'); // Initialize with 'hero'
 
 
-    const sections = ['home', 'about', 'contact'];
+    const sections = ['home', 'about', 'services'];
 
     // Function to set active section based on URL hash
     const setActiveSectionFromURL = () => {
@@ -104,7 +104,7 @@ const NavBar = () => {
                         </li>
                     ))}
                     <button className="bg-indigo-600 text-white font-[poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 duration-500"
-                        onClick={() => navigate('auth')}
+                        onClick={() => navigate('/login')}
                     >
                         SignIn
                     </button>
