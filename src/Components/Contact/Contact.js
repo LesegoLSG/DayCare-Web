@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import Background from '../../Assets/Background.png';
 
 const Contact = () => {
     return (
-        <section id="contact" className="bg-blue-200 w-full h-screen pt-20">
-            <h1>Contact</h1>
+        <section id="contact" className="bg-blue-200 w-full h-auto pt-20">
+            <img
+                className="bg-cover bg-no-repeat"
+                src={Background} />
         </section>
     )
 }
