@@ -7,15 +7,16 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { MdOutlineDashboard } from "react-icons/md";
 import { FaUserFriends } from "react-icons/fa";
 import { SiBloglovin } from "react-icons/si";
+import { RiLogoutCircleLine } from "react-icons/ri";
 
-const SideBar = ({ setActiveComponent }) => {
+const SideBar = () => {
     const [open, setOpen] = useState(true);
     const navigate = useNavigate();
 
     const menus = [
-        { title: "Dashboard", icon: <MdOutlineDashboard />, navigate: "/portal/dashboard", component: "dashboard" },
-        { title: "Users", icon: <FaUserFriends />, navigate: "/portal/users", component: "users" },
-        { title: "Blog", icon: <SiBloglovin />, navigate: "/portal/blog", component: "blog" }
+        { title: "Dashboard", icon: <MdOutlineDashboard />, path: "/portal" },
+        { title: "Users", icon: <FaUserFriends />, path: "/portal/users" },
+        { title: "Blog", icon: <SiBloglovin />, path: "/portal/blog" }
     ];
     //Navigation
     const handleMenuClick = (path) => {
@@ -45,18 +46,27 @@ const SideBar = ({ setActiveComponent }) => {
 
                 </div>
                 {/* Links */}
-                <ul className="bg-red-200 pt-6 text-left">
+                <ul className="bg-red-200 h-[44rem] pt-6 text-left">
                     {menus.map((menu, index) => (
-                        <li key={index}
-                            // onClick={() => handleMenuClick(menu.navigate)}
-                            onClick={() => setActiveComponent(menu.component)}
-                            // Link to="/portal/users"
-                            className="bg-green-200 text-medium item-center flex justify-start gap-x-4 cursor-pointer p-2 mb-2 hover:bg-red-600 rounded-md">
-                            {menu.icon}
-                            <span className={`${!open && 'hidden'} origin-left duration-200`}>{menu.title}</span>
+                        <li key={index} className="bg-green-400 w-full p-2 mb-2 hover:bg-red-600 rounded-md">
+                            <Link to={menu.path} className="flex items-center gap-x-4 cursor-pointer">
+                                <div className="text-lg font-medium item-center flex justify-start gap-x-4 cursor-pointer  rounded-md">
+                                    {menu.icon}
+                                    <span className={`${!open && 'hidden'} origin-left duration-200`}>{menu.title}</span>
+                                </div>
+                            </Link>
                         </li>
                     ))}
-
+                    <div className="absolute bottom-6 left-5">
+                        <li>
+                            <Link to="/">
+                                <div className="text-lg font-medium item-center flex justify-start gap-x-4 cursor-pointer  rounded-md">
+                                    <RiLogoutCircleLine />
+                                    <span className={`${!open && 'hidden'} origin-left duration-200`}>Logout</span>
+                                </div>
+                            </Link>
+                        </li>
+                    </div>
                 </ul>
             </div>
 
