@@ -1,0 +1,30 @@
+/* Custom arrow styles */
+.custom-prev-arrow,
+.custom-next-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    /* Adjust size as needed */
+    color: white;
+    /* Arrow color */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Arrow background color */
+    padding: 30px;
+    /* Adjust padding as needed */
+    border-radius: 50%;
+    margin: 20px;
+    /* Make the arrows circular */
+    cursor: pointer;
+
+}
+
+.custom-prev-arrow {
+    left: 10px;
+    /* Adjust left position as needed */
+}
+
+.custom-next-arrow {
+    right: 10px;
+    /* Adjust right position as needed */
+}
