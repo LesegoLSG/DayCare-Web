@@ -8,6 +8,7 @@ public class DaycareBackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DaycareBackendApplication.class, args);
+		System.out.println("Successful");
 	}
 
 }
