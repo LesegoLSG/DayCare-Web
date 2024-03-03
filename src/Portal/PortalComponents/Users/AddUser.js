@@ -18,8 +18,8 @@ const AddUser = () => {
                             <div>
                                 <h1 className="">Profile Picture</h1>
                             </div>
-                            <img src={Image4}
-                                className="object-cover" />
+                            {/* <img src={Image4}
+                                className="object-cover" /> */}
                         </div>
                         {/* user details */}
                         <div className="bg-green-400 w-full p-2 ">
