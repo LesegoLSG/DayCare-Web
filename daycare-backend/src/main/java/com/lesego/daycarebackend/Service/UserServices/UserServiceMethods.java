@@ -1,4 +1,4 @@
-package com.lesego.daycarebackend.Service.UserService;
+package com.lesego.daycarebackend.Service.UserServices;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

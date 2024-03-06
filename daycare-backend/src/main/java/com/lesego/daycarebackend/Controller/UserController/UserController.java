@@ -1,24 +1,33 @@
 package com.lesego.daycarebackend.Controller.UserController;
 
-import com.lesego.daycarebackend.Entity.User.User;
-import com.lesego.daycarebackend.Service.UserService.IUserService;
+import com.lesego.daycarebackend.Service.UserServices.IUserServiceMethods;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/v1/user")
+@RequiredArgsConstructor
 public class UserController {
 
+    @GetMapping()
+    public ResponseEntity<String> sayHello(){
+        return ResponseEntity.ok("Hi User");
+    }
+
     @Autowired
-    private IUserService userService;
+    private IUserServiceMethods userService;
 
     @PostMapping("/add")
-    public ResponseEntity<User> addNewUser(@RequestBody User user){
-        User newUser = userService.addUser(user).getBody();
-        return ResponseEntity.ok(newUser);
+    public ResponseEntity<String> addNewUser(@RequestParam("image")MultipartFile image,@RequestParam("user") String userJson){
+       userService.addUser(image,userJson);
+       return ResponseEntity.ok("User added successfully.");
+    }
+
+    @GetMapping("/getData")
+    public String getData(){
+        return "It works";
     }
 }

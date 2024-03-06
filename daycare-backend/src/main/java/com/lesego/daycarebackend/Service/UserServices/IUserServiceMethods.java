@@ -1,4 +1,4 @@
-package com.lesego.daycarebackend.Service.UserService;
+package com.lesego.daycarebackend.Service.UserServices;
 
 import org.springframework.web.multipart.MultipartFile;
 

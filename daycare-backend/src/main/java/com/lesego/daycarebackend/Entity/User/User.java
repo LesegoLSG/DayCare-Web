@@ -1,35 +1,45 @@
 package com.lesego.daycarebackend.Entity.User;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Lob
-    @Column(name="image", columnDefinition = "LONGBLOB")
+    @Column(name="image", columnDefinition = "LONGBLOB",nullable = true)
+
     private byte[] image;
     private String firstName;
     private String lastName;
-    private String mobileNum;
+
+    private String mobile;
+
     private String email;
     private String password;
-    private String role;
-    private String designation;
+
+    private Role role;
+
 
     public User(){}
 
-    public User(String firstName, String lastName, String mobileNum, String email, String password, String role, String designation) {
+    public User(String firstName, String lastName, String email, String password, Role role,byte[] image,String mobile) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.mobileNum = mobileNum;
         this.email = email;
         this.password = password;
         this.role = role;
-        this.designation = designation;
+        this.image= image;
+        this.mobile = mobile;
     }
 
     public int getId() {
@@ -56,13 +66,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getMobileNum() {
-        return mobileNum;
-    }
 
-    public void setMobileNum(String mobileNum) {
-        this.mobileNum = mobileNum;
-    }
 
     public String getEmail() {
         return email;
@@ -72,27 +76,65 @@ public class User {
         this.email = email;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
-    public String getDesignation() {
-        return designation;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setDesignation(String designation) {
-        this.designation = designation;
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 }
