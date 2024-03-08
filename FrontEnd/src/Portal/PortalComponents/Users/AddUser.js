@@ -123,19 +123,19 @@ const AddUser = () => {
                 <div className="flex flex-col w-[80%]">
                     <div className="bg-blue-200 w-[100%] h-[500px] grid grid-col-1 md:grid-cols-2 gap-2 relative">
                         {/* Profile picture */}
-                        <div className="bg-red-200 w-full h-auto ">
+                        <div className="bg-red-200 w-full h-auto flex flex-col justify-center items-center">
                             <div>
                                 <h1 className="">Profile Picture</h1>
                             </div>
 
                             {/* Image */}
-                            <div className="border rounded-full  overflow-hidden">
+                            <div className="w-80 h-80 border rounded-full">
                                 {Image ? (
                                     <img
-                                        className="object-cover"
+                                        className="w-80 h-80 object-fill border rounded-full"
                                         src={Image} alt="Captured" />
                                 ) : (
-                                    <video className="" ref={videoRef}></video>
+                                    <video className="w-80 h-80 object-fill border rounded-full" ref={videoRef}></video>
                                 )}
                                 {!Image && <canvas ref={photoRef}></canvas>}
                             </div>
