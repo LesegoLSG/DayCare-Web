@@ -5,19 +5,20 @@ import { IoPersonOutline } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoMdShare } from "react-icons/io";
 
-const BlogCard = () => {
+const BlogCard = ({ singleBlog }) => {
+    const { id, image, title, briefDescription, date, author, reactions } = singleBlog;
     return (
 
-        <div className="bg-red-600 w-[80%] h-auto flex flex-col  md:flex-row">
+        <div className="bg-red-600 w-[18rem] h-auto flex flex-col mx-auto my-2">
             {/* Card Image */}
-            <div className="bg-green-200 w-full h-[50%] md:w-[50%]">
-                <img className="w-full h-[100%] " src={Image2} />
+            <div className="bg-green-200 w-full h-auto ">
+                <img className="" src={image} />
             </div>
             {/* Card content */}
-            <div className="bg-yellow-400 w-full h-[50%] md:h-auto flex flex-col justify-center items-center md:pl-4 md:pr-4">
+            <div className="bg-yellow-400 w-full h-auto  md:h-auto flex flex-col justify-center items-center ">
 
                 {/* icon text */}
-                <div className="bg-blue-400 w-full auto flex flex-row justify-start items-start pb-2 ">
+                <div className="bg-blue-400 w-full  h-auto flex flex-row justify-start items-start ">
                     <div className="flex flex-row justify-start items-start ">
                         <span><MdDateRange /></span>
                         <span>20 Jan 2024</span>
@@ -25,7 +26,7 @@ const BlogCard = () => {
 
                     <div className="flex flex-row justify-start items-start">
                         <span><IoPersonOutline /></span>
-                        <span>Author</span>
+                        <span>{author}</span>
                     </div>
                     <div className="flex flex-row justify-start items-start">
                         <span><IoMdHeartEmpty /></span>
@@ -44,7 +45,7 @@ const BlogCard = () => {
                 </div>
                 {/* controls */}
                 <div className="bg-red-400 w-full h-auto flex justify-between items-center">
-                    <button className="bg-blue-400 p-2">
+                    <button className="bg-blue-600 p-2">
                         Read More
                     </button>
                     <div className="bg-blue-100 rounded-full p-2 border-2 border-black cursor-pointer">
