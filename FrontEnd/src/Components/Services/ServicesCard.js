@@ -4,6 +4,11 @@ import React from 'react';
 const ServicesCard = ({ singleService, onOpenModal, index }) => {
     const { title, briefDescription, icon, extendedDescription, imageMain, animation, colorStyling } = singleService;
 
+    // Calculate rotation angle based on index
+    // const rotationAngle = index % 2 === 0 ? '4' : '8';
+
+    // Calculate translateY value based on index
+    // const translateY = `${index * -10}px`; // Adjust this value as needed for the desired spacing
 
 
     return (
