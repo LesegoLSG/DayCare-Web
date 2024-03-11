@@ -17,17 +17,5 @@ public class UserController {
         return ResponseEntity.ok("Hi User");
     }
 
-    @Autowired
-    private IUserServiceMethods userService;
 
-    @PostMapping("/add")
-    public ResponseEntity<String> addNewUser(@RequestParam("image")MultipartFile image,@RequestParam("user") String userJson){
-       userService.addUser(image,userJson);
-       return ResponseEntity.ok("User added successfully.");
-    }
-
-    @GetMapping("/getData")
-    public String getData(){
-        return "It works";
-    }
 }
