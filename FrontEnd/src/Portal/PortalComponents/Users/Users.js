@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './User.css';
 import UsersList from './UsersList';
 import userData from './UsersData';
 import AddUser from './AddUser';
 import NoUser from './NoUser';
+import EditUser from './EditUser';
 
 const Users = () => {
-    const [users, setUsers] = useState(userData);
+    const [users, setUsers] = useState([]);
 
     const [isAddUser, setIsAddUser] = useState(false);
+    const [isEditUser, setIsEditUser] = useState(false);
     const [isUserList, setIsUserList] = useState(true);
+
+    const [userToEdit, setUserToEdit] = useState(null);
     const navigate = useNavigate();
 
     const handleChangeToAdd = () => {
@@ -19,24 +24,73 @@ const Users = () => {
         navigate("portal/users/add");
     }
 
+    const fetchUsers = async () => {
+        try {
+            const response = await axios.get("http://localhost:8080/api/v1/admin/getAllUsers");
+            setUsers(response.data);
+
+        } catch (error) {
+            console.log("Error fetching users:", error);
+        }
+    }
+
+    // useEffect hook to fetch users when component mounts
+    useEffect(() => {
+        fetchUsers();
+    }, []);
+
+    //Add new user
+    // const addUser = async (user, image) => {
+    //     console.log("image from landing:", image);
+    //     console.log("Json data:", user);
+
+    // try {
+    //     const formData = new FormData();
+    //     if (image) {
+    //         formData.append('image', image);
+    //     }
+    //     formData.append('user', JSON.stringify(user));
+
+    //     const response = await axios.post("http://localhost:8080/api/v1/admin/add", formData, {
+    //         headers: {
+    //             'Content-Type': 'multipart/form-data',
+    //         },
+    //     });
+
+
+    // } catch (error) {
+    //     console.log("Error adding user:" + error);
+    // }
+
+    // }
+
 
 
     //Delete user
     const deleteUser = async (id) => {
 
-
         console.log("deleted id: ", id);
         if (id) {
             try {
-
-                setUsers(users.filter((user) => user.id !== id))
-
+                const response = await axios.delete(`http://localhost:8080/api/v1/admin/deleteUser/${id}`)
+                if (response.data) {
+                    setUsers(users.filter((user) => user.id !== id))
+                }
             } catch (error) {
                 console.log("Delete error", error);
             }
 
         }
 
+    }
+
+    const modalPopUp = (user) => {
+        setIsEditUser(true);
+        setUserToEdit(user);
+    }
+
+    const closeModal = () => {
+        setIsEditUser(false);
     }
 
     return (
@@ -57,7 +111,7 @@ const Users = () => {
 
                 {isUserList && users.length >= 1 ?
                     (
-                        <UsersList users={users} onDelete={deleteUser} />
+                        <UsersList users={users} onDelete={deleteUser} onModalPopUp={modalPopUp} />
                     ) : (
                         <NoUser />
                     )
@@ -66,6 +120,13 @@ const Users = () => {
                 {isAddUser &&
                     <AddUser />
                 }
+
+                {isEditUser &&
+                    <EditUser userToEdit={userToEdit} closeModal={closeModal} />
+
+                }
+
+
 
 
             </div>

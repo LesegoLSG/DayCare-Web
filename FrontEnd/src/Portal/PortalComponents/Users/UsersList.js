@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { MdDeleteForever } from "react-icons/md";
 import { FaUserEdit } from "react-icons/fa";
 
-const UsersList = ({ users, onDelete }) => {
+const UsersList = ({ users, onDelete, onModalPopUp }) => {
     const [search, setSearch] = useState("");
 
     return (
@@ -24,7 +24,6 @@ const UsersList = ({ users, onDelete }) => {
                         <th className="">Last Name</th>
                         <th className="">Mobile Number</th>
                         <th className="">Email Address</th>
-                        <th className="">Designation</th>
                         <th className="">Role</th>
                         <th className="">Action</th>
                     </tr>
@@ -51,15 +50,15 @@ const UsersList = ({ users, onDelete }) => {
 
                                     </div>
                                 </td>
-                                <td>{user.firstname}</td>
-                                <td>{user.lastname}</td>
+                                <td>{user.firstName}</td>
+                                <td>{user.lastName}</td>
                                 <td>{user.mobile}</td>
                                 <td>{user.email}</td>
-                                <td>{user.designation}</td>
-                                <td>{user.roles}</td>
+                                <td>{user.role}</td>
                                 <td>
                                     <div className="flex justify-between">
                                         <FaUserEdit
+                                            onClick={() => onModalPopUp(user)}
                                             className="text-green-600 text-xl cursor-pointer m-2"
                                         />
                                         <MdDeleteForever
