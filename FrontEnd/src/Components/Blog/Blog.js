@@ -17,11 +17,11 @@ const Blog = () => {
     }
 
     return (
-        <div className="bg-blue-400 w-full h-auto" id="blog">
+        <div className="bg-blue-400 w-full h-auto flex flex-col justify-center items-center" id="blog">
             <div className="flex justify-center items-center">
                 <h1>Blog</h1>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 justify-center items-center">
+            <div className="bg-orange-400 w-[80%] grid grid-cols-1 md:grid-cols-3  ">
                 {
                     blogData.slice(0, visibleBlogs).map((myBlogData, index) => (
                         <BlogCard key={index} singleBlog={myBlogData} />
@@ -32,14 +32,14 @@ const Blog = () => {
             <div className="bg-gray-200 w-full flex justify-center items-center mt-4">
                 {visibleBlogs < blogData.length &&
                     <button
-                        className="bg-red-400 p-2"
+                        className="bg-red-400 p-2 transition duration-500 ease-in-out hover:bg-red-500"
                         onClick={showMoreBlogs}>
                         Load More
                     </button>
                 }
                 {visibleBlogs === blogData.length && showReadLess &&
                     <button
-                        className="bg-red-400 p-2"
+                        className="bg-red-400 p-2 transition duration-500 ease-in-out hover:bg-red-500"
                         onClick={showLessBlogs}>
                         Load Less
                     </button>
