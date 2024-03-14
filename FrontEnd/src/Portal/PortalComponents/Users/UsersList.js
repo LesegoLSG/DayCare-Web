@@ -2,30 +2,36 @@ import React, { useState } from 'react';
 // import userData from './UsersData';
 import { MdDeleteForever } from "react-icons/md";
 import { FaUserEdit } from "react-icons/fa";
+import { IoSearch } from "react-icons/io5";
 
 const UsersList = ({ users, onDelete, onModalPopUp }) => {
     const [search, setSearch] = useState("");
 
     return (
-        <div className="bg-red-200 w-[80%] min-h-[30rem]">
-            <div className="flex justify-end items-end mr-32 mb-10">
-                <input
-                    className="w-60 rounded-md "
-                    type="text"
-                    placeholder='Search User'
-                    onChange={(e) => setSearch(e.target.value)}
-                />
+        <div className="w-[80%] min-h-[30rem]">
+            <div className="w-full flex justify-end items-end mr-32 mb-10">
+                <div className="relative">
+                    <input
+                        className="w-80 h-8 border border-black rounded-md p-2 pl-8" // Added pl-8 for left padding
+                        type="text"
+                        placeholder="Search"
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-2">
+                        <IoSearch className="text-gray-400" />
+                    </div>
+                </div>
             </div>
-            <table>
-                <thead>
+            <table className="w-full">
+                <thead className="text-lg">
                     <tr>
-                        <th className=""></th>
-                        <th className="">First Name</th>
-                        <th className="">Last Name</th>
-                        <th className="">Mobile Number</th>
-                        <th className="">Email Address</th>
-                        <th className="">Role</th>
-                        <th className="">Action</th>
+                        <th></th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Mobile Number</th>
+                        <th>Email Address</th>
+                        <th>Role</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,13 +63,14 @@ const UsersList = ({ users, onDelete, onModalPopUp }) => {
                                 <td>{user.role}</td>
                                 <td>
                                     <div className="flex justify-between">
+                                        <button className="bg-blue-200 w-20">View</button>
                                         <FaUserEdit
                                             onClick={() => onModalPopUp(user)}
-                                            className="text-green-600 text-xl cursor-pointer m-2"
+                                            className="text-green-600 text-2xl cursor-pointer m-1"
                                         />
                                         <MdDeleteForever
                                             onClick={() => onDelete(user.id)}
-                                            className="text-red-600 text-xl cursor-pointer m-2" />
+                                            className="text-red-600 text-2xl cursor-pointer m-1" />
                                     </div>
                                 </td>
                             </tr>

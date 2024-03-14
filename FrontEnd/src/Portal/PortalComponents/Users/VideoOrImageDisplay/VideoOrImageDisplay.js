@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { FaCameraRetro } from "react-icons/fa";
+import { MdOutlineFileUpload } from "react-icons/md";
 
 
 const VideoOrImageDisplay = ({ image, setImage, showVideo, uploadsection }) => {
@@ -113,7 +115,7 @@ const VideoOrImageDisplay = ({ image, setImage, showVideo, uploadsection }) => {
 
     return (
         <div>
-            <div className="w-80 h-80 border rounded-full">
+            <div className="w-80 h-80 border rounded-full border-black">
                 {image ? (
                     <img
                         className="w-80 h-80 object-fill border rounded-full"
@@ -124,14 +126,18 @@ const VideoOrImageDisplay = ({ image, setImage, showVideo, uploadsection }) => {
                 {!image && <canvas ref={photoRef}></canvas>}
             </div>
             {/* Buttons */}
-            {image && showVideo ? (
-                <button onClick={clearImage}>ReCapture</button>
-            ) : (
+            <div className="w-full h-auto flex flex-col justify-center items-center p-2">
+                {image && showVideo ? (
+                    <button onClick={clearImage}>ReCapture</button>
+                ) : (
+                    <button
+                        className="bg-blue-200 w-40 h-8 m-1 flex justify-center items-center"
+                        onClick={(e) => takePicture(e)}><FaCameraRetro className="m-1" />Take a selfie</button>
+                )}
                 <button
-                    className='bg-red-600'
-                    onClick={(e) => takePicture(e)}>Take a selfie</button>
-            )}
-            <button onClick={uploadsection}>Rather Upload</button>
+                    className="bg-blue-200 w-40 h-8 m-1 flex justify-center items-center"
+                    onClick={uploadsection}><MdOutlineFileUpload className="m-1" />Upload</button>
+            </div>
         </div>
     );
 }

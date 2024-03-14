@@ -1,6 +1,8 @@
 import React from 'react';
 import EmptyUser from '../../../../Assets/EmptyUser.png';
 
+import { IoArrowBackSharp } from "react-icons/io5";
+
 const UploadImage = ({ showVideo, setShowVideo, image, setImage }) => {
 
     const handleBackToSelfie = (e) => {
@@ -14,7 +16,7 @@ const UploadImage = ({ showVideo, setShowVideo, image, setImage }) => {
     }
 
     return (
-        <div>
+        <div className="flex flex-col justify-center items-center ">
             <label htmlFor="file" style={{ cursor: 'pointer' }}>
                 <div className="w-80 h-80 border rounded-full flex justify-center items-center">
                     {image ? (
@@ -39,8 +41,8 @@ const UploadImage = ({ showVideo, setShowVideo, image, setImage }) => {
                 onChange={handleImage}
                 style={{ display: 'none' }}
             />
-            <button className="bg-red-400" onClick={handleBackToSelfie}>
-                Back to selfie
+            <button className="bg-blue-200 w-40 h-8 m-1 flex justify-center items-center" onClick={handleBackToSelfie}>
+                <IoArrowBackSharp className="m-1" /> Back to selfie
             </button>
         </div>
     )

@@ -8,6 +8,8 @@ import AddUser from './AddUser';
 import NoUser from './NoUser';
 import EditUser from './EditUser';
 
+import { IoMdAdd } from "react-icons/io";
+
 const Users = () => {
     const [users, setUsers] = useState([]);
 
@@ -95,19 +97,17 @@ const Users = () => {
 
     return (
         <section>
-            <div className="bg-red-200 w-full h-12 flex justify-between p-4">
-                <h1 className="text-black text-lg font-bold">Users</h1>
-
-            </div>
-            <div className="bg-green-200 w-full h-auto flex justify-start m-2 ">
+            <div className=" w-full h-12 flex justify-between item-center p-2">
+                <h1 className="text-black w-40 h-8 text-lg font-bold">Users</h1>
                 <button
                     onClick={() => navigate("/portal/users/add")}
-                    className="bg-blue-200 p-2"
+                    className="bg-blue-200 w-52 h-8 p-2 flex justify-center items-center"
                 >
-                    Add User
+                    <IoMdAdd className="m-1" />  Add User
                 </button>
             </div>
-            <div className="bg-blue-400 w-full user-height flex justify-center items-center">
+
+            <div className="w-full user-height flex justify-center items-center">
 
                 {isUserList && users.length >= 1 ?
                     (
