@@ -8,6 +8,7 @@ import Dashboard from './Portal/PortalComponents/Dashboard/Dashboard';
 import Authentication from './Components/LoginRegister/Authentication';
 import AddUser from './Portal/PortalComponents/Users/AddUser';
 import Transports from './Components/Transport/TransportDataFolder/Transports';
+import AddBlog from './Portal/PortalComponents/Blog/AddBlog';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/portal/users" element={<Users />} />
             <Route path="/portal/users/add" element={<AddUser />} />
             <Route path="/portal/blog" element={<BlogPortal />} />
+            <Route path="/portal/blog/add" element={<AddBlog />} />
           </Route>
 
           <Route path="/transportservice" element={<Transports />} />
