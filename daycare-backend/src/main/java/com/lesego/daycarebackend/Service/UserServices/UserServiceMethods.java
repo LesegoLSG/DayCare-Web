@@ -53,6 +53,41 @@ public class UserServiceMethods implements IUserServiceMethods {
     }
 
     @Override
+    public ResponseEntity<String> updateUser(int id, MultipartFile image, String userJson) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if(optionalUser.isPresent()){
+            User existingUser = optionalUser.get();
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            User userToUpdate;
+            try{
+                userToUpdate = objectMapper.readValue(userJson, User.class);
+                existingUser.setFirstName(userToUpdate.getFirstName());
+                existingUser.setLastName(userToUpdate.getLastName());
+                existingUser.setMobile(userToUpdate.getMobile());
+                existingUser.setEmail(userToUpdate.getEmail());
+                existingUser.setPassword(userToUpdate.getPassword());
+                existingUser.setRole(userToUpdate.getRole());
+
+                // Update image data if provided
+                if (image != null && !image.isEmpty()) {
+                    try {
+                        existingUser.setImage(ImageUtils.compressImage(image.getBytes()));
+                    } catch (IOException e) {
+                        throw new IllegalArgumentException("Error processing image file");
+                    }
+                }
+            }catch(JsonProcessingException e){
+                throw new IllegalArgumentException("Invalid user JSON format");
+            }
+
+            userRepository.save(existingUser);
+            return ResponseEntity.ok("User " + userToUpdate.getFirstName() + " is updated Successfully");
+        }
+        return null;
+    }
+
+    @Override
     public ResponseEntity<String> deleteUser(int id) {
         Optional<User> user = userRepository.findById(id);
        if(user.isPresent()){

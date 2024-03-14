@@ -46,4 +46,9 @@ public class AdminController {
     public ResponseEntity<String> deleteUser(@PathVariable int id){
         return userService.deleteUser(id);
     }
+
+    @PutMapping("/updateUser/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable int id,@RequestParam("image") MultipartFile image, @RequestParam("user") String userJson){
+        return userService.updateUser(id,image,userJson);
+    }
 }
