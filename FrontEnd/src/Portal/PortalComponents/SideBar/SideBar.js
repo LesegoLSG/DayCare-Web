@@ -27,15 +27,15 @@ const SideBar = () => {
 
     return (
         <div className="flex">
-            <div className={`${open ? "w-72" : "w-20"} duration-300 h-screen p-5 pt-8 bg-blue-200 relative`}>
+            <div className={`${open ? "w-72" : "w-20"} duration-300 h-screen p-5 pt-8 bg-[#1f2536] relative`}>
                 {open ? (
                     <FaArrowLeft
                         onClick={() => setOpen(!open)}
-                        className="absolute cursor-pointer rounded-full -right-3 top-9 w-7 border-2 bg-red-200 text-2xl"
+                        className="absolute cursor-pointer rounded-full -right-3 top-9 w-7 border-2 bg-blue-200 text-2xl"
                     />
                 ) : (<FaArrowRight
                     onClick={() => setOpen(!open)}
-                    className="absolute cursor-pointer rounded-full -right-3 top-9 w-7 border-2 bg-red-200 text-2xl"
+                    className="absolute cursor-pointer rounded-full -right-3 top-9 w-7 border-2 bg-blue-200 text-2xl"
                 />)
                 }
                 <div className="flex gap-x-4 items-center">
@@ -46,28 +46,30 @@ const SideBar = () => {
 
                 </div>
                 {/* Links */}
-                <ul className="bg-red-200 h-[44rem] pt-6 text-left">
+                <ul className=" h-[44rem] pt-6 text-left">
                     {menus.map((menu, index) => (
-                        <li key={index} className="bg-green-400 w-full p-2 mb-2 hover:bg-red-600 rounded-md">
+                        <li key={index} className=" w-full p-2 mb-2  rounded-md">
                             <Link to={menu.path} className="flex items-center gap-x-4 cursor-pointer">
-                                <div className="text-lg font-medium item-center flex justify-start gap-x-4 cursor-pointer  rounded-md">
+                                <div className=" text-white hover:text-blue-200 text-lg font-medium item-center flex justify-start gap-x-4 cursor-pointer  rounded-md">
                                     {menu.icon}
                                     <span className={`${!open && 'hidden'} origin-left duration-200`}>{menu.title}</span>
                                 </div>
                             </Link>
                         </li>
                     ))}
-                    <div className="absolute bottom-6 left-5">
-                        <li>
-                            <Link to="/">
-                                <div className="text-lg font-medium item-center flex justify-start gap-x-4 cursor-pointer  rounded-md">
-                                    <RiLogoutCircleLine />
-                                    <span className={`${!open && 'hidden'} origin-left duration-200`}>Logout</span>
-                                </div>
-                            </Link>
-                        </li>
-                    </div>
+
                 </ul>
+                <div className="absolute bottom-0 left-0 w-full p-2 mb-2 text-white hover:bg-red-600 rounded-md">
+                    <li>
+                        <Link to="/">
+                            <div className="text-lg font-medium item-center flex justify-start gap-x-4 cursor-pointer  rounded-md">
+                                <RiLogoutCircleLine />
+                                <span className={`${!open && 'hidden'} origin-left duration-200`}>Logout</span>
+                            </div>
+                        </Link>
+                    </li>
+                </div>
+
             </div>
 
             {/* <div className="p-7 text-2xl font-semibold flex-1 h-screen">
