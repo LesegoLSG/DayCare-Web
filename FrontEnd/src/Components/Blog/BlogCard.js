@@ -9,16 +9,16 @@ const BlogCard = ({ singleBlog }) => {
     const { id, image, title, briefDescription, date, author, reactions } = singleBlog;
     return (
 
-        <div className="bg-red-600 w-[18rem] h-auto flex flex-col mx-auto my-2">
+        <div className="bg-white shadow-xl shadow-black w-[18rem] h-auto flex flex-col mx-auto my-2">
             {/* Card Image */}
-            <div className="bg-green-200 w-full h-auto ">
+            <div className="w-full h-auto overflow-hidden transition-transform duration-500 transform hover:scale-150">
                 <img className="" src={image} />
             </div>
             {/* Card content */}
-            <div className="bg-yellow-400 w-full h-auto  md:h-auto flex flex-col justify-center items-center ">
+            <div className=" w-full h-auto  md:h-auto flex flex-col justify-center items-center ">
 
                 {/* icon text */}
-                <div className="bg-blue-400 w-full  h-auto flex flex-row justify-start items-start ">
+                <div className=" w-full  h-auto flex flex-row justify-start items-start ">
                     <div className="flex flex-row justify-start items-start ">
                         <span><MdDateRange /></span>
                         <span>20 Jan 2024</span>
@@ -28,27 +28,24 @@ const BlogCard = ({ singleBlog }) => {
                         <span><IoPersonOutline /></span>
                         <span>{author}</span>
                     </div>
-                    <div className="flex flex-row justify-start items-start">
-                        <span><IoMdHeartEmpty /></span>
-                        <span>222</span>
-                    </div>
+
                 </div>
                 {/* title */}
-                <div className="bg-orange-400  w-full h-auto flex justify-start items-start pb-2">
+                <div className="  w-full h-auto flex justify-start items-start pb-2">
                     <h1 className="text-lg font-semibold">Post title will be here</h1>
                 </div>
                 {/* Description */}
-                <div className="bg-purple-400 w-full h-auto flex justify-start items-start pb-2">
+                <div className=" w-full h-auto flex justify-start items-start pb-2">
                     <p className="text-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum iste assumenda, reprehenderit sequi inventore
                         voluptatum tempore ducimus corporis veniam, in ullam praesentium. Reprehenderit id quisquam sequi, veniam
                         minima culpa? Deserunt.</p>
                 </div>
                 {/* controls */}
-                <div className="bg-red-400 w-full h-auto flex justify-between items-center">
-                    <button className="bg-blue-600 p-2">
+                <div className=" w-full h-auto flex justify-between items-center">
+                    <button className="bg-blue-200 p-2 ml-1 mb-1">
                         Read More
                     </button>
-                    <div className="bg-blue-100 rounded-full p-2 border-2 border-black cursor-pointer">
+                    <div className=" rounded-full p-2 border-2 border-black cursor-pointer  mr-1 mb-1">
                         <IoMdShare className="text-xl" />
                     </div>
                 </div>
