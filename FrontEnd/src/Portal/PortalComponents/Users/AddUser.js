@@ -6,6 +6,7 @@ import Image4 from '../../../Assets/Image4.jpg';
 import Image1 from '../../../Assets/Image1.jpg';
 import UploadImage from './UploadImage/UploadImage';
 import VideoOrImageDisplay from './VideoOrImageDisplay/VideoOrImageDisplay';
+import { IoMdCloseCircleOutline } from "react-icons/io";
 
 
 const AddUser = () => {
@@ -80,15 +81,15 @@ const AddUser = () => {
     }
 
     return (
-        <div className="bg-blue-400 w-full user-height flex flex-col justify-center items-center p-4">
-            <h1>Hello</h1>
+        <div className=" w-full user-height flex flex-col justify-center items-center p-4">
 
 
-            <div className="bg-blue-200 w-[100%] h-[500px] grid grid-col-1 md:grid-cols-2 gap-2 relative">
+
+            <div className="  w-[100%] h-[500px] grid grid-col-1 md:grid-cols-2 gap-2 relative shadow-lg shadow-indigo-100">
                 {/* Profile picture */}
-                <div className="bg-red-200 w-full h-auto flex flex-col justify-center items-center">
+                <div className=" w-full h-auto flex flex-col justify-center items-center">
                     <div>
-                        <h1 className="">Profile Picture</h1>
+                        <h1 className="text-xl font-semibold">Profile Picture</h1>
                     </div>
 
                     {/* Image via video */}
@@ -102,8 +103,6 @@ const AddUser = () => {
                             showVideo={showVideo}
                             uploadsection={uploadsection}
                         />
-
-
                     }
 
                     {/* Upload image */}
@@ -122,15 +121,16 @@ const AddUser = () => {
 
                 <form className="flex flex-col justify-center items-center" onSubmit={onSubmit}>
                     {/* user details */}
-                    <div className="bg-green-400 w-full p-2 ">
+                    <div className=" w-full p-2 ">
+
                         <div>
-                            <h1 className="">User Details</h1>
+                            <h1 className="text-xl font-semibold">User Details</h1>
                         </div>
 
                         <div className="flex flex-col justify-start items-start">
                             <label>FirstName:</label>
                             <input
-                                className="w-full mb-2 "
+                                className="w-full h-8 mb-2 border border-black hover:border-blue-200"
                                 type="text"
                                 name="firstName"
                                 value={user.firstName}
@@ -140,7 +140,7 @@ const AddUser = () => {
                         <div className="flex flex-col justify-start items-start">
                             <label>Last Name:</label>
                             <input
-                                className="w-full mb-2 "
+                                className="w-full h-8 mb-2 border border-black hover:border-blue-200 "
                                 type="text"
                                 name="lastName"
                                 value={user.lastName}
@@ -150,7 +150,7 @@ const AddUser = () => {
                         <div className="flex flex-col justify-start items-start">
                             <label>Mobile Number:</label>
                             <input
-                                className="w-full mb-2 "
+                                className="w-full h-8 mb-2 border border-black hover:border-blue-200"
                                 type="text"
                                 name="mobile"
                                 value={user.mobile}
@@ -161,7 +161,7 @@ const AddUser = () => {
                             <label>Email Address:</label>
                             <input
 
-                                className="w-full mb-2 "
+                                className="w-full h-8 mb-2 border border-black hover:border-blue-200"
                                 type="text"
                                 name="email"
                                 value={user.email}
@@ -172,7 +172,7 @@ const AddUser = () => {
                             <label>Password:</label>
                             <input
 
-                                className="w-full mb-2 "
+                                className="w-full h-8 mb-2 border border-black hover:border-blue-200"
                                 type="text"
                                 name="password"
                                 value={user.password}
@@ -183,7 +183,7 @@ const AddUser = () => {
                             <label>Roles</label>
                             <input
 
-                                className="w-full mb-2 "
+                                className="w-full h-8 mb-2 border border-black hover:border-blue-200"
                                 type="text"
                                 name="role"
                                 value={user.role}
@@ -194,11 +194,11 @@ const AddUser = () => {
 
 
 
-                    <div className="bg-gray-400 m-4">
-                        <button type="submit" className="bg-green-600 m-1 p-1">Submit</button>
+                    <div className="m-4">
+                        <button type="submit" className="bg-blue-200 w-40 h-8 m-1 p-1">Submit</button>
                         <button
                             onClick={() => navigate("/portal/users")}
-                            className="bg-red-400 m-1 p-1">Cancel</button>
+                            className="bg-red-600 w-40 h-8 m-1 p-1">Cancel</button>
 
                     </div>
                 </form>
