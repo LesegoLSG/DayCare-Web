@@ -4,7 +4,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { FaUserEdit } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 
-const UsersList = ({ users, onDelete, onModalPopUp }) => {
+const UsersList = ({ users, onDelete, onModalPopUp, onModalViewUserPopUp }) => {
     const [search, setSearch] = useState("");
 
     return (
@@ -63,7 +63,9 @@ const UsersList = ({ users, onDelete, onModalPopUp }) => {
                                 <td>{user.role}</td>
                                 <td>
                                     <div className="flex justify-between">
-                                        <button className="bg-blue-200 w-20">View</button>
+                                        <button
+                                            onClick={() => onModalViewUserPopUp(user)}
+                                            className="bg-blue-200 w-20">View</button>
                                         <FaUserEdit
                                             onClick={() => onModalPopUp(user)}
                                             className="text-green-600 text-2xl cursor-pointer m-1"
