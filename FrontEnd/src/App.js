@@ -9,6 +9,7 @@ import Authentication from './Components/LoginRegister/Authentication';
 import AddUser from './Portal/PortalComponents/Users/AddUser';
 import Transports from './Components/Transport/TransportDataFolder/Transports';
 import AddBlog from './Portal/PortalComponents/Blog/AddBlog';
+import BlogReadMore from './Components/Blog/BlogReadMore/BlogReadMore';
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
           </Route>
 
           <Route path="/transportservice" element={<Transports />} />
+
+          {/* Route to display full blog description */}
+          <Route path="/blog/:id" element={<BlogReadMore />} />
 
         </Routes>
       </Router>
