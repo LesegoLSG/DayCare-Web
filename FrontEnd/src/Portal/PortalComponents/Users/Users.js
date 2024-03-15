@@ -9,6 +9,7 @@ import NoUser from './NoUser';
 import EditUser from './EditUser';
 
 import { IoMdAdd } from "react-icons/io";
+import ViewUser from './ViewUser/ViewUser';
 
 const Users = () => {
     const [users, setUsers] = useState([]);
@@ -16,8 +17,10 @@ const Users = () => {
     const [isAddUser, setIsAddUser] = useState(false);
     const [isEditUser, setIsEditUser] = useState(false);
     const [isUserList, setIsUserList] = useState(true);
+    const [isViewUser, setIsViewUser] = useState(false);
 
     const [userToEdit, setUserToEdit] = useState(null);
+    const [userToView, setUserToView] = useState(null);
     const navigate = useNavigate();
 
     const handleChangeToAdd = () => {
@@ -95,10 +98,19 @@ const Users = () => {
         setIsEditUser(false);
     }
 
+    const ModalViewUserPopUp = (user) => {
+        setIsViewUser(true);
+        setUserToView(user);
+    }
+
+    const closeViewUserModal = () => {
+        setIsViewUser(false);
+    }
+
     return (
         <section>
             <div className=" w-full h-12 flex justify-between item-center p-2">
-                <h1 className="text-black w-40 h-8 text-lg font-bold">Users</h1>
+                <h1 className="text-black w-40 h-8 text-2xl font-bold">Users</h1>
                 <button
                     onClick={() => navigate("/portal/users/add")}
                     className="bg-blue-200 w-52 h-8 p-2 flex justify-center items-center"
@@ -111,7 +123,7 @@ const Users = () => {
 
                 {isUserList && users.length >= 1 ?
                     (
-                        <UsersList users={users} onDelete={deleteUser} onModalPopUp={modalPopUp} />
+                        <UsersList users={users} onDelete={deleteUser} onModalPopUp={modalPopUp} onModalViewUserPopUp={ModalViewUserPopUp} />
                     ) : (
                         <NoUser />
                     )
@@ -124,6 +136,10 @@ const Users = () => {
                 {isEditUser &&
                     <EditUser userToEdit={userToEdit} closeModal={closeModal} />
 
+                }
+
+                {isViewUser &&
+                    <ViewUser userToView={userToView} closeViewUserModal={closeViewUserModal} />
                 }
 
 
