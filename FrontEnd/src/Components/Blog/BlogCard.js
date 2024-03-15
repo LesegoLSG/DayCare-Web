@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Image2 from '../../Assets/Image2.jpg';
 import { MdDateRange } from "react-icons/md";
 import { IoPersonOutline } from "react-icons/io5";
@@ -11,7 +12,7 @@ const BlogCard = ({ singleBlog }) => {
 
         <div className="bg-white shadow-xl shadow-black w-[18rem] h-auto flex flex-col mx-auto my-2">
             {/* Card Image */}
-            <div className="w-full h-auto overflow-hidden transition-transform duration-500 transform hover:scale-150">
+            <div className="w-full h-auto overflow-hidden transition-transform duration-300 transform hover:scale-150 hover:-translate-y-16">
                 <img className="" src={image} />
             </div>
             {/* Card content */}
@@ -42,9 +43,9 @@ const BlogCard = ({ singleBlog }) => {
                 </div>
                 {/* controls */}
                 <div className=" w-full h-auto flex justify-between items-center">
-                    <button className="bg-blue-200 p-2 ml-1 mb-1">
+                    <Link to={`/blog/${id}`} className="bg-blue-200 p-2 ml-1 mb-1">
                         Read More
-                    </button>
+                    </Link>
                     <div className=" rounded-full p-2 border-2 border-black cursor-pointer  mr-1 mb-1">
                         <IoMdShare className="text-xl" />
                     </div>
@@ -55,27 +56,6 @@ const BlogCard = ({ singleBlog }) => {
         </div>
 
 
-
-
-
-        // <div className="bg-orange-200 w-[16rem] h-[26rem] ">
-        //     {/* Use Tailwind CSS classes for styling */}
-        //     <div className="bg-red-400 w-full h-[50%] ">
-        //         <img className="w-full h-[100%] " src={Image2} />
-        //     </div>
-        //     <div className="bg-green-200  w-full h-auto flex justify-start items-start">
-        //         <h1>02 Jan 2024</h1>
-        //     </div>
-        //     <div className="bg-green-300  w-full h-auto flex justify-start items-start">
-        //         <h1>Lorem ipsum dolor sit amet consectetur, .</h1>
-        //     </div>
-        //     <div className="bg-green-400  w-full h-auto flex justify-start items-start">
-        //         <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus, animi vel fugit consequatur.</h1>
-        //     </div>
-        //     <div className="bg-green-400 flex justify-center items-center">
-        //         <button className="bg-black text-white">Read More</button>
-        //     </div>
-        // </div>
     )
 }
 
