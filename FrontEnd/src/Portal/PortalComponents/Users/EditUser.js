@@ -78,7 +78,7 @@ const EditUser = ({ userToEdit, closeModal }) => {
                 </div>
                 <div className="bg-gray-200 grid sm:grid-cols-1 md:grid-cols-2">
                     {/* Profile picture */}
-                    <div className="bg-red-200 w-full h-auto flex flex-col justify-center items-center">
+                    <div className=" w-full h-auto flex flex-col justify-center items-center">
                         <div>
                             <h1 className="">Profile Picture</h1>
                         </div>
@@ -112,15 +112,15 @@ const EditUser = ({ userToEdit, closeModal }) => {
 
                     <form className="flex flex-col justify-center items-center" onSubmit={onSubmit}>
                         {/* user details */}
-                        <div className="bg-green-400 w-full p-2 ">
+                        <div className="w-full p-2 ">
                             <div>
-                                <h1 className="">User Details</h1>
+                                <h1 className="text-xl font-semibold">User Details</h1>
                             </div>
 
                             <div className="flex flex-col justify-start items-start">
                                 <label>FirstName:</label>
                                 <input
-                                    className="w-full mb-2 "
+                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200 "
                                     type="text"
                                     name="firstName"
                                     value={user.firstName}
@@ -130,7 +130,7 @@ const EditUser = ({ userToEdit, closeModal }) => {
                             <div className="flex flex-col justify-start items-start">
                                 <label>Last Name:</label>
                                 <input
-                                    className="w-full mb-2 "
+                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
                                     type="text"
                                     name="lastName"
                                     value={user.lastName}
@@ -140,7 +140,7 @@ const EditUser = ({ userToEdit, closeModal }) => {
                             <div className="flex flex-col justify-start items-start">
                                 <label>Mobile Number:</label>
                                 <input
-                                    className="w-full mb-2 "
+                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
                                     type="text"
                                     name="mobile"
                                     value={user.mobile}
@@ -151,7 +151,7 @@ const EditUser = ({ userToEdit, closeModal }) => {
                                 <label>Email Address:</label>
                                 <input
 
-                                    className="w-full mb-2 "
+                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200 "
                                     type="text"
                                     name="email"
                                     value={user.email}
@@ -162,7 +162,7 @@ const EditUser = ({ userToEdit, closeModal }) => {
                                 <label>Password:</label>
                                 <input
 
-                                    className="w-full mb-2 "
+                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
                                     type="text"
                                     name="password"
                                     value={user.password}
@@ -173,7 +173,7 @@ const EditUser = ({ userToEdit, closeModal }) => {
                                 <label>Roles</label>
                                 <input
 
-                                    className="w-full mb-2 "
+                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200 "
                                     type="text"
                                     name="role"
                                     value={user.role}
@@ -184,11 +184,11 @@ const EditUser = ({ userToEdit, closeModal }) => {
 
 
 
-                        <div className="bg-gray-400 m-4">
-                            <button type="submit" className="bg-green-600 m-1 p-1">Submit</button>
+                        <div className=" m-4">
+                            <button type="submit" className="bg-blue-200 w-40 h-8 m-1 p-1">Submit</button>
                             <button
                                 onClick={() => navigate("/portal/users")}
-                                className="bg-red-400 m-1 p-1">Cancel</button>
+                                className="bg-red-600 w-40 h-8 m-1 p-1">Cancel</button>
 
                         </div>
                     </form>
