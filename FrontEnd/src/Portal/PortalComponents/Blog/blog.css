@@ -1,7 +1,3 @@
-.main_container {
-    height: calc(100vh-50px);
-}
-
-.qui {
-    min-height: 330px;
+.main-container {
+    height: calc(100vh - 70px);
 }
