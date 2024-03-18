@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IoMdAdd } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 import BlogPortalCard from './BlogPortalCard';
 import blogData from '../../../Components/Blog/BlogData';
-import NoBlog from './NoBlog';
+import BlogPortalList from './BlogPortalList';
 
 const BlogPortal = () => {
     const navigate = useNavigate();
+
+    const [blogs, setBlogs] = useState(blogData);
+
+
+    const deleteBlog = (id) => {
+        console.log("deleted id: ", id);
+        if (id) {
+            try {
+                setBlogs(prevBlogs => prevBlogs.filter((blog) => blog.id !== id));
+                console.log("onDelete blogs", blogs);
+            } catch (error) {
+                console.log("Delete error", error);
+            }
+
+        }
+
+    }
+
     return (
         <section className="main-container  w-full ">
             <div className="flex justify-between m-4">
@@ -19,17 +37,8 @@ const BlogPortal = () => {
                 </button>
             </div >
 
-            <div className="grid grid-cols-4 ">
-                {blogData.length > 0 ? (
-                    blogData.map((myBlogData, index) => (
-                        <BlogPortalCard key={index} singleBlog={myBlogData} />
-                    ))
-                ) : (
-                    <NoBlog />
-                )
+            <BlogPortalList blogs={blogs} onDelete={deleteBlog} />
 
-                }
-            </div>
         </section >
     )
 }
