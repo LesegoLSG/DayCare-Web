@@ -7,10 +7,11 @@ import BlogPortal from './Portal/PortalComponents/Blog/BlogPortal';
 import Dashboard from './Portal/PortalComponents/Dashboard/Dashboard';
 import Authentication from './Components/LoginRegister/Authentication';
 import AddUser from './Portal/PortalComponents/Users/AddUser';
-import Transports from './Components/Transport/TransportDataFolder/Transports';
 import AddBlog from './Portal/PortalComponents/Blog/AddBlog';
 import BlogReadMore from './Components/Blog/BlogReadMore/BlogReadMore';
 import BlogEdit from './Portal/PortalComponents/Blog/BlogEdit';
+import TermsAndConditions from './Components/LegalStatements/TermsAndConditions';
+import PrivacyPolicy from './Components/LegalStatements/PrivacyPolicy';
 
 function App() {
   return (
@@ -30,10 +31,12 @@ function App() {
             <Route path="/portal/blog/add" element={<AddBlog />} />
           </Route>
 
-          <Route path="/transportservice" element={<Transports />} />
 
           {/* Route to display full blog description */}
           <Route path="/blog/:id" element={<BlogReadMore />} />
+
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
         </Routes>
       </Router>
