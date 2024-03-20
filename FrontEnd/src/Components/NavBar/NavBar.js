@@ -6,6 +6,8 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { useLocation, useNavigate } from 'react-router-dom';
+import LessLog from '../../Assets/LessLogo.png';
+
 
 // import { Link } from 'react-scroll';
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
@@ -53,25 +55,10 @@ const NavBar = () => {
 
     return (
         <div className="shadow-md w-full fixed top-0 left-0 z-10">
-            {/* <div className="bg-blue-200 black w-full h-6 pr-32 pl-32 ">
-                <div className="flex justify-between items-start">
-                    <div className="flex flex-row sm:flex-col justify-center items-center">
-                        <MdEmail />
-                        <span className="mr-2">lesegomhlongo78@gmail.com</span>
-                        <FaPhoneAlt />
-                        <span>+27 640373089</span>
-                    </div>
 
-                    <div className="flex flex-row justify-center items-center">
-                        <FaFacebook />
-                        <IoLogoWhatsapp />
-                    </div>
-
-                </div>
-            </div> */}
 
             <div className="md:flex items-center justify-between bg-white py-2 md:px-10 px-7 ">
-                <div className="font-bold text-2xl cursor-pointer flex items-center font-[poppins] text-gray-800">
+                <div className="font-bold text-2xl cursor-pointer flex items-center font-[poppins] text-gray-800 overflow-hidden">
                     <span className="text-3xl text-indigo-600 mr-1 pt-2">
                         <IoLogoChrome />
                     </span>
