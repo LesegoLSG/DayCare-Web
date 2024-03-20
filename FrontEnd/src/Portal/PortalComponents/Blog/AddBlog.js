@@ -63,16 +63,18 @@ const AddBlog = () => {
                     <input className="h-[2rem] border border-black rounded-md hover:border-blue-100 " type="text" placeholder='Title' />
                     <label className="flex justify-start items-start">Topic:</label>
                     <input className="h-[2rem] border border-black rounded-md hover:border-blue-100 " type="text" placeholder='Topic' />
-                    <label className="flex justify-start items-start">Body:</label>
-                    <div className="">
+                    <label className="flex justify-start items-start">Content:</label>
+                    <div className="myQuill">
                         <ReactQuill
                             className="text-2xl border border-black max-h-80 overflow-y-auto"
                             theme="snow" value={value} onChange={setValue} modules={modules} formats={formats} />
                     </div>
                     <div className=' mt-4'>
                         <button>Preview</button>
+                        <button>Preview card</button>
                         <button className="bg-blue-200 w-60 h-8">CREATE POST</button>
                     </div>
+
                 </form>
                 {/* {
                     value
