@@ -5,7 +5,7 @@ const SearchBar = ({ setSearch }) => {
     return (
         <div className="bg-red-400 relative">
             <input
-                className="w-80 h-8 border border-black rounded-md p-2 pl-8" // Added pl-8 for left padding
+                className="w-60 h-8 my-2 md:my-0 md:w-80  border md:border-black md:rounded-md p-2 pl-8" // Added pl-8 for left padding
                 type="text"
                 placeholder="Search"
                 onChange={(e) => setSearch(e.target.value)}
