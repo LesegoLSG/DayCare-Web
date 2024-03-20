@@ -1,5 +1,6 @@
 package com.lesego.daycarebackend.Entity.User;
 
+import com.lesego.daycarebackend.Entity.Blog.Blog;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,11 +29,13 @@ public class User implements UserDetails {
     private String password;
 
     private Role role;
+    @OneToMany(mappedBy = "user")
+    private List<Blog> blog;
 
 
     public User(){}
 
-    public User(String firstName, String lastName, String email, String password, Role role,byte[] image,String mobile) {
+    public User(String firstName, String lastName, String email, String password, Role role,byte[] image,String mobile,List<Blog> blog) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -40,6 +43,7 @@ public class User implements UserDetails {
         this.role = role;
         this.image= image;
         this.mobile = mobile;
+        this.blog = blog;
     }
 
     public int getId() {
@@ -136,5 +140,13 @@ public class User implements UserDetails {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public List<Blog> getBlog() {
+        return blog;
+    }
+
+    public void setBlog(List<Blog> blog) {
+        this.blog = blog;
     }
 }
