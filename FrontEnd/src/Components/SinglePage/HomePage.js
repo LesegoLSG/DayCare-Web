@@ -5,8 +5,9 @@ import Hero from '../Hero/Hero';
 import NavBar from '../NavBar/NavBar';
 import Testimonials from '../Testimonials/Testimonials';
 import Services from '../Services/Services';
-import Transport from '../Transport/Transport';
 import Blog from '../Blog/Blog'
+import Teams from '../Teams/Teams'
+import Footer from '../Footer/Footer';
 
 
 const HomePage = () => {
@@ -17,9 +18,10 @@ const HomePage = () => {
             <About />
             <Services />
             <Blog />
-            <Transport />
             <Testimonials />
+            <Teams />
             <Contact />
+            <Footer />
 
         </>
     )
