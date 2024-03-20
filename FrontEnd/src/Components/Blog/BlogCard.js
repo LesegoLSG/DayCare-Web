@@ -8,38 +8,45 @@ import { IoMdShare } from "react-icons/io";
 
 const BlogCard = ({ singleBlog }) => {
     const { id, image, title, briefDescription, date, author, reactions } = singleBlog;
+
+    // Function to truncate text with ellipsis
+    const truncateText = (text, maxLength) => {
+        if (text.length <= maxLength) return text;
+        return text.slice(0, maxLength) + '...';
+    };
+
     return (
 
         <div className="bg-white shadow-xl shadow-black w-[18rem] h-auto flex flex-col mx-auto my-2">
             {/* Card Image */}
-            <div className="w-full h-auto overflow-hidden transition-transform duration-300 transform hover:scale-150 hover:-translate-y-16">
+            <div className="w-full h-auto overflow-hidden transition-transform duration-300 ">
                 <img className="" src={image} />
             </div>
             {/* Card content */}
             <div className=" w-full h-auto  md:h-auto flex flex-col justify-center items-center ">
 
-                {/* icon text */}
-                <div className=" w-full  h-auto flex flex-row justify-start items-start ">
-                    <div className="flex flex-row justify-start items-start ">
-                        <span><MdDateRange /></span>
-                        <span>20 Jan 2024</span>
-                    </div>
-
-                    <div className="flex flex-row justify-start items-start">
-                        <span><IoPersonOutline /></span>
-                        <span>{author}</span>
-                    </div>
-
-                </div>
                 {/* title */}
-                <div className="  w-full h-auto flex justify-start items-start pb-2">
+                <div className="  w-full h-auto flex justify-start items-start pb-2 px-2">
                     <h1 className="text-lg font-semibold">Post title will be here</h1>
                 </div>
+
+                {/* icon text */}
+                <div className=" w-full  h-auto flex flex-row justify-start items-start px-2">
+                    <div className="flex flex-row justify-start items-start ">
+                        <span ><MdDateRange /></span>
+                        <span className="text-xs text-gray-600">{date}</span>
+                    </div>
+
+                    <div className="flex flex-row justify-start items-start mx-1">
+                        <span><IoPersonOutline /></span>
+                        <span className="text-xs text-gray-600">{author}</span>
+                    </div>
+
+                </div>
+
                 {/* Description */}
-                <div className=" w-full h-auto flex justify-start items-start pb-2">
-                    <p className="text-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum iste assumenda, reprehenderit sequi inventore
-                        voluptatum tempore ducimus corporis veniam, in ullam praesentium. Reprehenderit id quisquam sequi, veniam
-                        minima culpa? Deserunt.</p>
+                <div className=" w-full max-h-20 flex justify-start items-start pb-2 px-2">
+                    <p className="text-left">{truncateText(briefDescription, 100)}</p>
                 </div>
                 {/* controls */}
                 <div className=" w-full h-auto flex justify-between items-center">
