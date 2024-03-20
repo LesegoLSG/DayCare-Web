@@ -23,7 +23,7 @@ const Services = () => {
                 <h1 className="text-xl font-bold">Our Best Offer <br></br>For Your Kid</h1>
             </div>
             {/* Main box */}
-            <div className="bg-green-300 w-full md:w-[1000px] h-auto mt-6 grid grid-cols-1 gap-1 md:grid-cols-3 place-items-center">
+            <div className="bg-green-300 w-full h-auto mt-6 grid grid-cols-1 gap-1 md:grid-cols-3 place-items-center px-16">
                 {
                     serviceData.map((myService, index) => (
                         <ServicesCard key={index} singleService={myService} onOpenModal={handleOpenModal} index={index} />

@@ -13,7 +13,7 @@ const ServicesCard = ({ singleService, onOpenModal, index }) => {
 
     return (
 
-        <div className="bg-red-200 w-[16rem] h-[16rem] m-6 p-6 flex flex-col justify-center items-center relative rounded-full  border-4  border-solid " style={{ borderColor: colorStyling }}>
+        <div className="bg-red-200 w-[18rem] h-[18rem] m-6 p-6 flex flex-col justify-center items-center relative rounded-full  border-4  border-solid " style={{ borderColor: colorStyling }}>
             <div className="bg-red-400 rounded-full w-[5rem] h-[5rem] absolute top-0 right-2 transform -translate-y-1/2 border border-black border-solid">
                 {animation}
             </div>
