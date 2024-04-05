@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import { Slide } from 'react-slideshow-image';
+import { IoLogoFacebook, IoLogoWhatsapp, IoLogoInstagram } from "react-icons/io5";
+import { MdOutlineMailOutline } from "react-icons/md";
 import 'react-slideshow-image/dist/styles.css';
 import Image1 from '../../Assets/Image1.jpg';
 import Image2 from '../../Assets/Image2.jpg';
@@ -9,10 +11,11 @@ import './Hero.css';
 
 const spanStyle = {
     padding: '20px',
-    background: '#efefef',
-    color: '#000000',
+    background: 'transparent',
+    color: 'black',
     marginTop: '16rem',
-    fontSize: '1.5rem'
+    fontSize: '1.9rem',
+    fontWeight: 'bold'
 }
 
 const divStyle = {
@@ -84,7 +87,7 @@ const Hero = () => {
         }
     }
     return (
-        <section id="home" className="bg-blue-100 w-full h-auto pt-14">
+        <section id="home" className="bg-secondary w-full h-auto pt-14">
             <div className="slide-container" style={{ overflowX: 'hidden', WebkitOverflowScrolling: 'touch' }}>
                 <Slide autoplay={true} duration={5000} ref={slideRef} >
                     {slideImages.map((slideImage, index) => (
@@ -92,7 +95,7 @@ const Hero = () => {
                             <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage.url})` }}>
                                 <span style={spanStyle}>{slideImage.caption}</span>
                                 <button
-                                    className="bg-green-200 relative m-4 p-2 text-lg text-black rounded-lg border-solid border-2 border-gray-300 "
+                                    className=" relative m-4 p-2 text-lg  "
                                     onClick={() => scrollToSection(slideImage.sectionId)}
                                 >
                                     {slideImage.buttonName}
@@ -113,7 +116,11 @@ const Hero = () => {
                 </h1>
 
                 <h1 className="font-bold text-2xl">Daycare center</h1>
+
+
+
             </div>
+
 
         </section>
     )
