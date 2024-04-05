@@ -48,7 +48,7 @@ const Blog = () => {
     };
 
     return (
-        <div className=" bg-gray-100 w-full h-auto flex flex-col justify-center items-center" id="blog">
+        <div className=" bg-primary w-full h-auto flex flex-col justify-center items-center" id="blog">
             <div className="flex justify-center items-center">
                 <h1>Blog</h1>
             </div>
@@ -72,7 +72,7 @@ const Blog = () => {
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                         />
-                        <div className="absolute inset-y-0 left-0 flex items-center px-3 pointer-events-none">
+                        <div className="absolute inset-y-0 left-0 flex items-center px-3 ">
                             <IoSearch />
                         </div>
                     </div>

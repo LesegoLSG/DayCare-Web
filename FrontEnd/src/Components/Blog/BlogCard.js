@@ -49,8 +49,8 @@ const BlogCard = ({ singleBlog }) => {
                     <p className="text-left">{truncateText(briefDescription, 100)}</p>
                 </div>
                 {/* controls */}
-                <div className=" w-full h-auto flex justify-between items-center">
-                    <Link to={`/blog/${id}`} className="bg-blue-200 p-2 ml-1 mb-1">
+                <div className=" w-full h-auto flex justify-between items-center px-2">
+                    <Link to={`/blog/${id}`} className=" border bg-[#5C8D89] border-balance rounded-xl font-semibold text-white hover:text-black hover:border-[#5C8D89] hover:bg-transparent p-1">
                         Read More
                     </Link>
                     <div className=" rounded-full p-2 border-2 border-black cursor-pointer  mr-1 mb-1">
