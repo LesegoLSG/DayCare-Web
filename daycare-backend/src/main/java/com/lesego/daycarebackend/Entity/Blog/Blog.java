@@ -1,5 +1,6 @@
 package com.lesego.daycarebackend.Entity.Blog;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lesego.daycarebackend.Entity.User.User;
 import jakarta.persistence.*;
 
@@ -21,6 +22,7 @@ public class Blog {
     private String content;
     private LocalDate date;
     @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
     //Parameterless constructor
     public Blog(){

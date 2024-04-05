@@ -1,5 +1,6 @@
 package com.lesego.daycarebackend.Entity.User;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lesego.daycarebackend.Entity.Blog.Blog;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,6 +31,7 @@ public class User implements UserDetails {
 
     private Role role;
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Blog> blog;
 
 

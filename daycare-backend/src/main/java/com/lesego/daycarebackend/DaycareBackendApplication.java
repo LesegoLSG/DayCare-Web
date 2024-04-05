@@ -21,13 +21,13 @@ public class DaycareBackendApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		User adminAccount = userRepository.findByRole(Role.ADMIN);
+		User adminAccount = userRepository.findByRole(Role.SYSTEM_ADMIN);
 		if(adminAccount == null) {
 			User user = new User();
 			user.setEmail("lesegomhlongo78gmail.com");
-			user.setFirstName("admin");
-			user.setLastName("admin");
-			user.setRole(Role.ADMIN);
+			user.setFirstName("Lesego");
+			user.setLastName("Mhlongo");
+			user.setRole(Role.SYSTEM_ADMIN);
 			user.setPassword(new BCryptPasswordEncoder().encode("lesegoLSGTSI2#"));
 			userRepository.save(user);
 		}
