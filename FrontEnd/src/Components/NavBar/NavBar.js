@@ -4,7 +4,8 @@ import { IoMenu, IoCloseCircleOutline } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
-import { IoLogoWhatsapp } from "react-icons/io";
+import { IoLogoFacebook, IoLogoWhatsapp, IoLogoInstagram } from "react-icons/io5";
+import { MdOutlineMailOutline } from "react-icons/md";
 import { useLocation, useNavigate } from 'react-router-dom';
 import LessLog from '../../Assets/LessLogo.png';
 
@@ -19,7 +20,7 @@ const NavBar = () => {
     const [activeSection, setActiveSection] = useState('home'); // Initialize with 'hero'
 
 
-    const sections = ['home', 'about', 'services'];
+    const sections = ['home', 'about', 'services', 'blog'];
 
     // Function to set active section based on URL hash
     const setActiveSectionFromURL = () => {
@@ -54,10 +55,10 @@ const NavBar = () => {
     };
 
     return (
-        <div className="shadow-md w-full fixed top-0 left-0 z-10">
+        <div className=" shadow-md shadow-secondary w-full fixed top-0 left-0 z-10">
 
 
-            <div className="md:flex items-center justify-between bg-white py-2 md:px-10 px-7 ">
+            <div className="bg-white md:flex items-center justify-between  py-2 md:px-10 px-7 ">
                 <div className="font-bold text-2xl cursor-pointer flex items-center font-[poppins] text-gray-800 overflow-hidden">
                     <span className="text-3xl text-indigo-600 mr-1 pt-2">
                         <IoLogoChrome />
@@ -83,18 +84,44 @@ const NavBar = () => {
                                 smooth={true}
                                 duration={500}
                                 // offset={-80}
-                                className={`text-gray-800 text-sm hover:text-gray-400 duration-500 cursor-pointer ${activeSection === section ? 'font-bold text-indigo-600' : ''}`}
+                                className={`text-gray-800 text-sm hover:text-gray-400 duration-500 cursor-pointer ${activeSection === section ? 'font-bold text-action' : ''}`}
                                 onClick={() => handleNavigateActive(section)}
                             >
                                 {section.charAt(0).toUpperCase() + section.slice(1)}
                             </ScrollLink>
                         </li>
                     ))}
-                    <button className="bg-indigo-600 text-white font-[poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 duration-500"
+                    <button className="px-4 py-1 ml-2"
                         onClick={() => navigate('/login')}
                     >
                         SignIn
                     </button>
+                </ul>
+            </div>
+
+            <div className="flex fixed flex-col top-1/2 left-0">
+                <ul>
+                    <li className="w-[130px] h-[40px] flex flex-col justify-center items-center ml-[-95px]  hover:ml-[0px] duration-300">
+                        <a className="bg-action flex justify-center items-center w-full text-white rounded-r-lg" href="https://wa.me/0640373089" target="_blank" rel="noopener noreferrer">
+                            <h4 className="mr-[20px]">WhatsApp</h4> <IoLogoWhatsapp size={30} />
+                        </a>
+                    </li>
+
+                    <li className="w-[130px] h-[40px] flex flex-col justify-center items-center ml-[-95px]  hover:ml-[0px] duration-300">
+                        <a className="bg-action flex justify-center items-center w-full text-white rounded-r-lg" href="https://www.facebook.com/lesego.mhlongo.3" target="_blank" rel="noopener noreferrer">
+                            <h4 className="mr-[20px]">Facebook</h4> <IoLogoFacebook size={30} />
+                        </a>
+                    </li>
+                    <li className="w-[130px] h-[40px] flex flex-col justify-center items-center ml-[-95px]  hover:ml-[0px] duration-300">
+                        <a className="bg-action flex justify-center items-center w-full text-white rounded-r-lg" href="mailto:lesegomhlongo78@gmail.com">
+                            <h4 className="mr-[20px]">Instagram</h4> <IoLogoInstagram size={30} />
+                        </a>
+                    </li>
+                    <li className="w-[130px] h-[40px] flex flex-col justify-center items-center ml-[-95px]  hover:ml-[0px] duration-300">
+                        <a className="bg-action flex justify-center items-center w-full text-white rounded-r-lg" href="mailto:lesegomhlongo78@gmail.com">
+                            <h4 className="mr-[20px] pr-8">Email</h4> <MdOutlineMailOutline size={30} />
+                        </a>
+                    </li>
                 </ul>
             </div>
 
