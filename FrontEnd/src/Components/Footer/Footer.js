@@ -29,10 +29,10 @@ const Footer = () => {
                         <div className="mb-5">
                             <h4 className="text-2xl pb-4">Organization</h4>
                             <ul>
-                                <li className="pb-4 cursor-pointer"><button onClick={() => scrollToSection('home')}>Home</button></li>
-                                <li className="pb-4 cursor-pointer"><button onClick={() => scrollToSection('about')}>About</button></li>
-                                <li className="pb-4 cursor-pointer"><button onClick={() => scrollToSection('services')}>Services</button></li>
-                                <li className="pb-4 cursor-pointer"><button onClick={() => scrollToSection('blog')}>Blog</button></li>
+                                <li className="pb-4 cursor-pointer" onClick={() => scrollToSection('home')}>Home</li>
+                                <li className="pb-4 cursor-pointer" onClick={() => scrollToSection('about')}>About</li>
+                                <li className="pb-4 cursor-pointer" onClick={() => scrollToSection('services')}>Services</li>
+                                <li className="pb-4 cursor-pointer" onClick={() => scrollToSection('blog')}>Blog</li>
                             </ul>
                         </div>
                         <div className="mb-5">
