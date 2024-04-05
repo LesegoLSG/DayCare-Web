@@ -5,7 +5,7 @@ import TestimonialCard from './TestimonialCard';
 
 const Testimonials = () => {
     return (
-        <section id="testimonials" className="bg-blue-300 w-full h-auto">
+        <section id="testimonials" className="bg-secondary w-full h-auto">
             <div className=" w-full h-auto flex justify-start items-center pl-16">
                 <h3>Testimonials</h3>
             </div>
