@@ -7,7 +7,7 @@ import BlogPortal from './Portal/PortalComponents/Blog/BlogPortal';
 import Dashboard from './Portal/PortalComponents/Dashboard/Dashboard';
 import Authentication from './Components/LoginRegister/Authentication';
 import AddUser from './Portal/PortalComponents/Users/AddUser';
-import AddBlog from './Portal/PortalComponents/Blog/AddBlog';
+import AddBlog from './Portal/PortalComponents/Blog/AddBlog/AddBlog';
 import BlogReadMore from './Components/Blog/BlogReadMore/BlogReadMore';
 import BlogEdit from './Portal/PortalComponents/Blog/BlogEdit';
 import TermsAndConditions from './Components/LegalStatements/TermsAndConditions';
