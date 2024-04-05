@@ -21,7 +21,7 @@ const LatestBlogCard = ({ latest }) => {
                 <p>{latest.date}</p>
             </div>
             <div className="w-full h-auto flex items-start">
-                <Link to={`/blog/${latest.id}`} className="bg-blue-200 p-2 ml-1 mb-1">
+                <Link to={`/blog/${latest.id}`} className=" border bg-[#5C8D89] border-balance rounded-xl font-semibold text-white hover:text-black hover:border-[#5C8D89] hover:bg-transparent p-1">
                     Read More
                 </Link>
             </div>

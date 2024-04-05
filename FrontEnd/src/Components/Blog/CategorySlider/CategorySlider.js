@@ -2,7 +2,7 @@ import React from 'react'
 
 const CategorySlider = ({ categories, selectedCategory, handleCategoryFilter }) => {
     return (
-        <div className="category-slider-container overflow-x-auto whitespace-nowrap">
+        <div className="category-slider-container overflow-x-auto whitespace-nowrap  px-1">
             {categories.map((category, index) => (
                 <button
                     key={index}
