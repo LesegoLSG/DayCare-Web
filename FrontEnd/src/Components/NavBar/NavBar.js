@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { IoLogoChrome } from "react-icons/io";
 import { IoMenu, IoCloseCircleOutline } from "react-icons/io5";
-import { MdEmail } from "react-icons/md";
-import { FaPhoneAlt } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
-import { IoLogoFacebook, IoLogoWhatsapp, IoLogoInstagram } from "react-icons/io5";
-import { MdOutlineMailOutline } from "react-icons/md";
 import { useLocation, useNavigate } from 'react-router-dom';
 import LessLog from '../../Assets/LessLogo.png';
 
 
 // import { Link } from 'react-scroll';
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
+import TopScroller from './TopScroller';
+import SocialIcons from './SocialIcons';
 
 const NavBar = () => {
     const navigate = useNavigate();
@@ -99,31 +96,10 @@ const NavBar = () => {
                 </ul>
             </div>
 
-            <div className="flex fixed flex-col top-1/2 left-0">
-                <ul>
-                    <li className="w-[130px] h-[40px] flex flex-col justify-center items-center ml-[-95px]  hover:ml-[0px] duration-300">
-                        <a className="bg-action flex justify-center items-center w-full text-white rounded-r-lg" href="https://wa.me/0640373089" target="_blank" rel="noopener noreferrer">
-                            <h4 className="mr-[20px]">WhatsApp</h4> <IoLogoWhatsapp size={30} />
-                        </a>
-                    </li>
-
-                    <li className="w-[130px] h-[40px] flex flex-col justify-center items-center ml-[-95px]  hover:ml-[0px] duration-300">
-                        <a className="bg-action flex justify-center items-center w-full text-white rounded-r-lg" href="https://www.facebook.com/lesego.mhlongo.3" target="_blank" rel="noopener noreferrer">
-                            <h4 className="mr-[20px]">Facebook</h4> <IoLogoFacebook size={30} />
-                        </a>
-                    </li>
-                    <li className="w-[130px] h-[40px] flex flex-col justify-center items-center ml-[-95px]  hover:ml-[0px] duration-300">
-                        <a className="bg-action flex justify-center items-center w-full text-white rounded-r-lg" href="mailto:lesegomhlongo78@gmail.com">
-                            <h4 className="mr-[20px]">Instagram</h4> <IoLogoInstagram size={30} />
-                        </a>
-                    </li>
-                    <li className="w-[130px] h-[40px] flex flex-col justify-center items-center ml-[-95px]  hover:ml-[0px] duration-300">
-                        <a className="bg-action flex justify-center items-center w-full text-white rounded-r-lg" href="mailto:lesegomhlongo78@gmail.com">
-                            <h4 className="mr-[20px] pr-8">Email</h4> <MdOutlineMailOutline size={30} />
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            {/* SideBar social media icons, visible on a screen greater than 764px */}
+            <SocialIcons />
+            {/* Scroll to top button */}
+            <TopScroller />
 
         </div>
     )
