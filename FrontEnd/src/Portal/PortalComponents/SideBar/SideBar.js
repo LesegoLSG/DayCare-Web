@@ -9,6 +9,8 @@ import { FaUserFriends } from "react-icons/fa";
 import { SiBloglovin } from "react-icons/si";
 import { RiLogoutCircleLine } from "react-icons/ri";
 
+import AuthService from '../../../AuthServices/AuthService/AuthService';
+
 const SideBar = () => {
     const [open, setOpen] = useState(true);
     const navigate = useNavigate();
@@ -62,7 +64,7 @@ const SideBar = () => {
                 <div className="absolute bottom-0 left-0 w-full p-2 mb-2 text-white hover:bg-red-600 rounded-md">
 
                     <Link to="/">
-                        <div className="text-lg font-medium item-center flex justify-start gap-x-4 cursor-pointer  rounded-md">
+                        <div className="text-lg font-medium item-center flex justify-start gap-x-4 cursor-pointer  rounded-md" onClick={AuthService.logout}>
                             <RiLogoutCircleLine />
                             <span className={`${!open && 'hidden'} origin-left duration-200`}>Logout</span>
                         </div>
