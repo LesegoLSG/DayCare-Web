@@ -1,6 +1,6 @@
 package com.lesego.daycarebackend.Service.UserServices;
 
-import com.lesego.daycarebackend.Entity.User.User;
+import com.lesego.daycarebackend.Entity.User.RoleType;
 import com.lesego.daycarebackend.dto.UserInformation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,5 +16,8 @@ public interface IUserServiceMethods {
 
     public ResponseEntity<String> deleteUser(int id);
 
+    public String getRoleFromUserEmail(String email);
+
+//    public UserInformation getLoggedInUserInfo(String email);
 
 }

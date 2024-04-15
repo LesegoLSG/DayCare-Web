@@ -1,5 +1,6 @@
 package com.lesego.daycarebackend.Controller.UserController;
 
+import com.lesego.daycarebackend.Entity.User.RoleType;
 import com.lesego.daycarebackend.Entity.User.User;
 import com.lesego.daycarebackend.Service.UserServices.IUserServiceMethods;
 import com.lesego.daycarebackend.dto.UserInformation;
@@ -14,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/admin")
 @RequiredArgsConstructor
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class AdminController {
 
     @GetMapping()
@@ -51,4 +52,19 @@ public class AdminController {
     public ResponseEntity<String> updateUser(@PathVariable int id,@RequestParam("image") MultipartFile image, @RequestParam("user") String userJson){
         return userService.updateUser(id,image,userJson);
     }
+    @GetMapping("/getRoleFromEmail/{email}")
+    public String getUserRoleFromEmail(@PathVariable String email) {
+        System.out.println(email);
+        String role = userService.getRoleFromUserEmail(email);
+        System.out.println("Role: " + role);
+        if (!role.isEmpty()) {
+            return role;
+        } else {
+            return "Error return user";
+        }
+    }
+//    @GetMapping("/currentlyLoggedInUser/{email}")
+//    public UserInformation getCurrentLoggedInUser(@PathVariable String email){
+//        return userService.getLoggedInUserInfo(email);
+//    }
 }

@@ -1,7 +1,8 @@
 package com.lesego.daycarebackend.dto;
 
-import com.lesego.daycarebackend.Entity.User.Role;
-import lombok.Data;
+import com.lesego.daycarebackend.Entity.User.RoleType;
+
+import java.util.List;
 
 
 public class SignUpRequest {
@@ -15,7 +16,7 @@ public class SignUpRequest {
 
     private String password;
 
-    private Role role;
+    private RoleType role;
 
     public String getFirstName() {
         return firstName;
@@ -65,11 +66,11 @@ public class SignUpRequest {
         this.mobile = mobile;
     }
 
-    public Role getRole() {
+    public RoleType getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(RoleType role) {
         this.role = role;
     }
 }

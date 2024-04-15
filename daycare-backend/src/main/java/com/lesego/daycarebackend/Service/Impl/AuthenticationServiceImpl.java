@@ -1,14 +1,12 @@
 package com.lesego.daycarebackend.Service.Impl;
 
-import com.lesego.daycarebackend.Entity.User.Role;
+
 import com.lesego.daycarebackend.Entity.User.User;
 import com.lesego.daycarebackend.Repository.UserRepo.UserRepository;
+import com.lesego.daycarebackend.Reusables.ImageUtils;
 import com.lesego.daycarebackend.Service.AuthenticationService;
 import com.lesego.daycarebackend.Service.JWTService;
-import com.lesego.daycarebackend.dto.JwtAuthenticationResponse;
-import com.lesego.daycarebackend.dto.RefreshTokenRequest;
-import com.lesego.daycarebackend.dto.SignInRequest;
-import com.lesego.daycarebackend.dto.SignUpRequest;
+import com.lesego.daycarebackend.dto.*;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -38,7 +37,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setFirstName(signUpRequest.getFirstName());
         user.setLastName(signUpRequest.getLastName());
         user.setEmail(signUpRequest.getEmail());
-        user.setRole(Role.valueOf(signUpRequest.getRole().toString()));
+        user.setRole(signUpRequest.getRole());
         user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
 
         return userRepository.save(user);
@@ -50,7 +49,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         var user = userRepository.findByEmail(signinRequest.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email address or password"));
+        System.out.println("User Name: " + user.getFirstName() + " " + user.getLastName());
         System.out.println("User:" + user);
+
 
         var jwt = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(new HashMap<>(),user);
@@ -80,5 +81,22 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
         return null;
 
+    }
+
+    public UserInformation getLoggedInUserInfo(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        UserInformation userInfo = new UserInformation();
+        if(user.isPresent()){
+            userInfo.setFirstName(user.get().getFirstName());
+            userInfo.setLastName(user.get().getLastName());
+            userInfo.setEmail(user.get().getEmail());
+            userInfo.setPassword(user.get().getPassword());
+            userInfo.setMobile(user.get().getMobile());
+            userInfo.setRole(user.get().getRole());
+            userInfo.setImage(ImageUtils.decompressImage(user.get().getImage()));
+
+            return userInfo;
+        }
+        return null;
     }
 }

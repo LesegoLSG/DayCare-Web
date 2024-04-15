@@ -1,7 +1,8 @@
 package com.lesego.daycarebackend.dto;
 
-import com.lesego.daycarebackend.Entity.User.Role;
-import jakarta.persistence.*;
+import com.lesego.daycarebackend.Entity.User.RoleType;
+
+import java.util.List;
 
 public class UserInformation {
 
@@ -15,7 +16,7 @@ public class UserInformation {
     private String email;
     private String password;
 
-    private Role role;
+    private RoleType role;
 
     public int getId() {
         return id;
@@ -73,11 +74,11 @@ public class UserInformation {
         this.password = password;
     }
 
-    public Role getRole() {
+    public RoleType getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(RoleType role) {
         this.role = role;
     }
 }

@@ -2,6 +2,7 @@ package com.lesego.daycarebackend.Service.UserServices;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lesego.daycarebackend.Entity.User.RoleType;
 import com.lesego.daycarebackend.Entity.User.User;
 import com.lesego.daycarebackend.Repository.UserRepo.UserRepository;
 import com.lesego.daycarebackend.Reusables.ImageUtils;
@@ -97,6 +98,31 @@ public class UserServiceMethods implements IUserServiceMethods {
            return ResponseEntity.notFound().build();
        }
     }
+
+    @Override
+    public String getRoleFromUserEmail(String email) {
+        System.out.println("Service email:" + email);
+        User user = userRepository.findByEmail(email).orElseThrow();
+        return user.getRole().name();
+    }
+
+ //   @Override
+//    public UserInformation getLoggedInUserInfo(String email) {
+//        Optional<User> user = userRepository.findByEmail(email);
+//        UserInformation userInfo = new UserInformation();
+//        if(user.isPresent()){
+//            userInfo.setFirstName(user.get().getFirstName());
+//            userInfo.setLastName(user.get().getLastName());
+//            userInfo.setEmail(user.get().getEmail());
+//            userInfo.setPassword(user.get().getPassword());
+//            userInfo.setMobile(user.get().getMobile());
+//            userInfo.setRole(user.get().getRole());
+//            userInfo.setImage(ImageUtils.decompressImage(user.get().getImage()));
+//
+//            return userInfo;
+//        }
+//        return null;
+//    }
 
 
     /**

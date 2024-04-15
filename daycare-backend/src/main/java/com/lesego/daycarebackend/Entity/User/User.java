@@ -6,8 +6,8 @@ import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,23 +29,24 @@ public class User implements UserDetails {
     private String email;
     private String password;
 
-    private Role role;
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<Blog> blog;
 
+    private RoleType role;
+
 
     public User(){}
 
-    public User(String firstName, String lastName, String email, String password, Role role,byte[] image,String mobile,List<Blog> blog) {
+    public User(String firstName, String lastName, String email, String password, byte[] image, String mobile,RoleType role, List<Blog> blog) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.role = role;
         this.image= image;
         this.mobile = mobile;
         this.blog = blog;
+        this.role = role;
     }
 
     public int getId() {
@@ -120,13 +121,6 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
     public byte[] getImage() {
         return image;
@@ -150,5 +144,13 @@ public class User implements UserDetails {
 
     public void setBlog(List<Blog> blog) {
         this.blog = blog;
+    }
+
+    public RoleType getRole() {
+        return role;
+    }
+
+    public void setRole(RoleType role) {
+        this.role = role;
     }
 }
