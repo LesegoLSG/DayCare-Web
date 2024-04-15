@@ -2,15 +2,26 @@ import axiosInstance from "../Axios/AxiosInstance";
 import { jwtDecode } from "jwt-decode";
 
 const AuthService = {
+    // Set access token
     setToken: (token) => {
         localStorage.setItem('token', token);
     },
-
+    //Set refresh token
+    setRefreshToken: (refreshToken) => {
+        localStorage.setItem('refreshToken', refreshToken);
+    },
+    //Get access token
     getToken: () => {
         const token = localStorage.getItem('token');
         return token ? token : null;
     },
+    //Get refresh token
+    getRefreshToken: () => {
+        const refreshToken = localStorage.getItem('refreshToken');
+        return refreshToken ? refreshToken : null;
+    },
 
+    //Get email from a valid access toekn
     getUserEmail: () => {
         const token = AuthService.getToken();
         console.log("getUserEmail:", token);
@@ -27,7 +38,7 @@ const AuthService = {
         }
         return null;
     },
-
+    //Getting a user's role using their valid email
     getUserRole: async () => {
         const token = AuthService.getToken();
         if (token) {
@@ -45,7 +56,7 @@ const AuthService = {
         }
         return null;
     },
-
+    //Get logged in user using a valid users email
     getCurrentlyLoggedInUser: async (email) => {
         console.log("email:", email);
         try {
@@ -57,11 +68,11 @@ const AuthService = {
         }
     },
 
-
+    //Login api
     login: (loginDetails) => {
         return axiosInstance.post("/auth/signin", loginDetails);
     },
-
+    //Checing if the user is logged in by assessing a token
     isLoggedIn: () => {
         const token = AuthService.getToken();
         if (token) {
@@ -71,10 +82,30 @@ const AuthService = {
         }
         return false;
     },
-
+    //Clear local storage when a user logs out
     logout: () => {
         localStorage.clear();
     },
+
+    clearTokens: () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+    },
+
+    //Get token from refresh token
+    refreshToken: async () => {
+        const refreshtoken = localStorage.getItem('refreshToken');
+        if (refreshtoken) {
+            try {
+                const response = await axiosInstance.post('/auth/refresh', refreshtoken);
+                AuthService.setToken(response.data.token);
+                return response;
+            } catch (error) {
+                console.error("Error refreshing the token:", error);
+                throw error;
+            }
+        }
+    }
 };
 
 export default AuthService;
