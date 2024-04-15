@@ -7,6 +7,7 @@ import userData from './UsersData';
 import AddUser from './AddUser';
 import NoUser from './NoUser';
 import EditUser from './EditUser';
+import AxiosPrivateInstance from '../../../AuthServices/Axios/AxiosPrivateInstance';
 
 import { IoMdAdd } from "react-icons/io";
 import ViewUser from './ViewUser/ViewUser';
@@ -31,7 +32,7 @@ const Users = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/api/v1/admin/getAllUsers");
+            const response = await AxiosPrivateInstance.get("http://localhost:8080/api/v1/admin/getAllUsers");
             setUsers(response.data);
 
         } catch (error) {
