@@ -13,32 +13,48 @@ import BlogEdit from './Portal/PortalComponents/Blog/BlogEdit';
 import TermsAndConditions from './Components/LegalStatements/TermsAndConditions';
 import PrivacyPolicy from './Components/LegalStatements/PrivacyPolicy';
 
+import { UserProvider } from './UserContext/UserLoggedIn';
+import { PrivateRoute } from './AuthServices/Routes/PrivateRoute';
+import { MainUsersRoute } from './AuthServices/Routes/MainUsersRoute';
+
 function App() {
   return (
     <div className="App">
       <Router>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<Authentication />} />
+        <UserProvider>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<Authentication />} />
+            {/* Protected routes */}
+            <Route path="/portal" element={
+              <PrivateRoute>
+                <PortalPage />
+              </PrivateRoute>
 
-          <Route path="/portal" element={<PortalPage />} >
-            <Route index element={<Dashboard />} />
-            <Route path="/portal/users" element={<Users />} />
-            <Route path="/portal/users/add" element={<AddUser />} />
-            <Route path="/portal/blog" element={<BlogPortal />} />
-            {/* make use of useParam for "/portal/blog/edit/:id" */}
-            <Route path="/portal/blog/:id" element={<BlogEdit />} />
-            <Route path="/portal/blog/add" element={<AddBlog />} />
-          </Route>
+            } >
+              <Route index element={<Dashboard />} />
+              <Route path="/portal/users" element={
+                <MainUsersRoute>
+                  <Users />
+                </MainUsersRoute>
+              }
+              />
+              <Route path="/portal/users/add" element={<AddUser />} />
+              <Route path="/portal/blog" element={<BlogPortal />} />
+              {/* make use of useParam for "/portal/blog/edit/:id" */}
+              <Route path="/portal/blog/:id" element={<BlogEdit />} />
+              <Route path="/portal/blog/add" element={<AddBlog />} />
+            </Route>
 
 
-          {/* Route to display full blog description */}
-          <Route path="/blog/:id" element={<BlogReadMore />} />
+            {/* Route to display full blog description */}
+            <Route path="/blog/:id" element={<BlogReadMore />} />
 
-          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
-        </Routes>
+          </Routes>
+        </UserProvider>
       </Router>
     </div>
   );
