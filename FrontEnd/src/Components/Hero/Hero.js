@@ -9,6 +9,7 @@ import Image3 from '../../Assets/Image3.jpg';
 import Image4 from '../../Assets/Image4.jpg';
 import './Hero.css';
 
+
 const spanStyle = {
     padding: '20px',
     background: 'transparent',
