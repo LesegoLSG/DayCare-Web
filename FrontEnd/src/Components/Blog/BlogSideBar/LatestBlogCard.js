@@ -12,10 +12,10 @@ const LatestBlogCard = ({ latest }) => {
     return (
         <div>
             <div className="w-full h-auto flex items-start">
-                <p>{latest.title}</p>
+                <p className="text-md font-bold">{latest.title}</p>
             </div>
             <div className="w-full h-auto flex justify-start items-start">
-                <p className="" style={{ whiteSpace: 'pre-line' }}>{truncateText(latest.briefDescription, 80)}</p>
+                <p className="text-start" style={{ whiteSpace: 'pre-line' }}>{truncateText(latest.briefDescription, 80)}</p>
             </div>
             <div className="w-full h-auto flex items-start">
                 <p>{latest.date}</p>

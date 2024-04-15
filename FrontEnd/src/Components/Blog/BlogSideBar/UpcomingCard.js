@@ -12,7 +12,7 @@ const UpcomingCard = ({ upcoming }) => {
         <div>
 
             <div className="w-full h-auto flex justify-start items-start">
-                <p className="" style={{ whiteSpace: 'pre-line' }}>{truncateText(upcoming.briefDescription, 80)}</p>
+                <p className="text-start" style={{ whiteSpace: 'pre-line' }}>{truncateText(upcoming.briefDescription, 80)}</p>
             </div>
 
             <div className="w-full h-auto flex items-start">
