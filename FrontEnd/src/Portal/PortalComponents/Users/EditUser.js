@@ -53,7 +53,7 @@ const EditUser = ({ userToEdit, closeModal }) => {
             }
             formData.append('user', JSON.stringify(user));
 
-            const response = await axios.put(`http://localhost:8080/api/v1/admin/updateUser/${userToEdit.id}`, formData);
+            const response = await axios.put(`http://localhost:8080/api/v1/user/updateUser/${userToEdit.id}`, formData);
             console.log("User updated successfully:", response.data);
 
 
