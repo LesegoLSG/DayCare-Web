@@ -2,13 +2,13 @@ package com.lesego.daycarebackend.dto;
 
 public class RefreshTokenRequest {
 
-    private String token;
+    private String refreshToken;
 
-    public String getToken() {
-        return token;
+    public String getRefreshToken() {
+        return refreshToken;
     }
 
     public void setToken(String token) {
-        this.token = token;
+        this.refreshToken = refreshToken;
     }
 }
