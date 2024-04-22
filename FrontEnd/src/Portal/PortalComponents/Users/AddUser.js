@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import AxiosPrivateInstance from '../../../AuthServices/Axios/AxiosPrivateInstance';
 import './User.css';
 import Image4 from '../../../Assets/Image4.jpg';
 import Image1 from '../../../Assets/Image1.jpg';
@@ -22,7 +23,11 @@ const AddUser = () => {
         email: '',
         password: '',
         mobile: '',
-        role: ''
+        role: '',
+        whatsAppNo: '',
+        facebookLink: '',
+        instagramLink: '',
+        linkedInLink: ''
     })
 
 
@@ -33,9 +38,6 @@ const AddUser = () => {
         setUser(prevUser => ({ ...prevUser, [name]: value }));
         console.log("Changes:", user);
     };
-
-
-
 
 
 
@@ -62,7 +64,7 @@ const AddUser = () => {
             console.log(formData.get('user'));
             console.log('myImage2:', formData.get('image'));
 
-            const response = await axios.post("http://localhost:8080/api/v1/admin/add", formData, {
+            const response = await AxiosPrivateInstance.post("/user/add", formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -87,7 +89,7 @@ const AddUser = () => {
 
             <div className="  w-[100%] h-[500px] grid grid-col-1 md:grid-cols-2 gap-2 relative shadow-lg shadow-indigo-100">
                 {/* Profile picture */}
-                <div className=" w-full h-auto flex flex-col justify-center items-center">
+                <div className=" w-full h-auto flex flex-col justify-center items-center ">
                     <div>
                         <h1 className="text-xl font-semibold">Profile Picture</h1>
                     </div>
@@ -119,76 +121,122 @@ const AddUser = () => {
 
                 </div>
 
-                <form className="flex flex-col justify-center items-center" onSubmit={onSubmit}>
+                <form className=" flex flex-col justify-center items-center" onSubmit={onSubmit}>
                     {/* user details */}
                     <div className=" w-full p-2 ">
 
                         <div>
                             <h1 className="text-xl font-semibold">User Details</h1>
                         </div>
+                        <div className=" w-full h-[380px] overflow-y-auto">
 
-                        <div className="flex flex-col justify-start items-start">
-                            <label>FirstName:</label>
-                            <input
-                                className="w-full h-8 mb-2 border border-black hover:border-blue-200"
-                                type="text"
-                                name="firstName"
-                                value={user.firstName}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div className="flex flex-col justify-start items-start">
-                            <label>Last Name:</label>
-                            <input
-                                className="w-full h-8 mb-2 border border-black hover:border-blue-200 "
-                                type="text"
-                                name="lastName"
-                                value={user.lastName}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div className="flex flex-col justify-start items-start">
-                            <label>Mobile Number:</label>
-                            <input
-                                className="w-full h-8 mb-2 border border-black hover:border-blue-200"
-                                type="text"
-                                name="mobile"
-                                value={user.mobile}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div className="flex flex-col justify-start items-start">
-                            <label>Email Address:</label>
-                            <input
+                            <div className="flex flex-col justify-start items-start">
+                                <label>FirstName:</label>
+                                <input
+                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
+                                    type="text"
+                                    name="firstName"
+                                    value={user.firstName}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="flex flex-col justify-start items-start">
+                                <label>Last Name:</label>
+                                <input
+                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200 "
+                                    type="text"
+                                    name="lastName"
+                                    value={user.lastName}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="flex flex-col justify-start items-start">
+                                <label>Mobile Number:</label>
+                                <input
+                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
+                                    type="text"
+                                    name="mobile"
+                                    value={user.mobile}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="flex flex-col justify-start items-start">
+                                <label>Email Address:</label>
+                                <input
 
-                                className="w-full h-8 mb-2 border border-black hover:border-blue-200"
-                                type="text"
-                                name="email"
-                                value={user.email}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div className="flex flex-col justify-start items-start">
-                            <label>Password:</label>
-                            <input
+                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
+                                    type="text"
+                                    name="email"
+                                    value={user.email}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="flex flex-col justify-start items-start">
+                                <label>Password:</label>
+                                <input
 
-                                className="w-full h-8 mb-2 border border-black hover:border-blue-200"
-                                type="text"
-                                name="password"
-                                value={user.password}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div className="flex flex-col justify-start items-start">
-                            <label>Roles</label>
-                            <input
+                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
+                                    type="text"
+                                    name="password"
+                                    value={user.password}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="flex flex-col justify-start items-start">
+                                <label>Roles</label>
+                                <input
 
-                                className="w-full h-8 mb-2 border border-black hover:border-blue-200"
-                                type="text"
-                                name="role"
-                                value={user.role}
-                                onChange={handleInputChange}
-                            />
+                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
+                                    type="text"
+                                    name="role"
+                                    value={user.role}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="flex flex-col justify-start items-start">
+                                <label>Whatsapp Number</label>
+                                <input
+
+                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
+                                    type="text"
+                                    name="whatsAppNo"
+                                    value={user.whatsAppNo}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="flex flex-col justify-start items-start">
+                                <label>Facebook Link</label>
+                                <input
+
+                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
+                                    type="text"
+                                    name="facebookLink"
+                                    value={user.facebookLink}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="flex flex-col justify-start items-start">
+                                <label>Instagram Link</label>
+                                <input
+
+                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
+                                    type="text"
+                                    name="instagramLink"
+                                    value={user.instagramLink}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="flex flex-col justify-start items-start">
+                                <label>LinkedIn Link</label>
+                                <input
+
+                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
+                                    type="text"
+                                    name="linkedInLink"
+                                    value={user.linkedInLink}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
                         </div>
                     </div>
 
