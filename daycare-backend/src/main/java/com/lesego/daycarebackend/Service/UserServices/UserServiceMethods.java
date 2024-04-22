@@ -69,6 +69,10 @@ public class UserServiceMethods implements IUserServiceMethods {
                 existingUser.setEmail(userToUpdate.getEmail());
                 existingUser.setPassword(userToUpdate.getPassword());
                 existingUser.setRole(userToUpdate.getRole());
+                existingUser.setWhatsAppNo(userToUpdate.getWhatsAppNo());
+                existingUser.setFacebookLink(userToUpdate.getFacebookLink());
+                existingUser.setInstagramLink(userToUpdate.getInstagramLink());
+                existingUser.setLinkedInLink(userToUpdate.getLinkedInLink());
 
                 // Update image data if provided
                 if (image != null && !image.isEmpty()) {
