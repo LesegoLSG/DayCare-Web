@@ -68,15 +68,15 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     public JwtAuthenticationResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
-        String userEmail = jwtService.extractUserName(refreshTokenRequest.getToken());
+        String userEmail = jwtService.extractUserName(refreshTokenRequest.getRefreshToken());
         User user = userRepository.findByEmail(userEmail).orElseThrow();
 
-        if (jwtService.isTokenValid(refreshTokenRequest.getToken(), user)) {
+        if (jwtService.isTokenValid(refreshTokenRequest.getRefreshToken(), user)) {
             var jwt = jwtService.generateToken(user);
 
             JwtAuthenticationResponse jwtAuthenticationResponse = new JwtAuthenticationResponse();
             jwtAuthenticationResponse.setToken(jwt);
-            jwtAuthenticationResponse.setRefreshToken(refreshTokenRequest.getToken());
+            jwtAuthenticationResponse.setRefreshToken(refreshTokenRequest.getRefreshToken());
             return jwtAuthenticationResponse;
         }
         return null;
