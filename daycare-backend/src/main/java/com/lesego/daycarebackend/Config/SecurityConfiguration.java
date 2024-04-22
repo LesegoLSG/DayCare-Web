@@ -39,7 +39,7 @@ public class SecurityConfiguration {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(request -> request.requestMatchers("/api/v1/auth/**")
                         .permitAll()
-                        .requestMatchers("/api/v1/admin/**").hasAnyAuthority(RoleType.SYSTEM_ADMIN.name(), RoleType.ADMIN.name())
+                        .requestMatchers("/api/v1/user/**").hasAnyAuthority(RoleType.SYSTEM_ADMIN.name(), RoleType.ADMIN.name())
                         .requestMatchers("/api/v1/blog/**").hasAnyAuthority(RoleType.SYSTEM_ADMIN.name(), RoleType.ADMIN.name(),RoleType.CONTENT_CREATOR.name())
                         .anyRequest().authenticated())
 
