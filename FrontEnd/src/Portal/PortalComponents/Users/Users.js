@@ -21,7 +21,7 @@ const Users = () => {
     const [isViewUser, setIsViewUser] = useState(false);
 
     const [userToEdit, setUserToEdit] = useState(null);
-    const [userToView, setUserToView] = useState(null);
+    const [userToView, setUserToView] = useState({});
     const navigate = useNavigate();
 
     const handleChangeToAdd = () => {
@@ -32,7 +32,7 @@ const Users = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await AxiosPrivateInstance.get("http://localhost:8080/api/v1/admin/getAllUsers");
+            const response = await AxiosPrivateInstance.get("/user/getAllUsers");
             setUsers(response.data);
 
         } catch (error) {
@@ -45,30 +45,7 @@ const Users = () => {
         fetchUsers();
     }, []);
 
-    //Add new user
-    // const addUser = async (user, image) => {
-    //     console.log("image from landing:", image);
-    //     console.log("Json data:", user);
 
-    // try {
-    //     const formData = new FormData();
-    //     if (image) {
-    //         formData.append('image', image);
-    //     }
-    //     formData.append('user', JSON.stringify(user));
-
-    //     const response = await axios.post("http://localhost:8080/api/v1/admin/add", formData, {
-    //         headers: {
-    //             'Content-Type': 'multipart/form-data',
-    //         },
-    //     });
-
-
-    // } catch (error) {
-    //     console.log("Error adding user:" + error);
-    // }
-
-    // }
 
 
 
