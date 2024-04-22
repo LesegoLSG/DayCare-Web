@@ -34,11 +34,15 @@ public class User implements UserDetails {
     private List<Blog> blog;
 
     private RoleType role;
+    private String whatsAppNo;
+    private String facebookLink;
+    private String instagramLink;
+    private String linkedInLink;
 
 
     public User(){}
 
-    public User(String firstName, String lastName, String email, String password, byte[] image, String mobile,RoleType role, List<Blog> blog) {
+    public User(String firstName, String lastName, String email, String password, byte[] image, String mobile,RoleType role, List<Blog> blog,String whatsAppNo,String facebookLink,String instagramLink, String linkedInLink) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -47,6 +51,10 @@ public class User implements UserDetails {
         this.mobile = mobile;
         this.blog = blog;
         this.role = role;
+        this.whatsAppNo = whatsAppNo;
+        this.facebookLink=facebookLink;
+        this.instagramLink = instagramLink;
+        this.linkedInLink = linkedInLink;
     }
 
     public int getId() {
@@ -152,5 +160,37 @@ public class User implements UserDetails {
 
     public void setRole(RoleType role) {
         this.role = role;
+    }
+
+    public String getWhatsAppNo() {
+        return whatsAppNo;
+    }
+
+    public void setWhatsAppNo(String whatsAppNo) {
+        this.whatsAppNo = whatsAppNo;
+    }
+
+    public String getFacebookLink() {
+        return facebookLink;
+    }
+
+    public void setFacebookLink(String facebookLink) {
+        this.facebookLink = facebookLink;
+    }
+
+    public String getInstagramLink() {
+        return instagramLink;
+    }
+
+    public void setInstagramLink(String instagramLink) {
+        this.instagramLink = instagramLink;
+    }
+
+    public String getLinkedInLink() {
+        return linkedInLink;
+    }
+
+    public void setLinkedInLink(String linkedInLink) {
+        this.linkedInLink = linkedInLink;
     }
 }
