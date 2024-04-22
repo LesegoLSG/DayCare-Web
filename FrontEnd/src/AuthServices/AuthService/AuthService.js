@@ -1,5 +1,6 @@
 import axiosInstance from "../Axios/AxiosInstance";
 import { jwtDecode } from "jwt-decode";
+import axios from 'axios';
 
 const AuthService = {
     // Set access token
@@ -93,18 +94,33 @@ const AuthService = {
     },
 
     //Get token from refresh token
-    refreshToken: async () => {
-        const refreshtoken = localStorage.getItem('refreshToken');
-        if (refreshtoken) {
+    refreshToken: (refreshToken) => {
+
+        if (refreshToken) {
             try {
-                const response = await axiosInstance.post('/auth/refresh', refreshtoken);
-                AuthService.setToken(response.data.token);
-                return response;
+                console.log("Hey i have a refresh token: ", refreshToken);
+                return axiosInstance.post('/auth/refresh', { refreshToken });
             } catch (error) {
                 console.error("Error refreshing the token:", error);
                 throw error;
             }
         }
+    },
+
+    getTokenExpiration: () => {
+        const token = AuthService.getToken();
+        if (token) {
+            try {
+                const payLoad = jwtDecode(token);
+                if (payLoad.exp) {
+                    return payLoad.exp * 1000; //Expiration time is in seconds, convert it to milliseconds
+                }
+
+            } catch (error) {
+                console.error("Error decoding token", error);
+            }
+        }
+        return null;// Return null if token is invalid or expiration time is not found
     }
 };
 
