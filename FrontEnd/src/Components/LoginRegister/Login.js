@@ -26,6 +26,7 @@ const Login = () => {
             const response = await AuthService.login(loginDetails);
             if (response?.data?.token) {
                 AuthService.setToken(response?.data?.token);
+                AuthService.setRefreshToken(response?.data?.refreshToken);
                 navigate("/portal")
             }
         } catch (error) {
