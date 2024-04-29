@@ -149,6 +149,10 @@ public class UserServiceMethods implements IUserServiceMethods {
             userInformation.setMobile(user.getMobile());
             userInformation.setPassword(user.getPassword());
             userInformation.setRole(user.getRole());
+            userInformation.setWhatsAppNo(user.getWhatsAppNo());
+            userInformation.setFacebookLink(user.getFacebookLink());
+            userInformation.setInstagramLink(user.getInstagramLink());
+            userInformation.setLinkedInLink(user.getLinkedInLink());
             userInformationList.add(userInformation);
 
             if(user.getImage() == null){

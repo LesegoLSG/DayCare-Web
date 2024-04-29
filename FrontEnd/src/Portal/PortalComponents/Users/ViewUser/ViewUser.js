@@ -6,9 +6,15 @@ const ViewUser = ({ userToView, closeViewUserModal, users }) => {
         if (e.target.id === "container")
             closeViewUserModal();
     }
+    const handleWhatsAppClick = () => {
+        window.open(`whatsapp://send?phone=${userToView.whatsAppNo}`, '_blank');
+    };
+    const handleFacebookClick = () => {
+        window.open(userToView.facebookLink, '_blank');
+    };
     return (
         <div id="container" onClick={handleOnClose} className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
-            <div className="bg-white w-[40rem] h-[30rem]">
+            <div className="bg-white w-[46rem] h-[30rem]">
                 <div className="w-full h-auto flex justify-center items-center py-4">
                     <div className="bg-green-500 w-[8rem] h-[8rem] rounded-full"
                         style={{
@@ -19,31 +25,33 @@ const ViewUser = ({ userToView, closeViewUserModal, users }) => {
                     </div>
                 </div>
                 <div className="w-full h-auto">
-                    <div className="flex justify-start items-center">
+                    <h1 className="text-xl font-bold underline">Personal Details</h1>
+                    <div className="grid grid-cols-2 text-start py-1">
                         <p className="text-lg"><span className="font-bold">First Name:</span>{userToView.firstName}</p>
-                    </div>
-                    <div className="flex justify-start items-center">
                         <p className="text-lg"><span className="font-bold">Last Name:</span>{userToView.lastName}</p>
                     </div>
-                    <div className="flex justify-start items-center">
+                    <div className="grid grid-cols-2 text-start py-1">
                         <p className="text-lg"><span className="font-bold">Email Address:</span>{userToView.email}</p>
-                    </div>
-                    <div className="flex justify-start items-center">
                         <p className="text-lg"><span className="font-bold">Mobile Number:</span>{userToView.mobile}</p>
                     </div>
-                    <div className="flex justify-start items-center">
+                    <h1 className="text-xl font-bold underline">Socials</h1>
+                    <div className="grid grid-cols-2 text-start py-1">
                         <p className="text-lg"><span className="font-bold">WhatsApp Number:</span>{userToView.whatsAppNo}</p>
+                        <button>WhatsApp {userToView.firstName}</button>
                     </div>
-                    <div className="flex justify-start items-center">
-                        <p className="text-lg"><span className="font-bold">Facebook Link:</span>{userToView.facebookLink}</p>
+                    <div className="grid grid-cols-2 text-start py-1">
+                        <p className="text-lg font-bold">Facebook Link:</p>
+                        <button onClick={handleFacebookClick}>Inbox</button>
                     </div>
-                    <div className="flex justify-start items-center">
-                        <p className="text-lg"><span className="font-bold">Instagram Link:</span>{userToView.instagramLink}</p>
+                    <div className="grid grid-cols-2 text-start py-1">
+                        <p className="text-lg font-bold">Instagram Link:</p>
+                        <button>Inbox</button>
                     </div>
-                    <div className="flex justify-start items-center">
-                        <p className="text-lg"><span className="font-bold">Linkedin Link:</span>{userToView.linkedInLink}</p>
-                    </div>
+                    <div className="grid grid-cols-2 text-start py-1">
+                        <p className="text-lg font-bold">Linkedin Link:</p>
+                        <button>Inbox</button>
 
+                    </div>
                 </div>
 
             </div>

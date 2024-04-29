@@ -5,3 +5,18 @@
 .active {
     background-color: green;
 }
+
+.span-error {
+    display: none;
+
+}
+
+.input-error:valid~.span-error {
+    display: none;
+    color: #d52;
+    /* Hide error messages when input is valid */
+}
+
+.input-error:invalid~.span-error {
+    display: block;
+}

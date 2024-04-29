@@ -18,6 +18,13 @@ public class UserInformation {
 
     private RoleType role;
 
+    private String whatsAppNo;
+    private String facebookLink;
+
+    private String instagramLink;
+
+    private String linkedInLink;
+
     public int getId() {
         return id;
     }
@@ -80,5 +87,37 @@ public class UserInformation {
 
     public void setRole(RoleType role) {
         this.role = role;
+    }
+
+    public String getWhatsAppNo() {
+        return whatsAppNo;
+    }
+
+    public void setWhatsAppNo(String whatsAppNo) {
+        this.whatsAppNo = whatsAppNo;
+    }
+
+    public String getFacebookLink() {
+        return facebookLink;
+    }
+
+    public void setFacebookLink(String facebookLink) {
+        this.facebookLink = facebookLink;
+    }
+
+    public String getInstagramLink() {
+        return instagramLink;
+    }
+
+    public void setInstagramLink(String instagramLink) {
+        this.instagramLink = instagramLink;
+    }
+
+    public String getLinkedInLink() {
+        return linkedInLink;
+    }
+
+    public void setLinkedInLink(String linkedInLink) {
+        this.linkedInLink = linkedInLink;
     }
 }

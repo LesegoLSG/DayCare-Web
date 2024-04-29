@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { FaCameraRetro } from "react-icons/fa";
 import { MdOutlineFileUpload } from "react-icons/md";
 
@@ -6,6 +7,9 @@ import { MdOutlineFileUpload } from "react-icons/md";
 const VideoOrImageDisplay = ({ image, setImage, showVideo, uploadsection }) => {
     const [videoLoaded, setVideoLoaded] = useState(false);
     const [imageUrl, setImageUrl] = useState(null);
+
+    const currentLocation = useLocation(); // Change 'location' to 'currentLocation'
+    const navigate = useNavigate();
 
     let videoRef = useRef(null);
     let photoRef = useRef(null);
@@ -82,6 +86,11 @@ const VideoOrImageDisplay = ({ image, setImage, showVideo, uploadsection }) => {
 
 
     const clearImage = () => {
+        let video = videoRef.current;
+        if (video) {
+            video.pause(); // Pause the video
+        }
+
         let photo = photoRef.current
         if (photo) {
             let ctx = photo.getContext('2d');
@@ -89,9 +98,11 @@ const VideoOrImageDisplay = ({ image, setImage, showVideo, uploadsection }) => {
         }
         setImage(null);
         setVideoLoaded(false); // Reset video loaded state
-        getUserCamera();
+
+        // getUserCamera();
 
     }
+
 
     useEffect(() => {
         getUserCamera()

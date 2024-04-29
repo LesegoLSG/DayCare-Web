@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import VideoOrImageDisplay from './VideoOrImageDisplay/VideoOrImageDisplay';
 import UploadImage from './UploadImage/UploadImage';
+import InputValidation from '../../../ReusableComponents/Validations/InputValidation';
 
 import { IoMdCloseCircleOutline } from "react-icons/io";
+import FormSubmit from './FormSubmit';
 
 const EditUser = ({ userToEdit, closeModal }) => {
 
@@ -20,8 +22,13 @@ const EditUser = ({ userToEdit, closeModal }) => {
         email: userToEdit.email,
         password: userToEdit.password,
         mobile: userToEdit.mobile,
-        role: userToEdit.role
-    })
+        role: userToEdit.role,
+        whatsAppNo: userToEdit.whatsAppNo,
+        facebookLink: userToEdit.facebookLink,
+        instagramLink: userToEdit.instagramLink,
+        linkedInLink: userToEdit.linkedInLink
+    });
+    const [error, setError] = useState({});
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -29,7 +36,7 @@ const EditUser = ({ userToEdit, closeModal }) => {
         console.log("Changes:", user);
     };
 
-    console.log(userToEdit);
+
     const handleOnClose = (e) => {
         if (e.target.id === "container")
             closeModal();
@@ -60,6 +67,13 @@ const EditUser = ({ userToEdit, closeModal }) => {
         } catch (error) {
             console.error("Error updating user:", error);
         }
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setError(InputValidation(user));
+        console.log("new user: ", user);
+
     }
 
     return (
@@ -110,88 +124,7 @@ const EditUser = ({ userToEdit, closeModal }) => {
 
                     </div>
 
-                    <form className="flex flex-col justify-center items-center" onSubmit={onSubmit}>
-                        {/* user details */}
-                        <div className="w-full p-2 ">
-                            <div>
-                                <h1 className="text-xl font-semibold">User Details</h1>
-                            </div>
-
-                            <div className="flex flex-col justify-start items-start">
-                                <label>FirstName:</label>
-                                <input
-                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200 "
-                                    type="text"
-                                    name="firstName"
-                                    value={user.firstName}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="flex flex-col justify-start items-start">
-                                <label>Last Name:</label>
-                                <input
-                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
-                                    type="text"
-                                    name="lastName"
-                                    value={user.lastName}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="flex flex-col justify-start items-start">
-                                <label>Mobile Number:</label>
-                                <input
-                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
-                                    type="text"
-                                    name="mobile"
-                                    value={user.mobile}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="flex flex-col justify-start items-start">
-                                <label>Email Address:</label>
-                                <input
-
-                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200 "
-                                    type="text"
-                                    name="email"
-                                    value={user.email}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="flex flex-col justify-start items-start">
-                                <label>Password:</label>
-                                <input
-
-                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
-                                    type="text"
-                                    name="password"
-                                    value={user.password}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="flex flex-col justify-start items-start">
-                                <label>Roles</label>
-                                <input
-
-                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200 "
-                                    type="text"
-                                    name="role"
-                                    value={user.role}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                        </div>
-
-
-
-                        <div className=" m-4">
-                            <button type="submit" className="bg-blue-200 w-40 h-8 m-1 p-1">Submit</button>
-                            <button
-                                onClick={() => navigate("/portal/users")}
-                                className="bg-red-600 w-40 h-8 m-1 p-1">Cancel</button>
-
-                        </div>
-                    </form>
+                    <FormSubmit user={user} error={error} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
 
 
                 </div>

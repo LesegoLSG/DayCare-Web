@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AxiosPrivateInstance from '../../../AuthServices/Axios/AxiosPrivateInstance';
 import './User.css';
@@ -8,10 +7,14 @@ import Image1 from '../../../Assets/Image1.jpg';
 import UploadImage from './UploadImage/UploadImage';
 import VideoOrImageDisplay from './VideoOrImageDisplay/VideoOrImageDisplay';
 import { IoMdCloseCircleOutline } from "react-icons/io";
-
+import InputValidation from '../../../ReusableComponents/Validations/InputValidation';
+import FormSubmit from './FormSubmit';
+import Notification from '../../../ReusableComponents/Notification/Notification';
+import { ToastContainer, toast, Bounce } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 const AddUser = () => {
-    const navigate = useNavigate();
+
 
     const [showVideo, setShowVideo] = useState(true);
 
@@ -28,22 +31,17 @@ const AddUser = () => {
         facebookLink: '',
         instagramLink: '',
         linkedInLink: ''
-    })
+    });
+
+    const [errorMessage, setErrorMessage] = useState({});
+
 
 
 
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setUser(prevUser => ({ ...prevUser, [name]: value }));
-        console.log("Changes:", user);
+        setUser({ ...user, [e.target.name]: e.target.value })
     };
-
-
-
-
-
-
 
     const uploadsection = () => {
         setShowVideo(!showVideo);
@@ -82,11 +80,46 @@ const AddUser = () => {
 
     }
 
+    // const Notify = () => {
+    //     toast.success('🦄 Wow so easy!', {
+    //         position: "top-right",
+    //         autoClose: 5000,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: undefined,
+    //         theme: "light",
+    //         transition: Bounce,
+    //     });
+    // }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const errors = InputValidation(user);
+        if (Object.keys(errors).length === 0) {
+            try {
+                console.log("Add new user: ", user);
+                console.log("Notify1");
+                Notification.errorPopUp("Wow...");
+                console.log("Notify2");
+
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            setErrorMessage(errors);
+        }
+
+
+
+
+    }
+    // console.log("New User:", user);
+    // console.log("error message:", errorMessage);
     return (
         <div className=" w-full user-height flex flex-col justify-center items-center p-4">
-
-
-
+            <ToastContainer />
             <div className="  w-[100%] h-[500px] grid grid-col-1 md:grid-cols-2 gap-2 relative shadow-lg shadow-indigo-100">
                 {/* Profile picture */}
                 <div className=" w-full h-auto flex flex-col justify-center items-center ">
@@ -118,141 +151,14 @@ const AddUser = () => {
                         </div>
                     }
 
-
+                    {/* <ToastContainer /> */}
                 </div>
 
-                <form className=" flex flex-col justify-center items-center" onSubmit={onSubmit}>
-                    {/* user details */}
-                    <div className=" w-full p-2 ">
-
-                        <div>
-                            <h1 className="text-xl font-semibold">User Details</h1>
-                        </div>
-                        <div className=" w-full h-[380px] overflow-y-auto">
-
-                            <div className="flex flex-col justify-start items-start">
-                                <label>FirstName:</label>
-                                <input
-                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
-                                    type="text"
-                                    name="firstName"
-                                    value={user.firstName}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="flex flex-col justify-start items-start">
-                                <label>Last Name:</label>
-                                <input
-                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200 "
-                                    type="text"
-                                    name="lastName"
-                                    value={user.lastName}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="flex flex-col justify-start items-start">
-                                <label>Mobile Number:</label>
-                                <input
-                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
-                                    type="text"
-                                    name="mobile"
-                                    value={user.mobile}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="flex flex-col justify-start items-start">
-                                <label>Email Address:</label>
-                                <input
-
-                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
-                                    type="text"
-                                    name="email"
-                                    value={user.email}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="flex flex-col justify-start items-start">
-                                <label>Password:</label>
-                                <input
-
-                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
-                                    type="text"
-                                    name="password"
-                                    value={user.password}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="flex flex-col justify-start items-start">
-                                <label>Roles</label>
-                                <input
-
-                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
-                                    type="text"
-                                    name="role"
-                                    value={user.role}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="flex flex-col justify-start items-start">
-                                <label>Whatsapp Number</label>
-                                <input
-
-                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
-                                    type="text"
-                                    name="whatsAppNo"
-                                    value={user.whatsAppNo}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="flex flex-col justify-start items-start">
-                                <label>Facebook Link</label>
-                                <input
-
-                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
-                                    type="text"
-                                    name="facebookLink"
-                                    value={user.facebookLink}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="flex flex-col justify-start items-start">
-                                <label>Instagram Link</label>
-                                <input
-
-                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
-                                    type="text"
-                                    name="instagramLink"
-                                    value={user.instagramLink}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="flex flex-col justify-start items-start">
-                                <label>LinkedIn Link</label>
-                                <input
-
-                                    className="w-full h-8 mb-2 border border-black hover:border-blue-200"
-                                    type="text"
-                                    name="linkedInLink"
-                                    value={user.linkedInLink}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <div className="m-4">
-                        <button type="submit" className="bg-blue-200 w-40 h-8 m-1 p-1">Submit</button>
-                        <button
-                            onClick={() => navigate("/portal/users")}
-                            className="bg-red-600 w-40 h-8 m-1 p-1">Cancel</button>
-
-                    </div>
-                </form>
+                <FormSubmit user={user} errorMessage={errorMessage} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
             </div>
 
         </div>
+
     )
 }
 
