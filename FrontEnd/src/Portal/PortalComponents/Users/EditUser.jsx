@@ -7,6 +7,9 @@ import InputValidation from '../../../ReusableComponents/Validations/InputValida
 
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import FormSubmit from './FormSubmit';
+import AxiosPrivateInstance from '../../../AuthServices/Axios/AxiosPrivateInstance';
+import { errorPopUp, successPopUp, warningPopUp } from '../../../ReusableComponents/Notification/Notification';
+import LoadingModal from '../../../ReusableComponents/LoadingSpinner/LoadingModal';
 
 const EditUser = ({ userToEdit, closeModal }) => {
 
@@ -28,12 +31,12 @@ const EditUser = ({ userToEdit, closeModal }) => {
         instagramLink: userToEdit.instagramLink,
         linkedInLink: userToEdit.linkedInLink
     });
-    const [error, setError] = useState({});
+    const [errorMessage, setErrorMessage] = useState({});
+
+    const [loading, setLoading] = useState(false);
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setUser(prevUser => ({ ...prevUser, [name]: value }));
-        console.log("Changes:", user);
+        setUser({ ...user, [e.target.name]: e.target.value })
     };
 
 
@@ -46,39 +49,57 @@ const EditUser = ({ userToEdit, closeModal }) => {
         setShowVideo(!showVideo);
     }
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        console.log("onSubmit is clicked...");
-        console.log("image state:", image);
-        console.log("user state:", user);
+    // const onSubmit = async (e) => {
+    //     e.preventDefault();
+    //     console.log("onSubmit is clicked...");
+    //     console.log("image state:", image);
+    //     console.log("user state:", user);
 
-        try {
-            console.log("----------1")
-            const formData = new FormData();
-            if (image) {
-                formData.append('image', image);
+    //     try {
+    //         console.log("----------1")
+    //         const formData = new FormData();
+    //         if (image) {
+    //             formData.append('image', image);
+    //         }
+    //         formData.append('user', JSON.stringify(user));
+
+    //         const response = await axios.put(`http://localhost:8080/api/v1/user/updateUser/${userToEdit.id}`, formData);
+    //         console.log("User updated successfully:", response.data);
+
+
+    //     } catch (error) {
+    //         console.error("Error updating user:", error);
+    //     }
+    // }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const errors = InputValidation(user);
+        if (Object.keys(errors).length === 0) {
+            try {
+                setLoading(true);
+                const formData = new FormData();
+                if (image) {
+                    formData.append('image', image);
+                }
+                formData.append('user', JSON.stringify(user));
+
+                const response = await AxiosPrivateInstance.put(`/user/updateUser/${userToEdit.id}`, formData);
+                setLoading(false);
+                successPopUp(`User ${user.firstName} is updated successfully`);
+
+
+            } catch (error) {
+                console.error("Error updating user:", error);
             }
-            formData.append('user', JSON.stringify(user));
-
-            const response = await axios.put(`http://localhost:8080/api/v1/user/updateUser/${userToEdit.id}`, formData);
-            console.log("User updated successfully:", response.data);
-
-
-        } catch (error) {
-            console.error("Error updating user:", error);
         }
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setError(InputValidation(user));
-        console.log("new user: ", user);
 
     }
 
     return (
 
         <div id="container" onClick={handleOnClose} className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
+            {loading && <LoadingModal />}s
             <div className=" w-[80%] h-[70%] bg-white p-2 rounded ">
                 <div className="flex justify-end items-end">
                     <IoMdCloseCircleOutline
@@ -124,7 +145,7 @@ const EditUser = ({ userToEdit, closeModal }) => {
 
                     </div>
 
-                    <FormSubmit user={user} error={error} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
+                    <FormSubmit user={user} errorMessage={errorMessage} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
 
 
                 </div>

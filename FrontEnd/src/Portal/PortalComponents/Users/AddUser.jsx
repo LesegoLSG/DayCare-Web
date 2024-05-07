@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AxiosPrivateInstance from '../../../AuthServices/Axios/AxiosPrivateInstance';
 import './User.css';
@@ -9,12 +10,14 @@ import VideoOrImageDisplay from './VideoOrImageDisplay/VideoOrImageDisplay';
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import InputValidation from '../../../ReusableComponents/Validations/InputValidation';
 import FormSubmit from './FormSubmit';
-import Notification from '../../../ReusableComponents/Notification/Notification';
 import { ToastContainer, toast, Bounce } from 'react-toastify';
+import { errorPopUp, successPopUp, warningPopUp } from '../../../ReusableComponents/Notification/Notification';
+import LoadingModal from '../../../ReusableComponents/LoadingSpinner/LoadingModal';
 // import 'react-toastify/dist/ReactToastify.css';
 
-const AddUser = () => {
 
+const AddUser = () => {
+    const navigate = useNavigate();
 
     const [showVideo, setShowVideo] = useState(true);
 
@@ -35,6 +38,8 @@ const AddUser = () => {
 
     const [errorMessage, setErrorMessage] = useState({});
 
+    const [loading, setLoading] = useState(false);
+
 
 
 
@@ -47,62 +52,64 @@ const AddUser = () => {
         setShowVideo(!showVideo);
     }
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        console.log("image state:", image);
-        console.log("Json User:", user);
+    // const onSubmit = async (e) => {
+    //     e.preventDefault();
+    //     console.log("image state:", image);
+    //     console.log("Json User:", user);
 
-        try {
-            const formData = new FormData();
-            if (image) {
-                formData.append('image', image);
-                console.log('myImage:', formData.get('image'));
-            }
-            formData.append('user', JSON.stringify(user));
-            console.log(formData.get('user'));
-            console.log('myImage2:', formData.get('image'));
+    //     try {
+    //         const formData = new FormData();
+    //         if (image) {
+    //             formData.append('image', image);
+    //             console.log('myImage:', formData.get('image'));
+    //         }
+    //         formData.append('user', JSON.stringify(user));
+    //         console.log(formData.get('user'));
+    //         console.log('myImage2:', formData.get('image'));
 
-            const response = await AxiosPrivateInstance.post("/user/add", formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-
-
-            console.log("user2", formData.get('user'));
-
-            console.log('myImage3:', formData.get('image'));
+    //         const response = await AxiosPrivateInstance.post("/user/add", formData, {
+    //             headers: {
+    //                 'Content-Type': 'multipart/form-data',
+    //             },
+    //         });
 
 
-        } catch (error) {
-            console.log("Error adding user:" + error);
-        }
+    //         console.log("user2", formData.get('user'));
 
-    }
+    //         console.log('myImage3:', formData.get('image'));
 
-    // const Notify = () => {
-    //     toast.success('🦄 Wow so easy!', {
-    //         position: "top-right",
-    //         autoClose: 5000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "light",
-    //         transition: Bounce,
-    //     });
+
+    //     } catch (error) {
+    //         console.log("Error adding user:" + error);
+    //     }
+
     // }
 
-    const handleSubmit = (e) => {
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const errors = InputValidation(user);
         if (Object.keys(errors).length === 0) {
             try {
-                console.log("Add new user: ", user);
-                console.log("Notify1");
-                Notification.errorPopUp("Wow...");
-                console.log("Notify2");
+                setLoading(true);
+                const formData = new FormData();
+                if (image) {
+                    formData.append('image', image);
+                    console.log('myImage:', formData.get('image'));
+                }
+                formData.append('user', JSON.stringify(user));
+                console.log(formData.get('user'));
+                console.log('myImage2:', formData.get('image'));
+
+                const response = await AxiosPrivateInstance.post("/user/add", formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+                setLoading(false);
+                successPopUp("User add successfully...");
+                navigate("/portal/users")
 
             } catch (error) {
                 console.log(error);
@@ -120,6 +127,7 @@ const AddUser = () => {
     return (
         <div className=" w-full user-height flex flex-col justify-center items-center p-4">
             <ToastContainer />
+            {loading && <LoadingModal />}
             <div className="  w-[100%] h-[500px] grid grid-col-1 md:grid-cols-2 gap-2 relative shadow-lg shadow-indigo-100">
                 {/* Profile picture */}
                 <div className=" w-full h-auto flex flex-col justify-center items-center ">

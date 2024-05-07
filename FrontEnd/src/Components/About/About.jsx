@@ -5,6 +5,7 @@ import LesegoMhlongo from '../../Assets/LesegoMhlongo.png';
 import lsg from '../../Assets/lsg.png';
 import Moon2 from '../../Assets/Moon2.png';
 import Moon from '../../Assets/Moon.png';
+import PlayingKid from '../../Assets/PlayingKid.png'
 
 import Lottie from "lottie-react";
 import animationData from './KidsAnimation.json';
@@ -16,8 +17,11 @@ const About = () => {
             </div>
             <div className=" w-full h-auto grid sm:grid-cols-1 md:grid-cols-2 p-6 ">
 
-                <div className=''>
+                {/* <div className=''>
                     <Lottie animationData={animationData} />
+                </div> */}
+                <div>
+                    <img src={PlayingKid}  alt=""/>
                 </div>
                 <div className="flex flex-col justify-center items-center">
 

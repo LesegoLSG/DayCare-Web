@@ -71,6 +71,7 @@ const AuthService = {
 
     //Login api
     login: (loginDetails) => {
+        console.log("axios instance:",axiosInstance.getUri);
         return axiosInstance.post("/auth/signin", loginDetails);
     },
     //Checing if the user is logged in by assessing a token

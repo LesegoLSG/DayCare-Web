@@ -11,6 +11,7 @@ import AxiosPrivateInstance from '../../../AuthServices/Axios/AxiosPrivateInstan
 
 import { IoMdAdd } from "react-icons/io";
 import ViewUser from './ViewUser/ViewUser';
+import LoadingModal from '../../../ReusableComponents/LoadingSpinner/LoadingModal';
 
 const Users = () => {
     const [users, setUsers] = useState([]);
@@ -23,6 +24,7 @@ const Users = () => {
     const [userToEdit, setUserToEdit] = useState(null);
     const [userToView, setUserToView] = useState({});
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
     const handleChangeToAdd = () => {
         setIsAddUser(true);
@@ -32,8 +34,10 @@ const Users = () => {
 
     const fetchUsers = async () => {
         try {
+            setLoading(true);
             const response = await AxiosPrivateInstance.get("/user/getAllUsers");
             setUsers(response.data);
+            setLoading(false);
 
         } catch (error) {
             console.log("Error fetching users:", error);
@@ -55,7 +59,7 @@ const Users = () => {
         console.log("deleted id: ", id);
         if (id) {
             try {
-                const response = await axios.delete(`http://localhost:8080/api/v1/admin/deleteUser/${id}`)
+                const response = await AxiosPrivateInstance.delete(`/user/deleteUser/${id}`)
                 if (response.data) {
                     setUsers(users.filter((user) => user.id !== id))
                 }
@@ -88,6 +92,7 @@ const Users = () => {
     return (
         <section>
             <div className=" w-full h-12 flex justify-between item-center p-2">
+                {loading && <LoadingModal />}
                 <h1 className="text-black w-40 h-8 text-2xl font-bold">Users</h1>
                 <button
                     onClick={() => navigate("/portal/users/add")}
