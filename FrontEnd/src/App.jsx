@@ -13,15 +13,20 @@ import BlogEdit from './Portal/PortalComponents/Blog/BlogEdit';
 import TermsAndConditions from './Components/LegalStatements/TermsAndConditions';
 import PrivacyPolicy from './Components/LegalStatements/PrivacyPolicy';
 
-import { UserProvider } from './UserContext/UserLoggedIn';
+import { UserProvider } from './Contexts/UserLoggedIn';
 import { PrivateRoute } from './AuthServices/Routes/PrivateRoute';
 import { MainUsersRoute } from './AuthServices/Routes/MainUsersRoute';
 
+import {BlogProvider} from './Contexts/BlogContext';
+
+
 function App() {
+
   return (
     <div className="App">
       <Router>
         <UserProvider>
+          <BlogProvider>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Authentication />} />
@@ -54,6 +59,7 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
           </Routes>
+          </BlogProvider>
         </UserProvider>
       </Router>
     </div>
