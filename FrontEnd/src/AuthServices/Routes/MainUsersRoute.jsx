@@ -1,6 +1,6 @@
 import AuthService from "../AuthService/AuthService";
 import { Navigate } from 'react-router-dom';
-import { useUser } from "../../UserContext/UserLoggedIn";
+import { useUser } from "../../Contexts/UserLoggedIn";
 
 
 export const MainUsersRoute = ({ children }) => {
