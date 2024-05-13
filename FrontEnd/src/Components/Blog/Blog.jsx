@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import BlogCard from './BlogCard';
 import blogData from './BlogData';
 import { IoSearch } from "react-icons/io5";
@@ -6,18 +6,49 @@ import BlogScroller from '../BlogScroller/BlogScroller';
 import Pagination from '../../ReusableComponents/SearchBar/Pagination/Pagination';
 import BlogSideBar from './BlogSideBar/BlogSideBar';
 import CategorySlider from './CategorySlider/CategorySlider';
+import axiosInstance from '../../AuthServices/Axios/AxiosInstance';
+import LoadingModal from '../../ReusableComponents/LoadingSpinner/LoadingModal';
+
+import { useBlogs } from '../../Contexts/BlogContext';
 
 const Blog = () => {
+    // const [blogs,setBlogs] = useState([]);
+    const {blogs,setBlogs} = useBlogs();
     const [search, setSearch] = useState("");
     const [selectedCategory, setSelectedCategory] = useState(null);
-    const categories = [...new Set(blogData.map(blog => blog.category))];
+    
 
     const [currentPage, setCurrentPage] = useState(1);
     const recordsPerPage = 6;
 
+    const [isLoading, setIsLoading] = useState(false);
+
+    const fetchBlogs = async () => {
+        try {
+            //  setIsLoading(true);
+            const response = await axiosInstance.get("/publicBlog/getAllBlogs");
+            console.log("Response public:",response);
+            setBlogs(response.data);
+
+            //  setIsLoading(false);
+
+        } catch (error) {
+            console.log("Error fetching blogs:", error);
+        }
+    }
+    console.log("Blog view posts:",blogs);
+    // useEffect hook to fetch users when component mounts
+    useEffect(() => {
+        fetchBlogs();
+       
+    }, []);
+
+    console.log("In Blog blogs:",blogs)
+
 
     // Filter blogs based on search term
-    const filteredBlogs = blogData.filter((blog) => {
+    const categories = [...new Set(blogs.map(blog => blog.category))];
+    const filteredBlogs = blogs.filter((blog) => {
         const searchTerm = search.toLowerCase();
         const categoryMatch = selectedCategory ? blog.category === selectedCategory : true;
         return categoryMatch && (search === "" || Object.values(blog).some((value) =>
@@ -30,6 +61,8 @@ const Blog = () => {
     const firstIndex = lastIndex - recordsPerPage;
     const records = filteredBlogs.slice(firstIndex, lastIndex);
     const totalPages = Math.ceil(filteredBlogs.length / recordsPerPage);
+
+
 
     const handlePreviousPage = () => {
         if (currentPage > 1) {
@@ -53,7 +86,7 @@ const Blog = () => {
                 <h1>Blog</h1>
             </div>
             <div className="w-full h-auto flex flex-col justify-center items-center md:flex-col my-4">
-
+            {isLoading && <LoadingModal/>}
                 {/* <BlogScroller /> */}
                 {/* Searchbar component*/}
                 <div className="w-full">
