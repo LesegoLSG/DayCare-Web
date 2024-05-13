@@ -5,3 +5,8 @@
 .myQuill {
     /* min-height: 500px; */
 }
+
+.scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #A7D7C5 #F4F9F4
+}

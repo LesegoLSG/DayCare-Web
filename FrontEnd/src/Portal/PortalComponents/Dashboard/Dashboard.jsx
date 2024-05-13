@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useUser } from '../../../UserContext/UserLoggedIn';
+import { useUser } from '../../../Contexts/UserLoggedIn';
 import AuthService from '../../../AuthServices/AuthService/AuthService';
 
 const Dashboard = () => {

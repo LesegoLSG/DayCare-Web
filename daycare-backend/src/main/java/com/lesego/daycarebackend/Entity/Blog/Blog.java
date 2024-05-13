@@ -16,9 +16,15 @@ public class Blog {
     @Lob
     @Column(name="cardImage", columnDefinition = "LONGBLOB",nullable = true)
     private byte[] cardImage;
+
+    private String category;
+
+    private Status status;
+
     private String title;
     private String topic;
     @Lob
+    @Column(length = 1000000000)
     private String content;
     private LocalDate date;
     @ManyToOne
@@ -29,12 +35,14 @@ public class Blog {
 
     }
 
-    public Blog(byte[] cardImage, String title, String topic, String content, LocalDate date,User user) {
+    public Blog(byte[] cardImage, String title, String topic, String content, LocalDate date,String category,Status status,User user) {
         this.cardImage = cardImage;
         this.title = title;
         this.topic = topic;
         this.content = content;
         this.date = date;
+        this.category = category;
+        this.status = status;
         this.user = user;
     }
 
@@ -84,6 +92,22 @@ public class Blog {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public User getUser() {

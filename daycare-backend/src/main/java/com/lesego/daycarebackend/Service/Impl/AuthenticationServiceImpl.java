@@ -87,6 +87,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         Optional<User> user = userRepository.findByEmail(email);
         UserInformation userInfo = new UserInformation();
         if(user.isPresent()){
+            userInfo.setId(user.get().getId());
             userInfo.setFirstName(user.get().getFirstName());
             userInfo.setLastName(user.get().getLastName());
             userInfo.setEmail(user.get().getEmail());

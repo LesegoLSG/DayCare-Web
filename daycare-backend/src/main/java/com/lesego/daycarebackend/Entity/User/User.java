@@ -39,10 +39,12 @@ public class User implements UserDetails {
     private String instagramLink;
     private String linkedInLink;
 
+    private String twitterLink;
+
 
     public User(){}
 
-    public User(String firstName, String lastName, String email, String password, byte[] image, String mobile,RoleType role, List<Blog> blog,String whatsAppNo,String facebookLink,String instagramLink, String linkedInLink) {
+    public User(String firstName, String lastName, String email, String password, byte[] image, String mobile,RoleType role, List<Blog> blog,String whatsAppNo,String facebookLink,String instagramLink, String linkedInLink,String twitterLink) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -55,6 +57,7 @@ public class User implements UserDetails {
         this.facebookLink=facebookLink;
         this.instagramLink = instagramLink;
         this.linkedInLink = linkedInLink;
+        this.twitterLink = twitterLink;
     }
 
     public int getId() {
@@ -192,5 +195,13 @@ public class User implements UserDetails {
 
     public void setLinkedInLink(String linkedInLink) {
         this.linkedInLink = linkedInLink;
+    }
+
+    public String getTwitterLink() {
+        return twitterLink;
+    }
+
+    public void setTwitterLink(String twitterLink) {
+        this.twitterLink = twitterLink;
     }
 }

@@ -52,40 +52,6 @@ const AddUser = () => {
         setShowVideo(!showVideo);
     }
 
-    // const onSubmit = async (e) => {
-    //     e.preventDefault();
-    //     console.log("image state:", image);
-    //     console.log("Json User:", user);
-
-    //     try {
-    //         const formData = new FormData();
-    //         if (image) {
-    //             formData.append('image', image);
-    //             console.log('myImage:', formData.get('image'));
-    //         }
-    //         formData.append('user', JSON.stringify(user));
-    //         console.log(formData.get('user'));
-    //         console.log('myImage2:', formData.get('image'));
-
-    //         const response = await AxiosPrivateInstance.post("/user/add", formData, {
-    //             headers: {
-    //                 'Content-Type': 'multipart/form-data',
-    //             },
-    //         });
-
-
-    //         console.log("user2", formData.get('user'));
-
-    //         console.log('myImage3:', formData.get('image'));
-
-
-    //     } catch (error) {
-    //         console.log("Error adding user:" + error);
-    //     }
-
-    // }
-
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();

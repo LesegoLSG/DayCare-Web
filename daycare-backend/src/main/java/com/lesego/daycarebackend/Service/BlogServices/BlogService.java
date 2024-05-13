@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -33,18 +35,25 @@ public class BlogService implements IBlogService{
         this.userRepository = userRepository;
     }
 
+    private String convertPlainTextToHtml(String plainText) {
+        // You can implement your own logic here to convert plain text to HTML
+        // For example, you can simply wrap the plain text in <p> tags
+        return "<p>" + plainText + "</p>";
+    }
+
     @Override
     public ResponseEntity<String> addBlog(MultipartFile cardImage, String blogJson, int userId) throws IOException {
         // Get user by ID
         User existingUser = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
 
+        System.out.println("TEsting 1");
 
         // Register LocalDate deserializer with custom date format
         ObjectMapper objectMapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
         module.addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         objectMapper.registerModule(module);
-
+        System.out.println("TEsting 2");
         Blog blog;
         try {
 
@@ -62,6 +71,8 @@ public class BlogService implements IBlogService{
 
         // Save the blog
         blogRepo.save(blog);
+
+
         return ResponseEntity.ok("Blog added successfully");
     }
 
@@ -73,8 +84,10 @@ public class BlogService implements IBlogService{
             System.out.println("Length of blog: " + blogList);
            // Decompress images for each blog and its associated user
            for (Blog blog : blogList) {
-               System.out.println("User: " + blog.getUser().getFirstName() + " " + blog.getUser().getLastName());
-               System.out.println("blog:" + blog.getTitle());
+               // Convert plain text content to HTML
+               blog.setContent(convertPlainTextToHtml(blog.getContent()));
+               System.out.println("Content:" + blog.getContent());
+
                // Decompress blog image
                if (blog.getCardImage() != null) {
                    blog.setCardImage(ImageUtils.decompressImage(blog.getCardImage()));
@@ -85,7 +98,7 @@ public class BlogService implements IBlogService{
                    user.setImage(ImageUtils.decompressImage(user.getImage()));
                }
            }
-
+            System.out.println("BlogList check:" + blogList);
            return ResponseEntity.ok(blogList);
 
        }catch(Throwable e){

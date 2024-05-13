@@ -1,23 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import DatePicker from 'react-datepicker';
 import '../blog.css';
 import BlogContent from './BlogContent';
 import CardPreview from './CardPreview';
+import { useUser } from '../../../../Contexts/UserLoggedIn';
+import LoadingModal from '../../../../ReusableComponents/LoadingSpinner/LoadingModal';
+import axiosPrivateInstance from '../../../../AuthServices/Axios/AxiosPrivateInstance';
+import BlogForm from './BlogForm';
+import CardImage from './CardImage';
 
 const AddBlog = () => {
 
     const [isModalAdd, setIsModalAdd] = useState(false);
     const [isPreviewCard, setIsPreviewCard] = useState(false);
 
+    const [loading,setLoading] = useState(false);
+   
+
+    const { loggedInUser } = useUser();
+
+    const [cardImage, setCardImage] = useState(null);
     const [blog, setBlog] = useState({
+        status:'',
         category: '',
+        date:'',
         title: '',
         topic: '',
         content: ''
     })
 
+    console.log("Add Blog:", loggedInUser.firstName);
+    console.log("Add Blog:", loggedInUser.id);
+
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setBlog({ ...blog, [name]: value });
+            setBlog({ ...blog, [name]: value });
+        
+    };
+
+    const handleImageUpload = (event) => {
+        const imageFile = event.target.files[0];
+        setCardImage(imageFile);
     };
 
 
@@ -41,71 +64,63 @@ const AddBlog = () => {
         setIsPreviewCard(false);
     };
 
-    const submitBlog = () => {
+    const submitBlog = async (e) => {
+    
+        console.log("Submmited blog card:", cardImage);
         console.log("Submitted blog:", blog);
-        // Implement your logic to submit the blog content
+       
+        try{
+            setLoading(true);
+            const formData = new FormData();
+            if(cardImage){
+                formData.append('cardImage',cardImage);
+                console.log("myImage",formData.get('cardImage'));
+            }
+          
+            formData.append('blogJson', JSON.stringify(blog));
+            console.log(formData.get('blogJson'));
+            console.log('myImage2:', formData.get('cardImage'));
+
+            const response = await axiosPrivateInstance.post(`/blog/addBlog/${loggedInUser.id}`, formData, {
+                headers: {
+                    'Content-Type':'multipart/form-data',
+                },
+            });
+            setLoading(false);
+
+        }catch(error){
+            console.log("Error adding a user");
+        }
+
     };
 
 
     return (
         <div className=" w-full " style={{ height: 'calc(100vh - 50px)' }}>
+            {loading && <LoadingModal/>}
             <div className="w-full h-[40px] flex justify-center items-center p-4">
                 <h1 className="text-2xl font-semibold">Create Blog</h1>
             </div>
-            <button>Upcoming Events</button>
-            <div className="w-full h-[80%] flex justify-center items-center ">
-                <form className=" w-3/5 h-auto grid grid-cols-1 gap-1 mt-4 pr-4 pl-4 items-start">
-                    <label className="flex justify-start items-start">Category:</label>
-                    <select name="category" value={blog.category} onChange={handleInputChange} className="h-[2rem] border border-black rounded-md hover:border-blue-100">
-                        <option value="No_selection">Select category...</option>
-                        <option value="Technology">Parenting Tips and Advice</option>
-                        <option value="Travel">Child Development</option>
-                        <option value="Health_safety">Health and Safety</option>
-                        <option value="News_Upadtes">Daycare Center News and Updates</option>
-                        <option value="Activities">Learning Activities</option>
-                        <option value="Parental">Parenting Resources</option>
-                        <option value="Community">Community Involvement</option>
-                        <option value="Testimonials">Testimonials and Success Stories</option>
-                        <option value="Holiday_Content">Seasonal and Holiday Content</option>
-                        <option value="FAQ">FAQs and Parenting Q&A</option>
-                        <option value="Other">Other</option>
-                        {/* Add more options as needed */}
-                    </select>
-                    <label className="flex justify-start items-start">Title:</label>
-                    <input
-                        name="title"
-                        value={blog.title}
-                        onChange={handleInputChange}
-                        className="h-[2rem] border border-black rounded-md hover:border-blue-100 " type="text" placeholder='Title'
-                    />
-                    <label className="flex justify-start items-start">Topic:</label>
-                    <input
-                        name="topic"
-                        value={blog.topic}
-                        onChange={handleInputChange}
-                        className="h-[2rem] border border-black rounded-md hover:border-blue-100 " type="text" placeholder='Topic'
-                    />
+           
 
-                    {isModalAdd &&
-                        <BlogContent onCloseModal={handleCloseModal} blog={blog} submitBlog={submitBlog} />
-                    }
-                    {isPreviewCard &&
-                        <CardPreview onClose={handleClosePreviewModal} blog={blog} />
-                    }
-                    <div className=' mt-4'>
-                        <button onClick={handleOpenPreviewModal}>Preview card</button>
-                        <button
-                            className="bg-blue-200 w-60 h-8"
-                            onClick={handleOpenModal}>CREATE CARD CONTENT</button>
-                    </div>
-
-                </form>
-                {/* {
-                    value
-                } */}
+            <div className="w-full h-[640px] overflow-y-auto scrollbar">
+           
+                <CardImage cardImage={cardImage} handleImageUpload={handleImageUpload}/>
+                <BlogForm 
+                blog={blog} 
+                handleInputChange={handleInputChange} 
+                onClose={handleClosePreviewModal} 
+                isPreviewCard={isPreviewCard}
+                handleCloseModal={handleCloseModal}
+                handleOpenModal={handleOpenModal}
+                handleOpenPreviewModal={handleOpenPreviewModal}
+                submitBlog={submitBlog}
+                />
+                
+                </div>
 
             </div>
-        </div>
+        
     )
 }
 

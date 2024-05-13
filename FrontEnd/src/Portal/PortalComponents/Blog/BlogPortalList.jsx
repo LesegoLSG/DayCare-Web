@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import SearchBar from '../../../ReusableComponents/SearchBar/SearchBar';
 import BlogPortalCard from './BlogPortalCard';
 import NoBlog from './NoBlog';
+import {useBlogs} from '../../../Contexts/BlogContext';
 
 const BlogPortalList = ({ blogs, onDelete }) => {
     const [search, setSearch] = useState("");
+    console.log("BlogPortalList: ",blogs);
     return (
 
         <div className="w-full h-4/5 flex flex-col  ">

@@ -73,6 +73,7 @@ public class UserServiceMethods implements IUserServiceMethods {
                 existingUser.setFacebookLink(userToUpdate.getFacebookLink());
                 existingUser.setInstagramLink(userToUpdate.getInstagramLink());
                 existingUser.setLinkedInLink(userToUpdate.getLinkedInLink());
+                existingUser.setTwitterLink(userToUpdate.getTwitterLink());
 
                 // Update image data if provided
                 if (image != null && !image.isEmpty()) {
@@ -153,6 +154,7 @@ public class UserServiceMethods implements IUserServiceMethods {
             userInformation.setFacebookLink(user.getFacebookLink());
             userInformation.setInstagramLink(user.getInstagramLink());
             userInformation.setLinkedInLink(user.getLinkedInLink());
+            userInformation.setTwitterLink(user.getTwitterLink());
             userInformationList.add(userInformation);
 
             if(user.getImage() == null){

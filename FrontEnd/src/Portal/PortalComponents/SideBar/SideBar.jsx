@@ -48,7 +48,7 @@ const SideBar = () => {
 
                 </div>
                 {/* Links */}
-                <ul className=" h-[44rem] pt-6 text-left">
+                <ul className=" h-auto pt-6 text-left">
                     {menus.map((menu, index) => (
                         <li key={index} className=" w-full p-2 mb-2  rounded-md">
                             <Link to={menu.path} className="flex items-center gap-x-4 cursor-pointer">

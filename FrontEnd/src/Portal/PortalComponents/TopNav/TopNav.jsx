@@ -1,6 +1,6 @@
 import React from 'react';
 import EmptyUser from '../../../Assets/EmptyUser.png';
-import { useUser } from '../../../UserContext/UserLoggedIn';
+import { useUser } from '../../../Contexts/UserLoggedIn';
 
 const TopNav = () => {
     const { loggedInUser, setLoggedInUser } = useUser();

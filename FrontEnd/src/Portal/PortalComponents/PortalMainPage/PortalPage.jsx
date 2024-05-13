@@ -8,7 +8,7 @@ import TopNav from '../TopNav/TopNav';
 import { Outlet } from 'react-router-dom';
 import AuthService from '../../../AuthServices/AuthService/AuthService';
 
-import { useUser } from '../../../UserContext/UserLoggedIn';
+import { useUser } from '../../../Contexts/UserLoggedIn';
 
 
 const PortalPage = () => {

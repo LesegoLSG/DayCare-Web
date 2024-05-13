@@ -25,6 +25,8 @@ public class UserInformation {
 
     private String linkedInLink;
 
+    private String twitterLink;
+
     public int getId() {
         return id;
     }
@@ -119,5 +121,13 @@ public class UserInformation {
 
     public void setLinkedInLink(String linkedInLink) {
         this.linkedInLink = linkedInLink;
+    }
+
+    public String getTwitterLink() {
+        return twitterLink;
+    }
+
+    public void setTwitterLink(String twitterLink) {
+        this.twitterLink = twitterLink;
     }
 }
