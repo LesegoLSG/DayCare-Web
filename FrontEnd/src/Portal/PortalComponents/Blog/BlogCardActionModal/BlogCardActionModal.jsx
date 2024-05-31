@@ -9,7 +9,7 @@ const BlogCardActionModal = ({ onDelete, singleBlog }) => {
 
     const navigate = useNavigate();
     const goToUpdate = () => {
-        navigate(`/portal/blog/${id}`)
+        navigate(`/portal/blog/edit/${id}`)
     }
 
     return (

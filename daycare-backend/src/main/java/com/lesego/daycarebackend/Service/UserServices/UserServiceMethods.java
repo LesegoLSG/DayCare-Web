@@ -111,7 +111,31 @@ public class UserServiceMethods implements IUserServiceMethods {
         return user.getRole().name();
     }
 
- //   @Override
+    @Override
+    public UserInformation getUserById(int id) {
+        User user = userRepository.findById(id).orElseThrow();
+        System.out.println("getUserById:" + user.getFirstName() + " " + user.getLastName());
+        UserInformation userInfo = new UserInformation();
+        userInfo.setId(user.getId());
+        userInfo.setFirstName(user.getFirstName());
+        userInfo.setLastName(user.getLastName());
+        userInfo.setEmail(user.getEmail());
+        userInfo.setPassword(user.getPassword());
+        userInfo.setImage(user.getImage());//to be decompressed
+        userInfo.setMobile(user.getMobile());
+        userInfo.setRole(user.getRole());
+        userInfo.setWhatsAppNo(user.getWhatsAppNo());
+        userInfo.setFacebookLink(user.getFacebookLink());
+        userInfo.setInstagramLink(user.getInstagramLink());
+        userInfo.setTwitterLink(user.getTwitterLink());
+        userInfo.setLinkedInLink(user.getLinkedInLink());
+
+        return userInfo;
+
+
+    }
+
+    //   @Override
 //    public UserInformation getLoggedInUserInfo(String email) {
 //        Optional<User> user = userRepository.findByEmail(email);
 //        UserInformation userInfo = new UserInformation();

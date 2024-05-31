@@ -19,5 +19,6 @@ public interface IUserServiceMethods {
     public String getRoleFromUserEmail(String email);
 
 //    public UserInformation getLoggedInUserInfo(String email);
+    public UserInformation getUserById(int id);
 
 }

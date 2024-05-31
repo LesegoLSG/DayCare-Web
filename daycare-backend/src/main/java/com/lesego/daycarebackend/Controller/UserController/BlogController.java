@@ -28,4 +28,9 @@ public class BlogController {
     public ResponseEntity<List<Blog>> findAllBlogs(){
         return iBlogService.getAllBlogs();
     }
+
+    @GetMapping("/getBlogById/{id}")
+    public ResponseEntity<Blog> getBlogById(@PathVariable int id){
+        return iBlogService.getBlogById(id);
+    }
 }

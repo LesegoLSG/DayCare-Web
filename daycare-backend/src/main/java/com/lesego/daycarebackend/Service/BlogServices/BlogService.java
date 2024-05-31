@@ -107,4 +107,16 @@ public class BlogService implements IBlogService{
        }
 
     }
+
+    @Override
+    public ResponseEntity<Blog> getBlogById(int id) {
+        Blog blog = blogRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Could not find the blog"));
+        if(blog != null){
+            if(blog.getCardImage() != null){
+                blog.setCardImage(ImageUtils.decompressImage(blog.getCardImage()));
+            }
+            return ResponseEntity.ok(blog);
+        }
+        return null;
+    }
 }

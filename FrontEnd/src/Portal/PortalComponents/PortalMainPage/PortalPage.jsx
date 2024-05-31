@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SideBar from '../SideBar/SideBar';
-import Dashboard from '../Dashboard/Dashboard';
-import Users from '../Users/Users';
-import BlogPortal from '../Blog/BlogPortal';
 import TopNav from '../TopNav/TopNav';
+import BottomBar from '../BottomBar/BottomBar';
 
 import { Outlet } from 'react-router-dom';
 import AuthService from '../../../AuthServices/AuthService/AuthService';
@@ -41,14 +39,16 @@ const PortalPage = () => {
 
 
     return (
-        <div className="flex">
+        <section className="flex flex-col h-screen">
+        <div className="flex flex-1">
             <SideBar />
-            <div className=" flex-1 h-screen">
+            <div className="flex-1">
                 <TopNav />
                 <Outlet />
-
             </div>
         </div>
+        <BottomBar />
+    </section>
     )
 }
 

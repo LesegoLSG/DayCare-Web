@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
-// import userData from './UsersData';
+import { useNavigate } from 'react-router-dom';
 import { MdDeleteForever } from "react-icons/md";
 import { FaUserEdit } from "react-icons/fa";
 import SearchBar from '../../../ReusableComponents/SearchBar/SearchBar';
 import Pagination from '../../../ReusableComponents/SearchBar/Pagination/Pagination';
+import EmptyUser from '../../../Assets/EmptyUser.png';
 
 const UsersList = ({ users, onDelete, onModalPopUp, onModalViewUserPopUp }) => {
+    const navigate = useNavigate();
     const [search, setSearch] = useState("");
-
     const [currentPage, setCurrentPage] = useState(1);
     const recordsPerPage = 5;
 
-
-    // Filter users based on search term
     const filteredUsers = users.filter((user) => {
-        if (search === "") return true; // Show all users if search is empty
+        if (search === "") return true;
         const searchTerm = search.toLowerCase();
         return Object.values(user).some((value) =>
             typeof value === 'string' && value.toLowerCase().includes(searchTerm)
@@ -33,72 +32,74 @@ const UsersList = ({ users, onDelete, onModalPopUp, onModalViewUserPopUp }) => {
     }
 
     const handleNextPage = () => {
-        if (currentPage < lastIndex) {
+        if (currentPage < totalPages) {
             setCurrentPage(currentPage + 1);
         }
     }
 
-
     return (
-        <div className="w-[80%] min-h-[30rem]">
-            <div className="w-full flex justify-end items-end mr-32 mb-10">
+        <div className="w-full min-h-[30rem] p-4">
+            <div className="w-full flex justify-end items-end mb-4">
                 <SearchBar setSearch={setSearch} />
             </div>
-            <table className="w-full">
-                <thead className="text-lg">
-                    <tr>
-                        <th></th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Mobile Number</th>
-                        <th>Email Address</th>
-                        <th>Role</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {records.map((user) => (
-                        <tr key={user.id}>
-                            <td>
-                                <div className="flex justify-center items-center">
-                                    <div className="bg-green-500 w-[4rem] h-[4rem] rounded-full"
-                                        style={{
-                                            backgroundImage: `url('data:image/**;base64,${user.image}')`,
-                                            backgroundSize: 'cover',
-                                            backgroundPosition: 'center',
-                                        }}>
-                                    </div>
-
-                                </div>
-                            </td>
-                            <td>{user.firstName}</td>
-                            <td>{user.lastName}</td>
-                            <td>{user.mobile}</td>
-                            <td>{user.email}</td>
-                            <td>{user.role}</td>
-                            <td>
-                                <div className="flex justify-between">
-                                    <button
-                                        onClick={() => onModalViewUserPopUp(user)}
-                                        className="bg-blue-200 w-20">View</button>
-                                    <FaUserEdit
-                                        onClick={() => onModalPopUp(user)}
-                                        className="text-green-600 text-2xl cursor-pointer m-1"
-                                    />
-                                    <MdDeleteForever
-                                        onClick={() => onDelete(user.id)}
-                                        className="text-red-600 text-2xl cursor-pointer m-1" />
-                                </div>
-                            </td>
+            <div className="overflow-x-auto">
+                <table className="w-full border-collapse">
+                    <thead>
+                        <tr className="bg-gray-200 text-left">
+                            <th className="p-2">Profile</th>
+                            <th className="p-2">First Name</th>
+                            <th className="p-2">Last Name</th>
+                            <th className="p-2">Mobile Number</th>
+                            <th className="p-2">Email Address</th>
+                            <th className="p-2">Role</th>
+                            <th className="p-2">Action</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-
-
-            <Pagination handleNextPage={handleNextPage} handlePreviousPage={handlePreviousPage} currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} />
+                    </thead>
+                    <tbody>
+                        {records.map((user) => (
+                            <tr key={user.id} className="border-b">
+                                <td className="p-2">
+                                    <div className="flex justify-center items-center">
+                                        <div className="bg-cover bg-center w-16 h-16 rounded-full"
+                                            style={{
+                                                backgroundImage: `url('${user.image ? `data:image/**;base64,${user.image}` : EmptyUser}')`
+                                            }}>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td className="p-2">{user.firstName}</td>
+                                <td className="p-2">{user.lastName}</td>
+                                <td className="p-2">{user.mobile}</td>
+                                <td className="p-2">{user.email}</td>
+                                <td className="p-2">{user.role}</td>
+                                <td className="p-2">
+                                    <div className="flex space-x-2">
+                                        <button
+                                            onClick={() => onModalViewUserPopUp(user)}
+                                            className="bg-blue-500 text-white p-1 rounded hover:bg-blue-600">View</button>
+                                        <FaUserEdit
+                                            onClick={() => navigate(`edit/${user.id}`)}
+                                            className="text-green-600 text-xl cursor-pointer hover:text-green-700"
+                                        />
+                                        <MdDeleteForever
+                                            onClick={() => onDelete(user.id)}
+                                            className="text-red-600 text-xl cursor-pointer hover:text-red-700" />
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+            <Pagination
+                handleNextPage={handleNextPage}
+                handlePreviousPage={handlePreviousPage}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                totalPages={totalPages}
+            />
         </div>
     )
 }
 
-export default UsersList
+export default UsersList;

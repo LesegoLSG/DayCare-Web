@@ -2,8 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+/* @layer base {
   button {
     @apply border bg-[#5C8D89] border-balance rounded-xl font-semibold text-white hover:text-black hover:border-[#5C8D89] hover:bg-transparent
+  }
+} */
+
+@layer components {
+  .button {
+    @apply min-w-20 h-auto bg-blue-400 text-white hover:text-black py-1 px-2 rounded-lg;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-gray-700;
+  }
+
+  .inputField {
+    @apply w-full border-b-2 border-gray-400 focus:outline-none focus:border-[#2d003b];
+  }
+
+  .btn-primary {
+    @apply bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-300;
+  }
+
+  .btn-danger {
+    @apply bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-600 transition duration-300;
+  }
+
+  .table-container {
+    @apply w-full overflow-x-auto;
+  }
+
+  .table {
+    @apply min-w-full bg-white;
+  }
+
+  .table-header {
+    @apply bg-gray-200;
+  }
+
+  .table-row {
+    @apply border-b border-gray-200;
+  }
+
+  .table-cell {
+    @apply py-4 px-6 text-left whitespace-nowrap;
+  }
+
+  .pagination {
+    @apply flex justify-between items-center py-2;
   }
 }

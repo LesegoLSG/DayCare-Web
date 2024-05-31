@@ -7,10 +7,15 @@ import { IoMdShare } from "react-icons/io";
 import BlogCardActionModal from './BlogCardActionModal/BlogCardActionModal';
 import blogData from '../../../Components/Blog/BlogData';
 import {useBlogs} from '../../../Contexts/BlogContext';
+import { FaUserEdit } from "react-icons/fa";
+import { MdDeleteForever } from "react-icons/md";
 
 const BlogPortalCard = ({ singleBlog, onDelete }) => {
     // const { id, image, title, briefDescription, date, author, reactions } = singleBlog;
-    const [isHovered, setIsHovered] = useState(false);
+    const navigate = useNavigate();
+    const goToUpdate = () => {
+        navigate(`/portal/blog/edit/${singleBlog.id}`)
+    }
 
     // Function to truncate text with ellipsis
     const truncateText = (text, maxLength) => {
@@ -19,7 +24,7 @@ const BlogPortalCard = ({ singleBlog, onDelete }) => {
     };
 
     return (
-        <div className="bg-white shadow-xl shadow-black w-[18rem] h-auto flex flex-col mx-auto my-2">
+        <div className="bg-white shadow-xl shadow-black w-[18rem] h-auto flex flex-col mx-auto my-2 relative">
             {/* Card Image */}
             {/* <div className="w-full h-auto overflow-hidden">
                 <img className="" src={singleBlog.cardImage} />
@@ -32,14 +37,20 @@ const BlogPortalCard = ({ singleBlog, onDelete }) => {
                                         }}>
                                     </div> */}
              <div
-                className="w-full h-[10rem] bg-cover bg-center"
+                className="w-full h-[10rem] bg-cover bg-center relative"
                 style={{ backgroundImage:  `url('data:image/**;base64,${singleBlog.cardImage}')` }}
-            ></div>
+            >
+                {/* Edit and delete icons */}
+                <div className="absolute top-0 right-0 space-y-6">
+                    <MdDeleteForever size={25} className="text-red-600 cursor-pointer" onClick={() =>onDelete(singleBlog.id)}/>
+                    <FaUserEdit size={25} className="text-green-600 cursor-pointer" onClick={() =>goToUpdate()}/>
+                    
+                </div>
+            </div>
 
             {/* Card content */}
             <div className=" w-full h-auto  md:h-auto flex flex-col justify-center items-center relative"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+               
             >
 
                 {/* icon text */}
@@ -63,12 +74,15 @@ const BlogPortalCard = ({ singleBlog, onDelete }) => {
                 <div className=" w-full h-auto flex justify-start items-start pb-2">
                     <p className="text-left">{truncateText(singleBlog.topic, 100)}</p>
                 </div>
+                
 
 
 
+
+{/* 
                 {isHovered && (
                     <BlogCardActionModal onDelete={onDelete} singleBlog={singleBlog} />
-                )}
+                )} */}
 
             </div>
         </div>

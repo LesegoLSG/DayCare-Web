@@ -26,11 +26,7 @@ const Users = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
-    const handleChangeToAdd = () => {
-        setIsAddUser(true);
-        setIsUserList(false);
-        navigate("portal/users/add");
-    }
+ 
 
     const fetchUsers = async () => {
         try {
@@ -112,14 +108,14 @@ const Users = () => {
                     )
 
                 }
-                {isAddUser &&
+                {/* {isAddUser &&
                     <AddUser />
                 }
 
                 {isEditUser &&
                     <EditUser userToEdit={userToEdit} closeModal={closeModal} />
 
-                }
+                } */}
 
                 {isViewUser &&
                     <ViewUser userToView={userToView} closeViewUserModal={closeViewUserModal} />

@@ -44,6 +44,11 @@ public class UserController {
     public ResponseEntity<String> deleteUser(@PathVariable int id){
         return userService.deleteUser(id);
     }
+    @GetMapping("/getUserById/{id}")
+    public UserInformation getUserBYId(@PathVariable int id){
+        System.out.println("getUserById id:" + id);
+        return userService.getUserById(id);
+    }
 
     @PutMapping("/updateUser/{id}")
     public ResponseEntity<String> updateUser(@PathVariable int id,@RequestParam("image") MultipartFile image, @RequestParam("user") String userJson){

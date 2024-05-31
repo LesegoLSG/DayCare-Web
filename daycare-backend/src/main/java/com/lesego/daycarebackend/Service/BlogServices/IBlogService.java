@@ -11,4 +11,6 @@ import java.util.List;
 public interface IBlogService {
     public ResponseEntity<String> addBlog(MultipartFile cardImage, String blog, int userId) throws IOException;
     public ResponseEntity<List<Blog>> getAllBlogs();
+
+    public ResponseEntity<Blog> getBlogById(int id);
 }

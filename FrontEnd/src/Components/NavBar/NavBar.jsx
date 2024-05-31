@@ -88,7 +88,7 @@ const NavBar = () => {
                             </ScrollLink>
                         </li>
                     ))}
-                    <button className="px-4 py-1 ml-2"
+                    <button className="button"
                         onClick={() => navigate('/login')}
                     >
                         SignIn

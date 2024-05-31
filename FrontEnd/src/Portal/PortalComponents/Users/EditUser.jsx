@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState,useEffect } from 'react';
+import { useNavigate,useParams } from 'react-router-dom';
 import axios from 'axios';
 import VideoOrImageDisplay from './VideoOrImageDisplay/VideoOrImageDisplay';
 import UploadImage from './UploadImage/UploadImage';
@@ -13,37 +13,36 @@ import LoadingModal from '../../../ReusableComponents/LoadingSpinner/LoadingModa
 
 const EditUser = ({ userToEdit, closeModal }) => {
 
-    const navigate = useNavigate();
+    const {id} = useParams();
     const [showVideo, setShowVideo] = useState(true);
 
     const [image, setImage] = useState(null);
 
-    const [user, setUser] = useState({
-        id: userToEdit.id,
-        firstName: userToEdit.firstName,
-        lastName: userToEdit.lastName,
-        email: userToEdit.email,
-        password: userToEdit.password,
-        mobile: userToEdit.mobile,
-        role: userToEdit.role,
-        whatsAppNo: userToEdit.whatsAppNo,
-        facebookLink: userToEdit.facebookLink,
-        instagramLink: userToEdit.instagramLink,
-        linkedInLink: userToEdit.linkedInLink
-    });
+    const [user, setUser] = useState(null);
     const [errorMessage, setErrorMessage] = useState({});
 
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                setLoading(true);
+                const response = await AxiosPrivateInstance.get(`/user/getUserById/${id}`);
+                setUser(response.data);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching user details:", error);
+                setLoading(false);
+            }
+        };
+
+        fetchUser();
+    }, [id]);
 
     const handleInputChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value })
     };
 
-
-    const handleOnClose = (e) => {
-        if (e.target.id === "container")
-            closeModal();
-    }
 
     const uploadsection = () => {
         setShowVideo(!showVideo);
@@ -96,18 +95,19 @@ const EditUser = ({ userToEdit, closeModal }) => {
 
     }
 
+    if (!user) {
+        return <LoadingModal />;
+    }
+
     return (
 
-        <div id="container" onClick={handleOnClose} className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
-            {loading && <LoadingModal />}s
-            <div className=" w-[80%] h-[70%] bg-white p-2 rounded ">
-                <div className="flex justify-end items-end">
-                    <IoMdCloseCircleOutline
-                        className="text-red-600 text-2xl cursor-pointer"
-                        onClick={() => closeModal()}
-                    />
+       
+           <div className="w-full h-auto my-14 flex justify-center items-center">
 
-                </div>
+          
+            <div className=" w-[80%] h-[70%] bg-white p-2 rounded ">
+            {loading && <LoadingModal />}
+                
                 <div className="flex justify-center items-center">
                     <h1>Edit User</h1>
                 </div>
@@ -154,7 +154,7 @@ const EditUser = ({ userToEdit, closeModal }) => {
 
 
             </div>
-        </div>
+            </div>
     )
 }
 
