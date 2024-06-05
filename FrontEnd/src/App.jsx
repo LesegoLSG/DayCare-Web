@@ -7,10 +7,12 @@ import { PrivateRoute } from './AuthServices/Routes/PrivateRoute';
 import { MainUsersRoute } from './AuthServices/Routes/MainUsersRoute';
 import {BlogProvider} from './Contexts/BlogContext';
 import routes from './routes';
+import useScrollToTop from './ReusableComponents/ScrollToTop/useScrollToTop';
 
 
 function App() {
-
+  
+  
   return (
     <div className="App">
       <>
@@ -18,7 +20,7 @@ function App() {
           <BlogProvider>
 
           <RouterProvider router={routes}/>
-
+            {/* <useScrollToTop/> */}
           </BlogProvider>
         </UserProvider>
       </>
