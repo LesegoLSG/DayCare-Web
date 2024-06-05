@@ -1,32 +1,47 @@
 import React from 'react';
-import Background from '../../Assets/Background.png';
+import { FiMail, FiPhone, FiSend } from 'react-icons/fi';
+import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 
 const Contact = () => {
     return (
-        <section id="contact" className="bg-blue-200 w-full h-auto pt-20">
-            {/* <img
-                className="bg-cover bg-no-repeat"
-                src={Background} /> */}
-            <div className="w-full h-auto">
-                <div className="w-full md:w-3/4 h-auto md:flex md:flex-wrap">
-                    {/* Left side */}
-                    <div className="w-full md:w-3/4">
-                        <div className="grid md:grid-cols-3 gap-4">
-                            {/* Your blog cards */}
-                            <div className="bg-gray-200 p-4">Blog Card 1</div>
-                            <div className="bg-gray-200 p-4">Blog Card 2</div>
-                            <div className="bg-gray-200 p-4">Blog Card 3</div>
-                            {/* Add more blog cards as needed */}
-                        </div>
+        <section id="contact" className="bg-primary w-full h-auto pt-20">
+           <div className="container mx-auto flex justify-center items-center">
+                <div className="bg-white shadow-md rounded-lg w-full lg:w-3/4 xl:w-1/2 p-8">
+                    <h2 className="text-3xl font-semibold text-center text-gray-800 mb-8">Contact Us</h2>
+                    <div className="flex items-center mb-4">
+                        <FiMail className="text-gray-600 text-lg" />
+                        <span className="ml-2">info@example.com</span>
                     </div>
-                    {/* Right side */}
-                    <div className="w-full md:w-1/4 md:ml-4">
-                        <div className="md:flex md:flex-col md:justify-between">
-                            {/* Latest Post */}
-                            <div className="bg-gray-300 p-4 mb-4">Latest Post</div>
-                            {/* Upcoming Events */}
-                            <div className="bg-gray-300 p-4">Upcoming Events</div>
+                    <div className="flex items-center mb-4">
+                        <FiPhone className="text-gray-600 text-lg" />
+                        <span className="ml-2">+1234567890</span>
+                    </div>
+                    <form className="mb-4">
+                        <div className="w-full flex flex-col mb-4">
+                            <label htmlFor="name" className="label text-start">Name</label>
+                            <input type="text" id="name" name="name" className="inputField" />
                         </div>
+                        <div className="w-full flex flex-row justify-center items-center gap-x-2">
+                        <div className="w-full flex flex-col">
+                                 <label htmlFor="email" className="label text-start">Email</label>
+                                 <input type="email" id="email" name="email" className="inputField" />
+                                   </div>
+                               <div className="w-full flex flex-col">
+                               <label htmlFor="contact" className="label text-start">Contact</label>
+                               <input type="text" id="contact" name="contact" className="inputField" />
+                            </div>
+                        </div>
+                      
+                        <div className="flex flex-col mb-4">
+                            <label htmlFor="message" className="label text-start">Message</label>
+                            <textarea id="message" name="message" rows="4" className="w-full border-b-2 border-gray-400 focus:outline-none focus:border-action"></textarea>
+                        </div>
+                        <button type="submit" className="button">Send Message <FiSend className="inline-block ml-2" /></button>
+                    </form>
+                    <div className="flex justify-center mt-4">
+                        <a href="#" className="text-gray-600 hover:text-blue-500 mx-2"><FaFacebook className="text-2xl" /></a>
+                        <a href="#" className="text-gray-600 hover:text-blue-500 mx-2"><FaTwitter className="text-2xl" /></a>
+                        <a href="#" className="text-gray-600 hover:text-blue-500 mx-2"><FaInstagram className="text-2xl" /></a>
                     </div>
                 </div>
             </div>
