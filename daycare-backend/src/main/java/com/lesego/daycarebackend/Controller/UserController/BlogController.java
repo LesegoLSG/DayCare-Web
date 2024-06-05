@@ -26,6 +26,7 @@ public class BlogController {
 
     @GetMapping("/getAllBlogs")
     public ResponseEntity<List<Blog>> findAllBlogs(){
+        System.out.println("getAllBlogs Controller reached");
         return iBlogService.getAllBlogs();
     }
 
