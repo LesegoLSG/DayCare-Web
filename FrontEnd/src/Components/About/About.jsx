@@ -5,21 +5,29 @@ import LesegoMhlongo from '../../Assets/LesegoMhlongo.png';
 import lsg from '../../Assets/lsg.png';
 import Moon2 from '../../Assets/Moon2.png';
 import Moon from '../../Assets/Moon.png';
-import PlayingKid from '../../Assets/PlayingKid.png'
+import PlayingKid from '../../Assets/PlayingKid.png';
+import './About.css';
+import {motion} from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 import Lottie from "lottie-react";
 import animationData from './KidsAnimation.json';
+import { useNavigate } from 'react-router-dom';
 const About = () => {
+    const navigate = useNavigate();
     return (
-        <section id="about" className="bg-primary w-full h-auto pt-20 px-12">
-            <div className="flex justify-center">
-                <h1 className="text-2xl font-bold">About</h1>
+        <motion.section
+        initial={{opacity:0}}
+        animate={{opacity:1}}
+        exit={{opacity:0}}
+         id="about" className="bg-white w-full h-auto pt-20 px-12 relative" style={{position:"relative"}}>
+ 
+            <div className="flex flex-col justify-center">
+                <h1 className="h2 my-2">About US</h1>
+                <h2 className='h3'>Discover Our Story of Nurturing and Growth</h2>
             </div>
             <div className=" w-full h-auto grid sm:grid-cols-1 md:grid-cols-2 p-6 ">
 
-                {/* <div className=''>
-                    <Lottie animationData={animationData} />
-                </div> */}
                 <div>
                     <img src={PlayingKid}  alt=""/>
                 </div>
@@ -43,11 +51,14 @@ const About = () => {
                         </div>
                     </div>
 
-                    <button className=" px-1 py-1 m-6" >Learn More</button>
+                    <button className=" button" onClick={() => navigate("/aboutInfo")}>Learn More</button>
                 </div>
             </div>
 
-        </section>
+   
+
+
+        </motion.section>
     )
 }
 
