@@ -19,7 +19,6 @@ public class User implements UserDetails {
     private int id;
     @Lob
     @Column(name="image", columnDefinition = "LONGBLOB",nullable = true)
-
     private byte[] image;
     private String firstName;
     private String lastName;
@@ -29,7 +28,7 @@ public class User implements UserDetails {
     private String email;
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Blog> blog;
 
