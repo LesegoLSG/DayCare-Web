@@ -13,7 +13,7 @@ import SocialIcons from './SocialIcons';
 const NavBar = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('home'); // Initialize with 'hero'
 
 
