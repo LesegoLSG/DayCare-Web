@@ -24,10 +24,10 @@ public class Blog {
     private String title;
     private String topic;
     @Lob
-    @Column(length = 1000000000)
+    @Column(columnDefinition = "LONGBLOB",nullable = true)
     private String content;
     private LocalDate date;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
     //Parameterless constructor
