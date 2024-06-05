@@ -15,13 +15,12 @@ const Services = () => {
     };
 
     return (
-        <section className="bg-secondary w-full h-auto flex flex-col justify-center items-center" id="services">
-            <div className=" w-full h-auto flex justify-start items-center pl-16">
-                <h3>Our offer</h3>
+        <section className="bg-primary w-full h-auto flex flex-col justify-center items-center" id="services">
+           <div className="flex flex-col justify-center">
+                <h1 className="h2 my-2">Services</h1>
+                <h2 className='h3'>Explore Our Comprehensive Offerings</h2>
             </div>
-            <div className="w-full h-auto flex justify-start items-center pl-16">
-                <h1 className="text-xl font-bold">Our Best Offer <br></br>For Your Kid</h1>
-            </div>
+        
             {/* Main box */}
             <div className=" w-full h-auto mt-6 grid grid-cols-1 gap-1 md:grid-cols-3 place-items-center px-16">
                 {
@@ -31,7 +30,7 @@ const Services = () => {
                 }
             </div>
 
-            {selectedService && <Modal service={selectedService} onCloseModal={handleCloseModal} />}
+            {/* {selectedService && <Modal service={selectedService} onCloseModal={handleCloseModal} />} */}
 
         </section>
     )
