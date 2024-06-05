@@ -5,17 +5,20 @@ import BlogPortalList from './BlogPortalList';
 import { useBlogs } from '../../../Contexts/BlogContext';
 import axiosInstance from '../../../AuthServices/Axios/AxiosInstance';
 import LoadingModal from '../../../ReusableComponents/LoadingSpinner/LoadingModal';
+import axiosPrivateInstance from '../../../AuthServices/Axios/AxiosPrivateInstance';
 
 const BlogPortal = () => {
     const navigate = useNavigate();
-    const { blogs, setBlogs } = useBlogs();
+    const { blogs, setBlogs } = useBlogs([]);
     const [isLoading, setIsLoading] = useState(false);
 
     const fetchBlogs = async () => {
         try {
             setIsLoading(true);
-            const response = await axiosInstance.get("/publicBlog/getAllBlogs");
+            const response = await axiosPrivateInstance.get("/blog/getAllBlogs");
+            console.log("POrtal blog response:", response.data)
             setBlogs(response.data);
+
             setIsLoading(false);
         } catch (error) {
             console.log("Error fetching blogs:", error);

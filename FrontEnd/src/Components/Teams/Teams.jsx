@@ -4,10 +4,10 @@ import TeamsCard from './TeamsCard';
 
 const Teams = () => {
     return (
-        <div className="bg-primary w-full h-auto flex flex-col justify-center items-center">
-            <div>
-                <h1>Our Team</h1>
-                <h2>Discover the faces behind our exceptional service</h2>
+        <div className="bg-white w-full h-auto flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-center items-center">
+                <h1 className="h2 my-2">About Us</h1>
+                <h2 className='h3'>Discover Our Story of Nurturing and Growth</h2>
             </div>
             <div className="flex flex-col md:flex-row">
                 {

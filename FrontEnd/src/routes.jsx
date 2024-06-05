@@ -15,6 +15,10 @@ import PrivacyPolicy from './Components/LegalStatements/PrivacyPolicy';
 import UserEntryPage from './Portal/PortalComponents/Users/UserEntryPage';
 import EditUser from './Portal/PortalComponents/Users/EditUser';
 import BlogEntryPage from './Portal/PortalComponents/Blog/BlogEntryPage';
+import { PrivateRoute } from './AuthServices/Routes/PrivateRoute';
+import { MainUsersRoute } from './AuthServices/Routes/MainUsersRoute';
+import AboutLearnMorePage from './Components/SinglePage/AboutLearnMorePage';
+import ServiceLearnMorePage from './Components/SinglePage/ServiceLearnMorePage';
 
 const routes = createBrowserRouter([
     {
@@ -26,8 +30,16 @@ const routes = createBrowserRouter([
         element: <Authentication />
     },
     {
+        path:"/aboutinfo",
+        element:<AboutLearnMorePage/>
+    },
+    {
+        path:"/servicedetails/:id",
+        element:<ServiceLearnMorePage/>
+    },
+    {
         path: "/portal",
-        element: <PortalPage />,
+        element:<PrivateRoute><PortalPage /></PrivateRoute> ,
         children: [
             {
                 index: true,
@@ -40,7 +52,7 @@ const routes = createBrowserRouter([
                 children: [
                     {
                         index: true,
-                        element: <Users/>
+                        element: <MainUsersRoute><Users/></MainUsersRoute>
                     },
                     // {
                     //     path: "profile/:id",

@@ -92,7 +92,7 @@ const BlogEdit = () => {
 
             <div className="w-full h-[640px] overflow-y-auto scrollbar">
            
-                <CardImage cardImage={cardImage} handleImageUpload={handleImageUpload}/>
+                {/* <CardImage cardImage={cardImage} handleImageUpload={handleImageUpload}/>
                 
                     <BlogForm 
                         blog={blog} 
@@ -103,7 +103,7 @@ const BlogEdit = () => {
                         handleOpenModal={handleOpenModal}
                         handleOpenPreviewModal={handleOpenPreviewModal}
                         submitBlog={() => console.log('Submit blog functionality here')}
-                    />
+                    /> */}
                     
                     </div>
 

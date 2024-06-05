@@ -5,12 +5,13 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 
 const BlogContent = ({ blog, submitBlog }) => {
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Update blog content
     blog.content = content;
+    console.log("Inside BlogContent", JSON.stringify(blog))
     submitBlog();
   };
 
@@ -20,7 +21,7 @@ const BlogContent = ({ blog, submitBlog }) => {
         <label className="block text-sm font-medium text-gray-700">Content:</label>
         <Editor
           value={content}
-          onTextChange={(e) => setContent(e.htmlValue)}
+          onTextChange={(e) => setContent(e.textValue)}
           style={{ height: "300px" }}
           className="mt-1"
         />

@@ -4,14 +4,14 @@ import { FaUpload } from "react-icons/fa";
 
 const CardImage = ({ cardImage, handleImageUpload }) => {
     console.log("cardImage in edit:",cardImage);
-    const containerStyle = {
-        width: '100%',
-        maxHeight: '200px', // Example max height for the image container
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundImage: cardImage ? `url(${typeof cardImage === 'string' ? cardImage : URL.createObjectURL(cardImage)})` : 'none',
-      };
+    // const containerStyle = {
+    //     width: '100%',
+    //     maxHeight: '200px', // Example max height for the image container
+    //     backgroundSize: 'cover',
+    //     backgroundPosition: 'center',
+    //     backgroundRepeat: 'no-repeat',
+    //     backgroundImage: cardImage ? `url(${typeof cardImage === 'string' ? cardImage : URL.createObjectURL(cardImage)})` : 'none',
+    //   };
   return (
     <div className="w-full flex justify-center items-center my-4">
       <div
@@ -19,20 +19,13 @@ const CardImage = ({ cardImage, handleImageUpload }) => {
         onClick={() => document.getElementById('imageInput').click()}
       >
         {cardImage ? (
-          typeof cardImage === 'string' ? (
-            <img
-              className="w-full h-full object-cover"
-              src={`url(data:image/png;base64,${cardImage})`} 
-              alt="Uploaded"
-              
-            />
-          ) : (
+           
             <img
               className="w-full h-full object-cover"
               src={URL.createObjectURL(cardImage)}
               alt="Uploaded"
             />
-          )
+          
         ) : (
           <div className="text-center">
             <FaUpload className="text-2xl" />
