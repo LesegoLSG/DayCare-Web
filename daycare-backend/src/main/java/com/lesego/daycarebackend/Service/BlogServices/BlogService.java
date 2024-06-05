@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -78,33 +79,21 @@ public class BlogService implements IBlogService{
 
     @Override
     public ResponseEntity<List<Blog>> getAllBlogs() {
+        try {
+            List<Blog> blogList = blogRepo.findAllWithUsers();
 
-       try{
-           List<Blog> blogList = blogRepo.findAllWithUsers();
-            System.out.println("Length of blog: " + blogList);
-           // Decompress images for each blog and its associated user
-           for (Blog blog : blogList) {
-               // Convert plain text content to HTML
-               blog.setContent(convertPlainTextToHtml(blog.getContent()));
-               System.out.println("Content:" + blog.getContent());
+            for (Blog blog : blogList) {
+                User user = blog.getUser();
+                if(blog.getCardImage() != null){
+                    blog.setCardImage(ImageUtils.decompressImage(blog.getCardImage()));
+                }
+            }
 
-               // Decompress blog image
-               if (blog.getCardImage() != null) {
-                   blog.setCardImage(ImageUtils.decompressImage(blog.getCardImage()));
-               }
-               // Decompress user image
-               User user = blog.getUser();
-               if (user != null && user.getImage() != null) {
-                   user.setImage(ImageUtils.decompressImage(user.getImage()));
-               }
-           }
-            System.out.println("BlogList check:" + blogList);
-           return ResponseEntity.ok(blogList);
+            return ResponseEntity.ok(blogList);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
 
-       }catch(Throwable e){
-           System.out.println(e.getMessage());
-           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-       }
 
     }
 
