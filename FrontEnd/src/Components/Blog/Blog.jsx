@@ -8,6 +8,7 @@ import BlogSideBar from './BlogSideBar/BlogSideBar';
 import CategorySlider from './CategorySlider/CategorySlider';
 import axiosInstance from '../../AuthServices/Axios/AxiosInstance';
 import LoadingModal from '../../ReusableComponents/LoadingSpinner/LoadingModal';
+import { IoSearchOutline } from "react-icons/io5";
 
 import { useBlogs } from '../../Contexts/BlogContext';
 
@@ -81,9 +82,10 @@ const Blog = () => {
     };
 
     return (
-        <div className=" bg-primary w-full h-auto flex flex-col justify-center items-center" id="blog">
-            <div className="flex justify-center items-center">
-                <h1>Blog</h1>
+        <div className=" bg-white w-full h-auto flex flex-col justify-center items-center" id="blog">
+            <div className="flex flex-col justify-center">
+                <h1 className="h2 my-2">Blog</h1>
+                <h2 className='h3'>Dive Into Our Insights and Inspiration</h2>
             </div>
             <div className="w-full h-auto flex flex-col justify-center items-center md:flex-col my-4">
             {isLoading && <LoadingModal/>}
@@ -97,7 +99,7 @@ const Blog = () => {
                     />
                 </div>
                 <div className="w-full flex justify-center items-center px-12 md:justify-end">
-                    <div className="relative">
+                    {/* <div className="relative">
                         <input
                             className="w-60 h-8 my-2 md:my-0 md:w-80 border md:border-black md:rounded-md md:p-2 md:pl-8"
                             type="text"
@@ -108,7 +110,15 @@ const Blog = () => {
                         <div className="absolute inset-y-0 left-0 flex items-center px-3 ">
                             <IoSearch />
                         </div>
-                    </div>
+                    </div> */}
+                    <div className="flex items-center rounded-md bg-white mt-6 px-2 py-1 border border-action">
+                    <IoSearchOutline className="text-gray-400 text-lg block float-left cursor-pointer mr-2" />
+                    <input
+                        type="text"
+                        placeholder="Search"
+                        className="text-base bg-transparent w-full text-black focus:outline-none focus:border-action"
+                    />
+                </div>
 
                 </div>
 
