@@ -9,6 +9,7 @@ import com.lesego.daycarebackend.Entity.User.User;
 import com.lesego.daycarebackend.Repository.BlogRepo.BlogRepo;
 import com.lesego.daycarebackend.Repository.UserRepo.UserRepository;
 import com.lesego.daycarebackend.Reusables.ImageUtils;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BlogService implements IBlogService{
@@ -99,13 +101,98 @@ public class BlogService implements IBlogService{
 
     @Override
     public ResponseEntity<Blog> getBlogById(int id) {
-        Blog blog = blogRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Could not find the blog"));
-        if(blog != null){
-            if(blog.getCardImage() != null){
+        try {
+            // Fetch the blog by ID
+            Optional<Blog> blogOptional = blogRepo.findByIdWithUser(id);
+
+            if (blogOptional.isEmpty()) {
+                return ResponseEntity.notFound().build(); // Return 404 if blog not found
+            }
+
+            Blog blog = blogOptional.get();
+
+            // Decompress the card image if it exists
+            if (blog.getCardImage() != null) {
                 blog.setCardImage(ImageUtils.decompressImage(blog.getCardImage()));
             }
+
             return ResponseEntity.ok(blog);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return null;
+    }
+
+    @Override
+    public ResponseEntity<String> updateBlog(MultipartFile cardImage, String blogJson, int id) {
+        Optional<Blog> blogOptional = blogRepo.findById(id);
+
+        if(blogOptional.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+
+        Blog blogToUpdate = blogOptional.get();
+
+        //Mapper
+        ObjectMapper objectMapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        objectMapper.registerModule(module);
+        Blog myNewBlog;
+
+        System.out.println("Updated blogdddd:" + blogToUpdate);
+        System.out.println("Updated blog contentddd:" + blogToUpdate.getContent());
+        System.out.println("Updated blog cardImageddd:" + blogToUpdate.getCardImage());
+
+
+
+        //Update the blog details
+        try{
+            System.out.println("1");
+            myNewBlog = objectMapper.readValue(blogJson, Blog.class);
+            blogToUpdate.setTitle(myNewBlog.getTitle());
+            blogToUpdate.setTopic(myNewBlog.getTopic());
+            blogToUpdate.setContent(myNewBlog.getContent());
+            blogToUpdate.setDate(myNewBlog.getDate());
+            blogToUpdate.setCategory(myNewBlog.getCategory());
+            blogToUpdate.setStatus(myNewBlog.getStatus());
+            System.out.println("2");
+
+            if(cardImage != null){
+                System.out.println("3");
+
+                try{
+                    blogToUpdate.setCardImage(ImageUtils.compressImage(cardImage.getBytes()));
+                    System.out.println("4");
+
+                }catch (IOException e){
+                    throw new IllegalArgumentException("Error processing image file");
+                }
+
+            }
+            System.out.println("Updated blog:" + blogToUpdate);
+            System.out.println("Updated blog content:" + blogToUpdate.getContent());
+            System.out.println("Updated blog cardImage:" + blogToUpdate.getCardImage());
+
+            // Save the updated blog
+            blogRepo.save(blogToUpdate);
+            return ResponseEntity.ok("Blog updated successfully");
+
+        }catch(JsonProcessingException e){
+            throw new IllegalArgumentException("Invalid blog JSON format");
+        }
+
+
+    }
+
+    @Override
+    public ResponseEntity<String> deleteBlog(int id) {
+        Optional<Blog> blogOptional = blogRepo.findById(id);
+
+        if (blogOptional.isEmpty()) {
+            return ResponseEntity.notFound().build(); // Return 404 if blog not found
+        }
+
+        blogRepo.deleteById(id); // Delete the blog
+        return ResponseEntity.ok("Blog deleted successfully");
     }
 }

@@ -12,6 +12,7 @@ import AxiosPrivateInstance from '../../../AuthServices/Axios/AxiosPrivateInstan
 import { IoMdAdd } from "react-icons/io";
 import ViewUser from './ViewUser/ViewUser';
 import LoadingModal from '../../../ReusableComponents/LoadingSpinner/LoadingModal';
+import DeleteDialog from '../../../ReusableComponents/ConfirmationsDialogs/DeleteDialog';
 
 const Users = () => {
     const [users, setUsers] = useState([]);
@@ -25,6 +26,11 @@ const Users = () => {
     const [userToView, setUserToView] = useState({});
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+
+     //State for controlling the opeing and closing of a dialog
+     const [isDialogOpen, setIsDialogOpen] = useState(false);
+      //Blog to delete id
+    const [blogToDelete, setBlogToDelete] = useState(null);
 
  
 
@@ -85,14 +91,41 @@ const Users = () => {
         setIsViewUser(false);
     }
 
+     //Pass an id of a blog to be deleted and opens the dialog
+     const handleDeleteClick = (id) => {
+        setBlogToDelete(id);
+        setIsDialogOpen(true);
+    }
+
+    //Confirm delete
+    const handleConfirmDelete = () => {
+        if (blogToDelete) {
+            deleteUser(blogToDelete);
+        }
+        setIsDialogOpen(false);
+        setBlogToDelete(null);
+    }
+    //Cancel delete operation
+    const handleCancelDelete = () => {
+        setIsDialogOpen(false);
+        setBlogToDelete(null);
+    }
+
     return (
         <section>
             <div className=" w-full h-12 flex justify-between item-center p-2">
                 {loading && <LoadingModal />}
+                {/* Delete dialog */}
+            <DeleteDialog 
+                 isOpen={isDialogOpen}
+                 onConfirm={handleConfirmDelete}
+                 onCancel={handleCancelDelete}
+                 message="Are you sure you want to delete this user?"
+            />
                 <h1 className="text-black w-40 h-8 text-2xl font-bold">Users</h1>
                 <button
                     onClick={() => navigate("/portal/users/add")}
-                    className="bg-blue-200 w-52 h-8 p-2 flex justify-center items-center"
+                    className="button flex justify-center items-center"
                 >
                     <IoMdAdd className="m-1" />  Add User
                 </button>
@@ -102,7 +135,7 @@ const Users = () => {
 
                 {isUserList && users.length >= 1 ?
                     (
-                        <UsersList users={users} onDelete={deleteUser} onModalPopUp={modalPopUp} onModalViewUserPopUp={ModalViewUserPopUp} />
+                        <UsersList users={users} onDelete={handleDeleteClick} onModalPopUp={modalPopUp} onModalViewUserPopUp={ModalViewUserPopUp} />
                     ) : (
                         <NoUser />
                     )

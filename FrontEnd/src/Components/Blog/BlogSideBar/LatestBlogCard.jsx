@@ -15,13 +15,13 @@ const LatestBlogCard = ({ latest }) => {
                 <p className="text-md font-bold">{latest.title}</p>
             </div>
             <div className="w-full h-auto flex justify-start items-start">
-                <p className="text-start" style={{ whiteSpace: 'pre-line' }}>{truncateText(latest.briefDescription, 80)}</p>
+                <p className="text-start" style={{ whiteSpace: 'pre-line' }}>{truncateText(latest.topic, 80)}</p>
             </div>
             <div className="w-full h-auto flex items-start">
-                <p>{latest.date}</p>
+                <p className="text-xs">{latest.date}</p>
             </div>
             <div className="w-full h-auto flex items-start">
-                <Link to={`/blog/${latest.id}`} className="button">
+                <Link to={`/bloginfo/${latest.id}`} className="button">
                     Read More
                 </Link>
             </div>

@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Editor } from "primereact/editor";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 
 const BlogContent = ({ blog, submitBlog }) => {
-  const [content, setContent] = useState();
+  const [content, setContent] = useState('');
+
+
+  // Update the content state if the blog content prop changes
+  useEffect(() => {
+    if (blog.content) {
+      setContent(blog.content);
+    }
+  }, [blog.content]);
+
+  console.log("CONTENT TO DISPLAY:", blog.content);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +31,7 @@ const BlogContent = ({ blog, submitBlog }) => {
         <label className="block text-sm font-medium text-gray-700">Content:</label>
         <Editor
           value={content}
-          onTextChange={(e) => setContent(e.textValue)}
+          onTextChange={(e) => setContent(e.htmlValue)}
           style={{ height: "300px" }}
           className="mt-1"
         />
@@ -30,7 +40,7 @@ const BlogContent = ({ blog, submitBlog }) => {
             onClick={handleSubmit}
             className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
           >
-            Create Post
+             {blog.id ? "Update Post" : "Create Post"}
           </button>
         </div>
       </div>

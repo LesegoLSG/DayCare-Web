@@ -67,12 +67,12 @@ const UsersList = ({ users, onDelete, onModalPopUp, onModalViewUserPopUp }) => {
                                         </div>
                                     </div>
                                 </td>
-                                <td className="p-2">{user.firstName}</td>
-                                <td className="p-2">{user.lastName}</td>
-                                <td className="p-2">{user.mobile}</td>
-                                <td className="p-2">{user.email}</td>
-                                <td className="p-2">{user.role}</td>
-                                <td className="p-2">
+                                <td className="p-2 text-start">{user.firstName}</td>
+                                <td className="p-2 text-start">{user.lastName}</td>
+                                <td className="p-2 text-start">{user.mobile}</td>
+                                <td className="p-2 text-start">{user.email}</td>
+                                <td className="p-2 text-start">{user.role}</td>
+                                <td className="p-2 text-start">
                                     <div className="flex space-x-2">
                                         <button
                                             onClick={() => onModalViewUserPopUp(user)}

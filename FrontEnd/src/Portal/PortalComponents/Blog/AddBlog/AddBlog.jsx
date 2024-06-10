@@ -105,7 +105,7 @@ const AddBlog = () => {
 
             <div className="w-full h-[640px] overflow-y-auto scrollbar">
            
-                <CardImage cardImage={cardImage} handleImageUpload={handleImageUpload}/>
+                <CardImage cardImage={cardImage} handleImageUpload={handleImageUpload} isEditing={false}/>
                 <BlogForm 
                 blog={blog} 
                 handleInputChange={handleInputChange} 

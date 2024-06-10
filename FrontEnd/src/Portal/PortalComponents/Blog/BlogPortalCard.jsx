@@ -26,16 +26,7 @@ const BlogPortalCard = ({ singleBlog, onDelete }) => {
     return (
         <div className="bg-white shadow-xl shadow-black w-[18rem] h-auto flex flex-col mx-auto my-2 relative">
             {/* Card Image */}
-            {/* <div className="w-full h-auto overflow-hidden">
-                <img className="" src={singleBlog.cardImage} />
-            </div> */}
-                            {/* <div className="bg-green-500 w-full h-auto"
-                                        style={{
-                                            backgroundImage: `url('data:image/**;base64,${singleBlog.cardImage}')`,
-                                            backgroundSize: 'cover',
-                                            backgroundPosition: 'center',
-                                        }}>
-                                    </div> */}
+           
              <div
                 className="w-full h-[10rem] bg-cover bg-center relative"
                 style={{ backgroundImage:  `url('data:image/**;base64,${singleBlog.cardImage}')` }}

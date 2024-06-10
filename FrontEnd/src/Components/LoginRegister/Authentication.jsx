@@ -6,7 +6,7 @@ import LoginHomeNavBar from '../NavBar/LoginHomeNavBar';
 const Authentication = () => {
     return (
         <div className=''>
-            <LoginHomeNavBar />
+            {/* <LoginHomeNavBar /> */}
             <div className="w-full h-screen flex justify-center items-center">
 
                 <Login />

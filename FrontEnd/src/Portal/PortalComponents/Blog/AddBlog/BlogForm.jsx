@@ -19,6 +19,7 @@ const BlogForm = ({
           onChange={handleInputChange}
           className="inputField"
         >
+          <option value="Select_status">Select status</option>
           <option value="CURRENT_POST">CURRENT_POST</option>
           <option value="UPCOMING_POST">UPCOMING_POST</option>
         </select>

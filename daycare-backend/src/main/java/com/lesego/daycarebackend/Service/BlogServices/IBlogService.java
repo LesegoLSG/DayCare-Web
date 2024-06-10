@@ -13,4 +13,7 @@ public interface IBlogService {
     public ResponseEntity<List<Blog>> getAllBlogs();
 
     public ResponseEntity<Blog> getBlogById(int id);
+    public ResponseEntity<String> updateBlog(MultipartFile cardImage, String blogJson, int id);
+
+    public ResponseEntity<String> deleteBlog(int id);
 }

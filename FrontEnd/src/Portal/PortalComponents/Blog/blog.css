@@ -10,3 +10,18 @@
     scrollbar-width: thin;
     scrollbar-color: #A7D7C5 #F4F9F4
 }
+
+/* Add custom scrollbar styling for Webkit browsers (Chrome, Safari) */
+.scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    background: #F4F9F4;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background-color: #A7D7C5;
+    border-radius: 4px;
+    border: 2px solid #F4F9F4;
+}

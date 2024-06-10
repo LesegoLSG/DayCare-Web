@@ -50,13 +50,13 @@ const BlogCard = ({ singleBlog }) => {
                     <p className="text-left">{truncateText(singleBlog.topic, 100)}</p>
                 </div>
                 {/* controls */}
-                <div className=" w-full h-auto flex justify-between items-center px-2">
-                    <Link to={`/blog/${singleBlog.id}`} className=" border bg-[#5C8D89] border-balance rounded-xl font-semibold text-white hover:text-black hover:border-[#5C8D89] hover:bg-transparent p-1">
+                <div className=" w-full h-auto flex justify-between items-center px-2 py-1">
+                    <Link to={`/bloginfo/${singleBlog.id}`} className="button">
                         Read More
                     </Link>
-                    <div className=" rounded-full p-2 border-2 border-black cursor-pointer  mr-1 mb-1">
+                    {/* <div className=" rounded-full p-2 border-2 border-black cursor-pointer  mr-1 mb-1">
                         <IoMdShare className="text-xl" />
-                    </div>
+                    </div> */}
                 </div>
 
 

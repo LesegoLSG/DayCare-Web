@@ -9,6 +9,8 @@ import CategorySlider from './CategorySlider/CategorySlider';
 import axiosInstance from '../../AuthServices/Axios/AxiosInstance';
 import LoadingModal from '../../ReusableComponents/LoadingSpinner/LoadingModal';
 import { IoSearchOutline } from "react-icons/io5";
+import './Blog.css'
+import SearchBar from '../../ReusableComponents/SearchBar/SearchBar';
 
 import { useBlogs } from '../../Contexts/BlogContext';
 
@@ -82,15 +84,15 @@ const Blog = () => {
     };
 
     return (
-        <div className=" bg-white w-full h-auto flex flex-col justify-center items-center" id="blog">
+        <section className=" bg-white w-full h-auto flex flex-col justify-center items-center relative py-16 " id="blog">
             <div className="flex flex-col justify-center">
                 <h1 className="h2 my-2">Blog</h1>
                 <h2 className='h3'>Dive Into Our Insights and Inspiration</h2>
             </div>
-            <div className="w-full h-auto flex flex-col justify-center items-center md:flex-col my-4">
+            <div className="w-full h-auto flex flex-col justify-center items-center md:flex-col my-4  py-16">
             {isLoading && <LoadingModal/>}
                 {/* <BlogScroller /> */}
-                {/* Searchbar component*/}
+               
                 <div className="w-full">
                     <CategorySlider
                         categories={categories}
@@ -98,32 +100,15 @@ const Blog = () => {
                         handleCategoryFilter={handleCategoryFilter}
                     />
                 </div>
-                <div className="w-full flex justify-center items-center px-12 md:justify-end">
-                    {/* <div className="relative">
-                        <input
-                            className="w-60 h-8 my-2 md:my-0 md:w-80 border md:border-black md:rounded-md md:p-2 md:pl-8"
-                            type="text"
-                            placeholder="Search"
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                        />
-                        <div className="absolute inset-y-0 left-0 flex items-center px-3 ">
-                            <IoSearch />
-                        </div>
-                    </div> */}
-                    <div className="flex items-center rounded-md bg-white mt-6 px-2 py-1 border border-action">
-                    <IoSearchOutline className="text-gray-400 text-lg block float-left cursor-pointer mr-2" />
-                    <input
-                        type="text"
-                        placeholder="Search"
-                        className="text-base bg-transparent w-full text-black focus:outline-none focus:border-action"
-                    />
-                </div>
+                 {/* Searchbar component*/}
+                <div className="w-full flex justify-center items-center px-16 my-4 md:justify-end">
+                 
+                <SearchBar setSearch={setSearch}/>
 
                 </div>
 
             </div>
-            <div className=" w-full h-auto px-12">
+            <div className=" w-full h-auto px-2 md:px-12 pb-20">
                 <div className=" w-full md:flex md:flex-row h-auto ">
                     {/* Left side */}
                     <div className=" w-full md:w-3/4 ">
@@ -139,12 +124,18 @@ const Blog = () => {
                         </div>
                     </div>
                     {/* right side */}
-                    <BlogSideBar />
+                    <BlogSideBar blogs={blogs}/>
 
                 </div>
             </div>
 
-        </div>
+            <div class="custom-shape-divider-bottom-1717894530">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+    </svg>
+</div>
+
+        </section>
     )
 }
 

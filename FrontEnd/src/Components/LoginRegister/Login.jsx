@@ -99,7 +99,7 @@ const Login = () => {
                 {/* Right */}
                 <div className='hidden md:flex w-1/2 h-screen  justify-start items-center bg-blue-200 relative'>
                     <div className=''>
-                        <img src={LoginPlayingKids} alt="Books" className="h-screen " />
+                        <img src={LoginPlayingKids} alt="Books" className=" " />
                     </div>
                     <h1 className="h1 absolute top-50 left-60 text-white">Building Bright Futures</h1>
 

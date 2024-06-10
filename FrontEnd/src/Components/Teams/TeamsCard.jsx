@@ -10,7 +10,7 @@ const TeamsCard = ({ singleTeamMember }) => {
             {/* circle */}
             <div className="">
                 {/* ImgBox */}
-                <div className="rounded-b-full overflow-hidden hover:rounded-b-none duration-500">
+                <div className=" overflow-hidden ">
                     <img src={singleTeamMember.image} />
                 </div>
 

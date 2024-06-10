@@ -32,6 +32,17 @@ public class BlogController {
 
     @GetMapping("/getBlogById/{id}")
     public ResponseEntity<Blog> getBlogById(@PathVariable int id){
+        System.out.println("id " + id);
         return iBlogService.getBlogById(id);
+    }
+
+    @PutMapping("/updateBlog/{id}")
+    public ResponseEntity<String> updateBlog(@RequestParam("cardImage") MultipartFile cardImage,@RequestParam("blogJson") String blogJson , @PathVariable int id){
+        return iBlogService.updateBlog(cardImage,blogJson,id);
+    }
+
+    @DeleteMapping("/deleteBlogById/{id}")
+    public ResponseEntity<String> deleteBlogById(@PathVariable int id){
+        return iBlogService.deleteBlog(id);
     }
 }

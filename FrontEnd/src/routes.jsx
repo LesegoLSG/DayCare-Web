@@ -9,7 +9,7 @@ import Authentication from './Components/LoginRegister/Authentication';
 import AddUser from './Portal/PortalComponents/Users/AddUser';
 import AddBlog from './Portal/PortalComponents/Blog/AddBlog/AddBlog';
 import BlogReadMore from './Components/Blog/BlogReadMore/BlogReadMore';
-import BlogEdit from './Portal/PortalComponents/Blog/BlogEdit';
+import BlogEdit from './Portal/PortalComponents/Blog/EditBlog/BlogEdit';
 import TermsAndConditions from './Components/LegalStatements/TermsAndConditions';
 import PrivacyPolicy from './Components/LegalStatements/PrivacyPolicy';
 import UserEntryPage from './Portal/PortalComponents/Users/UserEntryPage';
@@ -19,6 +19,8 @@ import { PrivateRoute } from './AuthServices/Routes/PrivateRoute';
 import { MainUsersRoute } from './AuthServices/Routes/MainUsersRoute';
 import AboutLearnMorePage from './Components/SinglePage/AboutLearnMorePage';
 import ServiceLearnMorePage from './Components/SinglePage/ServiceLearnMorePage';
+import BlogReadMorePage from './Components/SinglePage/BlogReadMorePage';
+import Profile from './Portal/Profile/Profile';
 
 const routes = createBrowserRouter([
     {
@@ -37,6 +39,12 @@ const routes = createBrowserRouter([
         path:"/servicedetails/:id",
         element:<ServiceLearnMorePage/>
     },
+    {
+        path:"/bloginfo/:id",
+        element:<BlogReadMorePage/>
+    },
+
+
     {
         path: "/portal",
         element:<PrivateRoute><PortalPage /></PrivateRoute> ,
@@ -88,10 +96,10 @@ const routes = createBrowserRouter([
             },
 
 
-            // {
-            //     path: "principal",
-            //     element: <PrincipalPage />
-            // },
+            {
+                path: "profile",
+                element: <Profile/>
+            },
             // {
             //     path: "teacher",
             //     element: <TeachersPage />
