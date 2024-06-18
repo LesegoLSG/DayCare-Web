@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import AxiosPrivateInstance from '../../../AuthServices/Axios/AxiosPrivateInstance';
-import './User.css'; // if any custom styles
-import Image4 from '../../../Assets/Image4.jpg';
-import Image1 from '../../../Assets/Image1.jpg';
-import UploadImage from './UploadImage/UploadImage';
-import VideoOrImageDisplay from './VideoOrImageDisplay/VideoOrImageDisplay';
-import { IoMdCloseCircleOutline } from 'react-icons/io';
-import InputValidation from '../../../ReusableComponents/Validations/InputValidation';
-import FormSubmit from './FormSubmit';
-import { ToastContainer } from 'react-toastify';
-import LoadingModal from '../../../ReusableComponents/LoadingSpinner/LoadingModal';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AxiosPrivateInstance from "../../../AuthServices/Axios/AxiosPrivateInstance";
+import "./User.css"; // if any custom styles
+import Image4 from "../../../Assets/Image4.jpg";
+import Image1 from "../../../Assets/Image1.jpg";
+import UploadImage from "./UploadImage/UploadImage";
+import VideoOrImageDisplay from "./VideoOrImageDisplay/VideoOrImageDisplay";
+import { IoMdCloseCircleOutline } from "react-icons/io";
+import InputValidation from "../../../ReusableComponents/Validations/InputValidation";
+import FormSubmit from "./FormSubmit";
+import { ToastContainer } from "react-toastify";
+import LoadingModal from "../../../ReusableComponents/LoadingSpinner/LoadingModal";
+import { successPopUp } from "../../../ReusableComponents/Notification/Notification";
 
 const AddUser = () => {
   const navigate = useNavigate();
@@ -18,16 +19,16 @@ const AddUser = () => {
   const [showVideo, setShowVideo] = useState(true);
   const [image, setImage] = useState(null);
   const [user, setUser] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    mobile: '',
-    role: '',
-    whatsAppNo: '',
-    facebookLink: '',
-    instagramLink: '',
-    linkedInLink: ''
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    mobile: "",
+    role: "",
+    whatsAppNo: "",
+    facebookLink: "",
+    instagramLink: "",
+    linkedInLink: "",
   });
 
   const [errorMessage, setErrorMessage] = useState({});
@@ -49,18 +50,22 @@ const AddUser = () => {
         setLoading(true);
         const formData = new FormData();
         if (image) {
-          formData.append('image', image);
+          formData.append("image", image);
         }
-        formData.append('user', JSON.stringify(user));
+        formData.append("user", JSON.stringify(user));
 
-        const response = await AxiosPrivateInstance.post('/user/add', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
+        const response = await AxiosPrivateInstance.post(
+          "/user/add",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
           }
-        });
+        );
         setLoading(false);
-        successPopUp('User added successfully...');
-        navigate('/portal/users');
+        successPopUp("User added successfully...");
+        navigate("/portal/users");
       } catch (error) {
         console.error(error);
       }
