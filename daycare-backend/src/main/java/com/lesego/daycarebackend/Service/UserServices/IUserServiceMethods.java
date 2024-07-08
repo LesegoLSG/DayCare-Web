@@ -21,4 +21,6 @@ public interface IUserServiceMethods {
 //    public UserInformation getLoggedInUserInfo(String email);
     public UserInformation getUserById(int id);
 
+    public ResponseEntity<String> updateUserPassword(int id,String passwordJson);
+
 }

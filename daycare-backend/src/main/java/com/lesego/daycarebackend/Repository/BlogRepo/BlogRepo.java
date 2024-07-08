@@ -18,4 +18,7 @@ public interface BlogRepo extends JpaRepository<Blog,Integer> {
     // Query to fetch a single blog by ID with user eagerly loaded
     @Query("SELECT b FROM Blog b JOIN FETCH b.user WHERE b.id = :id")
     Optional<Blog> findByIdWithUser(@Param("id") int id);
+
+    //Count user by id
+    long countByUserId(int userId);
 }

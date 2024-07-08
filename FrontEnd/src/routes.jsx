@@ -20,7 +20,7 @@ import { MainUsersRoute } from "./AuthServices/Routes/MainUsersRoute";
 import AboutLearnMorePage from "./Components/SinglePage/AboutLearnMorePage";
 import ServiceLearnMorePage from "./Components/SinglePage/ServiceLearnMorePage";
 import BlogReadMorePage from "./Components/SinglePage/BlogReadMorePage";
-// import Profile from './Portal/Profile/Profile';
+import Profile from "./Portal/Profile/Profile";
 
 const routes = createBrowserRouter([
   {
@@ -69,10 +69,10 @@ const routes = createBrowserRouter([
               </MainUsersRoute>
             ),
           },
-          // {
+          //   {
           //     path: "profile/:id",
-          //     element: <SchoolProfilePage />
-          // },
+          //     element: <SchoolProfilePage />,
+          //   },
           {
             path: "add",
             element: <AddUser />,
@@ -102,10 +102,10 @@ const routes = createBrowserRouter([
         ],
       },
 
-      // {
-      //     path: "profile",
-      //     element: <Profile/>
-      // },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
       // {
       //     path: "teacher",
       //     element: <TeachersPage />

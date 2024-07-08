@@ -18,7 +18,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Lob
-    @Column(name="image", columnDefinition = "LONGBLOB",nullable = true)
+    @Column(name="image", columnDefinition = "LONGBLOB", nullable = true)
     private byte[] image;
     private String firstName;
     private String lastName;
@@ -33,11 +33,16 @@ public class User implements UserDetails {
     private List<Blog> blog;
 
     private RoleType role;
-    private String whatsAppNo;
-    private String facebookLink;
-    private String instagramLink;
-    private String linkedInLink;
 
+    @Column(nullable = true)
+    private String whatsAppNo;
+    @Column(nullable = true)
+    private String facebookLink;
+    @Column(nullable = true)
+    private String instagramLink;
+    @Column(nullable = true)
+    private String linkedInLink;
+    @Column(nullable = true)
     private String twitterLink;
 
 

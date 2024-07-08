@@ -37,10 +37,11 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
-                .authorizeHttpRequests(request -> request.requestMatchers("/api/v1/auth/**","/api/v1/publicBlog/**")
+                .authorizeHttpRequests(request -> request.requestMatchers("/api/v1/auth/**","/api/v1/publicBlog/**", "/api/v1/dashboard/**")
                         .permitAll()
                         .requestMatchers("/api/v1/user/**").hasAnyAuthority(RoleType.SYSTEM_ADMIN.name(), RoleType.ADMIN.name())
                         .requestMatchers("/api/v1/blog/**").hasAnyAuthority(RoleType.SYSTEM_ADMIN.name(), RoleType.ADMIN.name(),RoleType.CONTENT_CREATOR.name())
+                        .requestMatchers("/api/v1/profile/**").hasAnyAuthority(RoleType.SYSTEM_ADMIN.name(), RoleType.ADMIN.name(),RoleType.CONTENT_CREATOR.name())
                         .anyRequest().authenticated())
 
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

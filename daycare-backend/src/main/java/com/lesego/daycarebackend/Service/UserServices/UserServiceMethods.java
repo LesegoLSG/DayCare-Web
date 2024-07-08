@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -39,7 +40,9 @@ public class UserServiceMethods implements IUserServiceMethods {
 
         // Set the image data from the multipart file and encode password
         try {
-            user.setImage(ImageUtils.compressImage(image.getBytes()));
+            if(image != null && !image.isEmpty()){
+                user.setImage(ImageUtils.compressImage(image.getBytes()));
+            }
 
         } catch (IOException e) {
             // Handle file processing exception
@@ -50,7 +53,7 @@ public class UserServiceMethods implements IUserServiceMethods {
 
         // Save the user to the database
         userRepository.save(user);
-        return "User added successfully:"+ user.getFirstName();
+        return "User added successfully:" + user.getFirstName();
     }
 
     @Override
@@ -67,7 +70,7 @@ public class UserServiceMethods implements IUserServiceMethods {
                 existingUser.setLastName(userToUpdate.getLastName());
                 existingUser.setMobile(userToUpdate.getMobile());
                 existingUser.setEmail(userToUpdate.getEmail());
-                existingUser.setPassword(userToUpdate.getPassword());
+//                existingUser.setPassword(new BCryptPasswordEncoder().encode(userToUpdate.getPassword()));
                 existingUser.setRole(userToUpdate.getRole());
                 existingUser.setWhatsAppNo(userToUpdate.getWhatsAppNo());
                 existingUser.setFacebookLink(userToUpdate.getFacebookLink());
@@ -135,23 +138,28 @@ public class UserServiceMethods implements IUserServiceMethods {
 
     }
 
-    //   @Override
-//    public UserInformation getLoggedInUserInfo(String email) {
-//        Optional<User> user = userRepository.findByEmail(email);
-//        UserInformation userInfo = new UserInformation();
-//        if(user.isPresent()){
-//            userInfo.setFirstName(user.get().getFirstName());
-//            userInfo.setLastName(user.get().getLastName());
-//            userInfo.setEmail(user.get().getEmail());
-//            userInfo.setPassword(user.get().getPassword());
-//            userInfo.setMobile(user.get().getMobile());
-//            userInfo.setRole(user.get().getRole());
-//            userInfo.setImage(ImageUtils.decompressImage(user.get().getImage()));
-//
-//            return userInfo;
-//        }
-//        return null;
-//    }
+    @Override
+    public ResponseEntity<String> updateUserPassword(int id, String passwordJson) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        System.out.print("OptionalUser" + optionalUser.get().getPassword());
+        if (optionalUser.isPresent()) {
+            User existingUser = optionalUser.get();
+            ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                Map<String, String> passwordMap = objectMapper.readValue(passwordJson, Map.class);
+                String newPassword = passwordMap.get("password");
+                System.out.println("Password" + newPassword);
+                existingUser.setPassword(new BCryptPasswordEncoder().encode(newPassword));
+                System.out.println("Encrypted password:" + existingUser.getPassword());
+                userRepository.save(existingUser);
+                return ResponseEntity.ok("Password updated successfully");
+            } catch (IOException e) {
+                return ResponseEntity.badRequest().body("Invalid JSON format");
+            }
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 
 
     /**

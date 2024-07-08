@@ -24,7 +24,7 @@ public class UserController {
     private IUserServiceMethods userService;
 
     @PostMapping("/add")
-    public ResponseEntity<String> addNewUser(@RequestParam("image") MultipartFile image, @RequestParam("user") String userJson){
+    public ResponseEntity<String> addNewUser(@RequestParam(value = "image", required = false) MultipartFile image, @RequestParam("user") String userJson){
         userService.addUser(image,userJson);
         return ResponseEntity.ok("User added successfully.");
     }
@@ -51,7 +51,7 @@ public class UserController {
     }
 
     @PutMapping("/updateUser/{id}")
-    public ResponseEntity<String> updateUser(@PathVariable int id,@RequestParam("image") MultipartFile image, @RequestParam("user") String userJson){
+    public ResponseEntity<String> updateUser(@PathVariable int id,@RequestParam(value = "image", required = false) MultipartFile image, @RequestParam("user") String userJson){
         return userService.updateUser(id,image,userJson);
     }
     @GetMapping("/getRoleFromEmail/{email}")

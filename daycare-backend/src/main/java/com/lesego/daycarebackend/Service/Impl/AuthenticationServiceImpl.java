@@ -94,7 +94,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             userInfo.setPassword(user.get().getPassword());
             userInfo.setMobile(user.get().getMobile());
             userInfo.setRole(user.get().getRole());
-            userInfo.setImage(ImageUtils.decompressImage(user.get().getImage()));
+            userInfo.setWhatsAppNo(user.get().getWhatsAppNo());
+            userInfo.setFacebookLink(user.get().getFacebookLink());
+            userInfo.setInstagramLink(user.get().getInstagramLink());
+            userInfo.setLinkedInLink(user.get().getLinkedInLink());
+            userInfo.setTwitterLink(user.get().getTwitterLink());
+
+            if(user.get().getImage() != null){
+                userInfo.setImage(ImageUtils.decompressImage(user.get().getImage()));
+            }
+
 
             return userInfo;
         }

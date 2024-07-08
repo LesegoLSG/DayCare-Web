@@ -126,6 +126,7 @@ const EditUser = () => {
             errorMessage={errorMessage}
             handleInputChange={handleInputChange}
             handleSubmit={handleSubmit}
+            showPassword={false}
           />
         </div>
       </div>

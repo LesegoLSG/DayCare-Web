@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AxiosPrivateInstance from "../../../AuthServices/Axios/AxiosPrivateInstance";
 import "./User.css"; // if any custom styles
-import Image4 from "../../../Assets/Image4.jpg";
-import Image1 from "../../../Assets/Image1.jpg";
 import UploadImage from "./UploadImage/UploadImage";
 import VideoOrImageDisplay from "./VideoOrImageDisplay/VideoOrImageDisplay";
 import { IoMdCloseCircleOutline } from "react-icons/io";
@@ -105,6 +103,7 @@ const AddUser = () => {
             errorMessage={errorMessage}
             handleInputChange={handleInputChange}
             handleSubmit={handleSubmit}
+            showPassword={true}
           />
         </div>
       </div>

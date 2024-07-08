@@ -1,7 +1,13 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const FormSubmit = ({ handleSubmit, user, errorMessage, handleInputChange }) => {
+const FormSubmit = ({
+  handleSubmit,
+  user,
+  errorMessage,
+  handleInputChange,
+  showPassword,
+}) => {
   const navigate = useNavigate();
 
   return (
@@ -19,7 +25,9 @@ const FormSubmit = ({ handleSubmit, user, errorMessage, handleInputChange }) => 
             value={user.firstName}
             onChange={handleInputChange}
           />
-          {errorMessage.firstName && <span className="text-red-600">{errorMessage.firstName}</span>}
+          {errorMessage.firstName && (
+            <span className="text-red-600">{errorMessage.firstName}</span>
+          )}
         </div>
         <div className="flex flex-col">
           <label className="label text-start">Last Name:</label>
@@ -30,7 +38,9 @@ const FormSubmit = ({ handleSubmit, user, errorMessage, handleInputChange }) => 
             value={user.lastName}
             onChange={handleInputChange}
           />
-          {errorMessage.lastName && <span className="text-red-600">{errorMessage.lastName}</span>}
+          {errorMessage.lastName && (
+            <span className="text-red-600">{errorMessage.lastName}</span>
+          )}
         </div>
         <div className="flex flex-col">
           <label className="label text-start">Mobile Number:</label>
@@ -41,7 +51,9 @@ const FormSubmit = ({ handleSubmit, user, errorMessage, handleInputChange }) => 
             value={user.mobile}
             onChange={handleInputChange}
           />
-          {errorMessage.mobile && <span className="text-red-600">{errorMessage.mobile}</span>}
+          {errorMessage.mobile && (
+            <span className="text-red-600">{errorMessage.mobile}</span>
+          )}
         </div>
         <div className="flex flex-col">
           <label className="label text-start">Email Address:</label>
@@ -52,19 +64,28 @@ const FormSubmit = ({ handleSubmit, user, errorMessage, handleInputChange }) => 
             value={user.email}
             onChange={handleInputChange}
           />
-          {errorMessage.email && <span className="text-red-600">{errorMessage.email}</span>}
+          {errorMessage.email && (
+            <span className="text-red-600">{errorMessage.email}</span>
+          )}
         </div>
-        <div className="flex flex-col">
-          <label className="label text-start">Password:</label>
-          <input
-            className="inputField"
-            type="text"
-            name="password"
-            value={user.password}
-            onChange={handleInputChange}
-          />
-          {errorMessage.password && <span className="text-red-600 text-start">{errorMessage.password}</span>}
-        </div>
+        {showPassword && (
+          <div className="flex flex-col">
+            <label className="label text-start">Password:</label>
+            <input
+              className="inputField"
+              type="text"
+              name="password"
+              value={user.password}
+              onChange={handleInputChange}
+            />
+            {errorMessage.password && (
+              <span className="text-red-600 text-start">
+                {errorMessage.password}
+              </span>
+            )}
+          </div>
+        )}
+
         <div className="flex flex-col">
           <label className="label text-start">Roles:</label>
           <select
@@ -78,7 +99,9 @@ const FormSubmit = ({ handleSubmit, user, errorMessage, handleInputChange }) => 
             <option value="ADMIN">ADMIN</option>
             <option value="CONTENT_CREATOR">CONTENT_CREATOR</option>
           </select>
-          {errorMessage.role && <span className="text-red-600">{errorMessage.role}</span>}
+          {errorMessage.role && (
+            <span className="text-red-600">{errorMessage.role}</span>
+          )}
         </div>
         <div className="flex flex-col">
           <label className="label text-start">Whatsapp Number:</label>
@@ -120,12 +143,25 @@ const FormSubmit = ({ handleSubmit, user, errorMessage, handleInputChange }) => 
             onChange={handleInputChange}
           />
         </div>
+        <div className="flex flex-col">
+          <label className="label text-start">Twitter Link:</label>
+          <input
+            className="inputField"
+            type="text"
+            name="twitterLink"
+            value={user.twitterLink}
+            onChange={handleInputChange}
+          />
+        </div>
       </div>
       <div className="flex justify-between mt-4">
         <button type="submit" className="bg-blue-200 w-40 h-8 p-1">
           Submit
         </button>
-        <button onClick={() => navigate('/portal/users')} className="bg-red-600 w-40 h-8 p-1">
+        <button
+          onClick={() => navigate("/portal/users")}
+          className="bg-red-600 w-40 h-8 p-1"
+        >
           Cancel
         </button>
       </div>
