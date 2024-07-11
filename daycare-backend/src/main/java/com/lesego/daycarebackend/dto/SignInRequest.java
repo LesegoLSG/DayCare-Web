@@ -1,5 +1,8 @@
 package com.lesego.daycarebackend.dto;
-
+/**
+ * Data transfer object (DTO) representing a sign-in request.
+ * @author Mhlongo Lesego
+ */
 public class SignInRequest {
 
     private String email;

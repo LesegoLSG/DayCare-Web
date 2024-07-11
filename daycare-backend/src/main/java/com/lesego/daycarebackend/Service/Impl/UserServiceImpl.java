@@ -8,13 +8,21 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
+/**
+ * Implementation of UserService providing user details retrieval.
+ * @author Mhlongo Lesego
+ */
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private  UserRepository userRepository;
+    /**
+     * Retrieves the UserDetailsService for Spring Security.
+     *
+     * @return UserDetailsService implementation that loads UserDetails by username.
+     */
 
     @Override
     public UserDetailsService userDetailsService(){

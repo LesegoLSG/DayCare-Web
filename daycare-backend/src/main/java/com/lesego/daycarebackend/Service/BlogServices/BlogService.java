@@ -25,7 +25,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * Service class for handling Blog operations.
+ * author Mhlongo Lesego
+ */
 @Service
 public class BlogService implements IBlogService{
     @Autowired
@@ -38,25 +41,26 @@ public class BlogService implements IBlogService{
         this.userRepository = userRepository;
     }
 
-    private String convertPlainTextToHtml(String plainText) {
-        // You can implement your own logic here to convert plain text to HTML
-        // For example, you can simply wrap the plain text in <p> tags
-        return "<p>" + plainText + "</p>";
-    }
-
+    /**
+     * Adds a new blog post.
+     *
+     * @param cardImage the image file for the blog post
+     * @param blogJson JSON string representing the blog post data
+     * @param userId the ID of the user creating the blog post
+     * @return a ResponseEntity indicating the result of the add operation
+     * @throws IOException if there is an error processing the image file
+     */
     @Override
     public ResponseEntity<String> addBlog(MultipartFile cardImage, String blogJson, int userId) throws IOException {
         // Get user by ID
         User existingUser = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        System.out.println("TEsting 1");
 
         // Register LocalDate deserializer with custom date format
         ObjectMapper objectMapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
         module.addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         objectMapper.registerModule(module);
-        System.out.println("TEsting 2");
         Blog blog;
         try {
 
@@ -70,15 +74,19 @@ public class BlogService implements IBlogService{
 
         // Set user and card image to blog
         blog.setUser(existingUser);
-        blog.setCardImage(ImageUtils.compressImage(cardImage.getBytes()));
-
+        if(cardImage != null && !cardImage.isEmpty()){
+            blog.setCardImage(ImageUtils.compressImage(cardImage.getBytes()));
+        }
         // Save the blog
         blogRepo.save(blog);
-
-
         return ResponseEntity.ok("Blog added successfully");
     }
 
+    /**
+     * Retrieves all blog posts with associated users.
+     *
+     * @return a ResponseEntity containing a list of Blog objects
+     */
     @Override
     public ResponseEntity<List<Blog>> getAllBlogs() {
         try {
@@ -95,10 +103,14 @@ public class BlogService implements IBlogService{
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-
-
     }
 
+    /**
+     * Retrieves a blog post by its ID.
+     *
+     * @param id the ID of the blog post
+     * @return a ResponseEntity containing the Blog object
+     */
     @Override
     public ResponseEntity<Blog> getBlogById(int id) {
         try {
@@ -108,20 +120,25 @@ public class BlogService implements IBlogService{
             if (blogOptional.isEmpty()) {
                 return ResponseEntity.notFound().build(); // Return 404 if blog not found
             }
-
             Blog blog = blogOptional.get();
-
             // Decompress the card image if it exists
             if (blog.getCardImage() != null) {
                 blog.setCardImage(ImageUtils.decompressImage(blog.getCardImage()));
             }
-
             return ResponseEntity.ok(blog);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
+    /**
+     * Updates an existing blog post.
+     *
+     * @param cardImage the new image file for the blog post
+     * @param blogJson JSON string representing the updated blog post data
+     * @param id the ID of the blog post to update
+     * @return a ResponseEntity indicating the result of the update operation
+     */
     @Override
     public ResponseEntity<String> updateBlog(MultipartFile cardImage, String blogJson, int id) {
         Optional<Blog> blogOptional = blogRepo.findById(id);
@@ -139,11 +156,6 @@ public class BlogService implements IBlogService{
         objectMapper.registerModule(module);
         Blog myNewBlog;
 
-        System.out.println("Updated blogdddd:" + blogToUpdate);
-        System.out.println("Updated blog contentddd:" + blogToUpdate.getContent());
-        System.out.println("Updated blog cardImageddd:" + blogToUpdate.getCardImage());
-
-
 
         //Update the blog details
         try{
@@ -157,21 +169,16 @@ public class BlogService implements IBlogService{
             blogToUpdate.setStatus(myNewBlog.getStatus());
             System.out.println("2");
 
-            if(cardImage != null){
-                System.out.println("3");
+            if(cardImage != null && !cardImage.isEmpty()){
 
                 try{
                     blogToUpdate.setCardImage(ImageUtils.compressImage(cardImage.getBytes()));
-                    System.out.println("4");
 
                 }catch (IOException e){
                     throw new IllegalArgumentException("Error processing image file");
                 }
 
             }
-            System.out.println("Updated blog:" + blogToUpdate);
-            System.out.println("Updated blog content:" + blogToUpdate.getContent());
-            System.out.println("Updated blog cardImage:" + blogToUpdate.getCardImage());
 
             // Save the updated blog
             blogRepo.save(blogToUpdate);
@@ -184,6 +191,12 @@ public class BlogService implements IBlogService{
 
     }
 
+    /**
+     * Deletes a blog post by its ID.
+     *
+     * @param id the ID of the blog post to delete
+     * @return a ResponseEntity indicating the result of the delete operation
+     */
     @Override
     public ResponseEntity<String> deleteBlog(int id) {
         Optional<Blog> blogOptional = blogRepo.findById(id);
@@ -191,7 +204,6 @@ public class BlogService implements IBlogService{
         if (blogOptional.isEmpty()) {
             return ResponseEntity.notFound().build(); // Return 404 if blog not found
         }
-
         blogRepo.deleteById(id); // Delete the blog
         return ResponseEntity.ok("Blog deleted successfully");
     }

@@ -10,10 +10,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
+/**
+ * Entity class representing a User in the system.
+ * Implements UserDetails for Spring Security integration.
+ *
+ * @author Mhlongo Lesego
+ */
 @Entity
 @Table(name = "user")
 public class User implements UserDetails {
+    //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -45,9 +51,26 @@ public class User implements UserDetails {
     @Column(nullable = true)
     private String twitterLink;
 
-
+    //Parameterless constructor
     public User(){}
 
+    /**
+     * Parameterised constructor for creating a User instance.
+     *
+     * @param firstName User's first name
+     * @param lastName User's last name
+     * @param email User's email
+     * @param password User's password
+     * @param image User's profile image
+     * @param mobile User's mobile number
+     * @param role User's role
+     * @param blog List of blogs associated with the user
+     * @param whatsAppNo User's WhatsApp number
+     * @param facebookLink User's Facebook link
+     * @param instagramLink User's Instagram link
+     * @param linkedInLink User's LinkedIn link
+     * @param twitterLink User's Twitter link
+     */
     public User(String firstName, String lastName, String email, String password, byte[] image, String mobile,RoleType role, List<Blog> blog,String whatsAppNo,String facebookLink,String instagramLink, String linkedInLink,String twitterLink) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -64,6 +87,7 @@ public class User implements UserDetails {
         this.twitterLink = twitterLink;
     }
 
+    //Getters and setters
     public int getId() {
         return id;
     }
@@ -98,6 +122,11 @@ public class User implements UserDetails {
         this.email = email;
     }
 
+    /**
+     * Returns the authorities granted to the user.
+     *
+     * @return a collection of GrantedAuthority
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));

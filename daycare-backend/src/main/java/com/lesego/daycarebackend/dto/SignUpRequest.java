@@ -4,7 +4,10 @@ import com.lesego.daycarebackend.Entity.User.RoleType;
 
 import java.util.List;
 
-
+/**
+ * Data transfer object (DTO) representing a sign-up request.
+ * @author Mhlongo Lesego
+ */
 public class SignUpRequest {
     private byte[] image;
     private String firstName;

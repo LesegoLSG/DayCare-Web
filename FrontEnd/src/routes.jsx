@@ -43,6 +43,14 @@ const routes = createBrowserRouter([
     path: "/bloginfo/:id",
     element: <BlogReadMorePage />,
   },
+  {
+    path: "/terms&Conditions",
+    element: <TermsAndConditions />,
+  },
+  {
+    path: "/privacy-policy",
+    element: <PrivacyPolicy />,
+  },
 
   {
     path: "/portal",

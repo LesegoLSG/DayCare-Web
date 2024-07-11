@@ -15,7 +15,7 @@ const BottomBar = () => {
   return (
     <div className="md:hidden fixed bottom-0 left-0 w-full bg-gray-800 text-white flex justify-around py-3">
       <button
-        onClick={() => handleNavigation("/portal/")}
+        onClick={() => handleNavigation("/portal/dashboard")}
         className="flex flex-col items-center"
       >
         <MdOutlineDashboard size={24} />
@@ -36,7 +36,7 @@ const BottomBar = () => {
         <span className="text-xs">Blogs</span>
       </button>
       <button
-        onClick={() => handleNavigation("/portal/subscriptions")}
+        onClick={() => handleNavigation("/portal/profile")}
         className="flex flex-col items-center"
       >
         <ImProfile size={24} />

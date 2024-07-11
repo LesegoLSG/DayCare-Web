@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "../blog.css";
-import BlogContent from "./BlogContent";
-import CardPreview from "./CardPreview";
 import { useUser } from "../../../../Contexts/UserLoggedIn";
 import LoadingModal from "../../../../ReusableComponents/LoadingSpinner/LoadingModal";
 import axiosPrivateInstance from "../../../../AuthServices/Axios/AxiosPrivateInstance";
 import BlogForm from "./BlogForm";
 import CardImage from "./CardImage";
 import { useNavigate } from "react-router-dom";
+import {
+  successPopUp,
+  errorPopUp,
+} from "../../../../ReusableComponents/Notification/Notification";
 
 const AddBlog = () => {
   const navigate = useNavigate();
@@ -86,9 +88,10 @@ const AddBlog = () => {
         }
       );
       setLoading(false);
+      successPopUp("Blog Added successfully");
       navigate("/portal/blog");
     } catch (error) {
-      console.log("Error adding a user");
+      errorPopUp("Error adding a blog, please try again later.");
     }
   };
 

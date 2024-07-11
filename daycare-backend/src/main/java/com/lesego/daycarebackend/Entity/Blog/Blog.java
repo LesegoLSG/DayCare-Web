@@ -6,10 +6,15 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Date;
-
+/**
+ * Entity class representing a Blog post.
+ * Each Blog is associated with a User who created it.
+ * @author Mhlongo Lesego
+ */
 @Entity
 @Table(name = "blog")
 public class Blog {
+    // Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -35,6 +40,19 @@ public class Blog {
 
     }
 
+    /**
+     * Parameterized constructor for creating a Blog instance.
+     *
+     * @param cardImage Image associated with the blog post
+     * @param title Title of the blog post
+     * @param topic Topic of the blog post
+     * @param content Content of the blog post
+     * @param date Date of the blog post
+     * @param category Category of the blog post
+     * @param status Status of the blog post
+     * @param user User who created the blog post
+     */
+
     public Blog(byte[] cardImage, String title, String topic, String content, LocalDate date,String category,Status status,User user) {
         this.cardImage = cardImage;
         this.title = title;
@@ -45,7 +63,7 @@ public class Blog {
         this.status = status;
         this.user = user;
     }
-
+    // Getters and setters
     public int getId() {
         return id;
     }

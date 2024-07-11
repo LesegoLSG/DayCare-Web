@@ -19,7 +19,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-
+/**
+ * JwtAuthenticationFilter intercepts incoming requests to validate JWT tokens
+ * and set up Spring Security context if the token is valid.
+ * This filter is executed once per request.
+ * @author Mhlongo Lesego
+ */
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -27,6 +32,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private JWTService jwtService;
     @Autowired
     private UserService userService;
+    /**
+     * Filters incoming requests to validate JWT tokens and set up Spring Security context.
+     *
+     * @param request     HTTP request object.
+     * @param response    HTTP response object.
+     * @param filterChain Filter chain to execute after filtering.
+     * @throws ServletException If there is an issue with the servlet.
+     * @throws IOException      If there is an IO issue.
+     */
+
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,@NonNull HttpServletResponse response,@NonNull FilterChain filterChain)
             throws ServletException, IOException {
@@ -34,19 +49,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
         final String userEmail;
-
+        // Check if the Authorization header is present and starts with "Bearer "
         if(authHeader == null || !authHeader.startsWith("Bearer ")){
             filterChain.doFilter(request,response);
             return;
         }
 
+        // Extract JWT token from the Authorization header
         jwt = authHeader.substring(7);
         userEmail = jwtService.extractUserName(jwt);
-
+        // If user email is extracted and no authentication is set in the security context
         if(userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null){
             UserDetails userDetails = userService.userDetailsService().loadUserByUsername(userEmail);
-
+            // Validate the JWT token
             if(jwtService.isTokenValid(jwt,userDetails)){
+                // Create authentication token and set it in the security context
                 SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
 
                 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
@@ -55,9 +72,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 securityContext.setAuthentication(token);
-                SecurityContextHolder.setContext(securityContext);
+                SecurityContextHolder.setContext(securityContext);  // Set the security context
             }
         }
-        filterChain.doFilter(request,response);
+        filterChain.doFilter(request,response); // Proceed to the next filter in the chain
     }
 }

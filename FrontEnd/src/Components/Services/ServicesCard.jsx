@@ -24,7 +24,7 @@ const ServicesCard = ({ singleService, onOpenModal, index }) => {
       className=" w-[18rem] h-[18rem] m-6 p-6 flex flex-col justify-center items-center relative rounded-full  border-4  border-solid "
       style={{ borderColor: colorStyling }}
     >
-      <div className="bg-balance rounded-full w-[5rem] h-[5rem] absolute top-0 right-2 transform -translate-y-1/2 border border-black border-solid">
+      <div className="bg-balance rounded-full w-[5rem] h-[5rem] absolute top-0 right-2 transform -translate-y-1/2 border-4 border-[#36C2CE] border-solid ">
         {animation}
       </div>
       <h1 className="text-base font-semibold mt-6">{title}</h1>

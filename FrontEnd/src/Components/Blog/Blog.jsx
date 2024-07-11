@@ -91,7 +91,7 @@ const Blog = () => {
       id="blog"
     >
       <div className="flex flex-col justify-center">
-        <h1 className="h2 my-2">Blog</h1>
+        <h1 className="h2 my-2 text-[#36C2CE]">Insights & Updates</h1>
         <motion.h2
           initial={{ rotateX: 0 }}
           whileInView={{ rotateX: "360deg" }}

@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./User.css";
 import UsersList from "./UsersList";
-import userData from "./UsersData";
-import AddUser from "./AddUser";
 import NoUser from "./NoUser";
-import EditUser from "./EditUser";
-import AxiosPrivateInstance from "../../../AuthServices/Axios/AxiosPrivateInstance";
 
+import AxiosPrivateInstance from "../../../AuthServices/Axios/AxiosPrivateInstance";
+import {
+  successPopUp,
+  errorPopUp,
+} from "../../../ReusableComponents/Notification/Notification";
 import { IoMdAdd } from "react-icons/io";
 import ViewUser from "./ViewUser/ViewUser";
 import LoadingModal from "../../../ReusableComponents/LoadingSpinner/LoadingModal";
 import DeleteDialog from "../../../ReusableComponents/ConfirmationsDialogs/DeleteDialog";
+import { ToastContainer } from "react-toastify";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -60,8 +61,9 @@ const Users = () => {
         if (response.data) {
           setUsers(users.filter((user) => user.id !== id));
         }
+        successPopUp("User deleted successfully");
       } catch (error) {
-        console.log("Delete error", error);
+        errorPopUp("Error deleting a user, Please try again later.");
       }
     }
     setLoading(false);
@@ -152,6 +154,7 @@ const Users = () => {
           />
         )}
       </div>
+      <ToastContainer />
       {loading && <LoadingModal />}
     </section>
   );

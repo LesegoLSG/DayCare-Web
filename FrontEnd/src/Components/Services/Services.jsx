@@ -21,7 +21,7 @@ const Services = () => {
       id="services"
     >
       <div className="flex flex-col justify-center">
-        <h1 className="h2 my-2">Services</h1>
+        <h1 className="h2 my-2 text-[#36C2CE]">Our Expertise</h1>
         <motion.h2
           className="h3"
           initial={{ rotateX: 0 }}

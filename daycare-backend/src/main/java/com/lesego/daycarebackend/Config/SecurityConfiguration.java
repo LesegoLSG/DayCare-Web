@@ -32,7 +32,13 @@ public class SecurityConfiguration {
     private  JwtAuthenticationFilter jwtAuthenticationFilter;
     @Autowired
     private  UserService userService;
-
+    /**
+     * Configures security filters and policies for different endpoints.
+     *
+     * @param http HttpSecurity object to configure security settings.
+     * @return SecurityFilterChain configured with specified settings.
+     * @throws Exception If configuration encounters an error.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(AbstractHttpConfigurer::disable)
@@ -50,7 +56,11 @@ public class SecurityConfiguration {
                 );
         return http.build();
     }
-
+    /**
+     * Configures the authentication provider.
+     *
+     * @return DaoAuthenticationProvider configured with userDetailsService and passwordEncoder.
+     */
     @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -59,16 +69,33 @@ public class SecurityConfiguration {
         return authenticationProvider;
     }
 
+    /**
+     * Provides a BCrypt password encoder bean.
+     *
+     * @return BCryptPasswordEncoder bean instance.
+     */
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
+    /**
+     * Provides an AuthenticationManager bean.
+     *
+     * @param config AuthenticationConfiguration object for obtaining the authentication manager.
+     * @return AuthenticationManager instance.
+     * @throws Exception If an error occurs while obtaining the authentication manager.
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
         throws Exception{
         return config.getAuthenticationManager();
     }
+
+    /**
+     * Configures CORS (Cross-Origin Resource Sharing) for all endpoints.
+     *
+     * @return CorsConfigurationSource configured with allowed origins, methods, and headers.
+     */
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();

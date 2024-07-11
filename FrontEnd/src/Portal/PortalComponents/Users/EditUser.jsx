@@ -66,6 +66,7 @@ const EditUser = () => {
         formData.append("user", JSON.stringify(user));
 
         const response = await AxiosPrivateInstance.put(
+      
           `/user/updateUser/${id}`,
           formData
         );

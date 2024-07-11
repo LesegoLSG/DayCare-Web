@@ -6,7 +6,10 @@ import com.lesego.daycarebackend.Repository.UserRepo.UserRepository;
 import com.lesego.daycarebackend.dto.DashboardStats;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+/**
+ * Service class for providing dashboard-related functionalities.
+ * @author Mhlongo Lesego
+ */
 @Service
 public class DashboardService implements IDashboardService {
     @Autowired
@@ -14,6 +17,12 @@ public class DashboardService implements IDashboardService {
     @Autowired
     public  BlogRepo blogRepo;
 
+
+    /**
+     * Retrieves statistics for the dashboard.
+     *
+     * @return a DashboardStats object containing the statistics
+     */
     public DashboardStats getDashboardStats(){
         DashboardStats stats = new DashboardStats();
 
@@ -26,6 +35,12 @@ public class DashboardService implements IDashboardService {
 
     }
 
+    /**
+     * Counts the number of blogs created by a user with the given user ID.
+     *
+     * @param userId the ID of the user
+     * @return the number of blogs created by the user
+     */
     public long getBlogsByUserId(int userId) {
         return blogRepo.countByUserId(userId);
     }

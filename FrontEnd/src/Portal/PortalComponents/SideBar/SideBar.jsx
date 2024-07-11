@@ -11,6 +11,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { MdDashboard } from "react-icons/md";
 import { IoIosArrowDown } from "react-icons/io";
 import { ImProfile } from "react-icons/im";
+import Logo2 from "../../../Assets/Logo/Logo2.png";
 
 import AuthService from "../../../AuthServices/AuthService/AuthService";
 
@@ -77,18 +78,20 @@ const SideBar = () => {
           onClick={() => setIsSmallScreenOpen(false)}
         />
         <div className="inline-flex">
-          <FaBookReader
-            className={`text-4xl rounded cursor-pointer block float-left mr-2 duration-500 ${
+          <img
+            src={Logo2}
+            alt="Logo1"
+            className={`w-36 rounded cursor-pointer block float-left mr-2 duration-500 ${
               isOpen && "rotate-[360deg]"
             }`}
           />
-          <h1
+          {/* <h1
             className={`text-white origin-left font-medium text-2xl duration-500 ${
               !isOpen && "scale-0"
             }`}
           >
             Less-Ego
-          </h1>
+          </h1> */}
         </div>
         {/* <div className={`flex items-center rounded-md bg-white mt-6 ${!isOpen ? "px-2.5" : "px-4"} py-2`}>
                     <IoSearchOutline className={`text-gray-400 text-lg block float-left cursor-pointer mr-2 ${isOpen && "mr-2"}`} />

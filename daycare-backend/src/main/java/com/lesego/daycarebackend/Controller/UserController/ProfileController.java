@@ -15,11 +15,14 @@ public class ProfileController {
 
     @Autowired
     private IUserServiceMethods userService;
+
+    //Updating a profile
     @PutMapping("/profileUpdate/{id}")
     public ResponseEntity<String> updateProfile(@PathVariable int id, @RequestParam(value = "image", required = false) MultipartFile image, @RequestParam("user") String userJson){
         return userService.updateUser(id,image,userJson);
     }
 
+    //Updating a password
     @PutMapping("/updateUserPassword/{id}")
     public ResponseEntity<String> updateUserPassword(@RequestBody String password,@PathVariable int id){
         return userService.updateUserPassword(id,password);

@@ -13,7 +13,10 @@ import java.security.Key;
 import java.util.Date;
 import java.util.Map;
 import java.util.function.Function;
-
+/**
+ * Implementation of JWTService providing JWT token generation, validation, and extraction.
+ * @author Mhlongo Lesego
+ */
 @Service
 public class JWTServiceImpl implements JWTService {
     /**

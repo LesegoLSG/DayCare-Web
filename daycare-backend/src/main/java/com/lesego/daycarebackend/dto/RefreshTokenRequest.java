@@ -1,5 +1,8 @@
 package com.lesego.daycarebackend.dto;
-
+/**
+ * Data transfer object (DTO) representing a request to refresh an authentication token.
+ * @author Mhlongo Lesego
+ */
 public class RefreshTokenRequest {
 
     private String refreshToken;

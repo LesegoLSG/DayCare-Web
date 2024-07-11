@@ -22,25 +22,13 @@ const slideImages = [
   {
     url: Memories1,
     caption: "Creating unforgettable memories with us",
-    sectionId: "",
+    sectionId: "blog",
     buttonName: "Explore Memories",
   },
 ];
 
 const Hero = () => {
   const slideRef = useRef(null);
-
-  const handleSlidePrev = () => {
-    if (slideRef.current) {
-      slideRef.current.goBack();
-    }
-  };
-
-  const handleSlideNext = () => {
-    if (slideRef.current) {
-      slideRef.current.goNext();
-    }
-  };
 
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
@@ -60,7 +48,9 @@ const Hero = () => {
             <div key={index}>
               <div
                 className="slide-content"
-                style={{ backgroundImage: `url(${slideImage.url})` }}
+                style={{
+                  backgroundImage: `url(${slideImage.url})`,
+                }}
               >
                 <div className="slide-overlay">
                   <span className="slide-caption">{slideImage.caption}</span>
@@ -77,7 +67,9 @@ const Hero = () => {
         </Slide>
         <div className="welcome-text">
           <h1 className="font-bold text-2xl mb-2">Welcome To</h1>
-          <h1 className="font-bold text-6xl font-serif mb-2">Mamoriti</h1>
+          <h1 className="font-bold text-6xl font-serif mb-2 text-[#36C2CE]">
+            Star Bright
+          </h1>
           <h1 className="font-bold text-2xl">Daycare Center</h1>
         </div>
       </div>

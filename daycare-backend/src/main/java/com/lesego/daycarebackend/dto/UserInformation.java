@@ -3,9 +3,12 @@ package com.lesego.daycarebackend.dto;
 import com.lesego.daycarebackend.Entity.User.RoleType;
 
 import java.util.List;
-
+/**
+ * Data transfer object (DTO) representing user information.
+ * @author Mhlongo Lesego
+ */
 public class UserInformation {
-
+    //Attributes
     private int id;
     private byte[] image;
     private String firstName;
@@ -27,6 +30,7 @@ public class UserInformation {
 
     private String twitterLink;
 
+    //Getters and setters
     public int getId() {
         return id;
     }

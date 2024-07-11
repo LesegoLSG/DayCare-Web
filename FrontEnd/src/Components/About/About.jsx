@@ -25,7 +25,7 @@ const About = () => {
       className="bg-white w-full h-auto pt-20 px-6 md:px-12 relative py-16"
     >
       <div className="flex flex-col justify-center">
-        <h1 className="h2 my-2">About US</h1>
+        <h1 className="h2 my- text-[#36C2CE]">Our Journey</h1>
         <motion.h2
           initial={{ rotateX: 0 }}
           whileInView={{ rotateX: "360deg" }}
@@ -52,7 +52,7 @@ const About = () => {
           >
             We are a trusted daycare center with over 10 years of experience in
             providing a nurturing and playful environment for children to
-            blossom and thrive. At [Mamoriti], we believe in fostering
+            blossom and thrive. At Star Bright, we believe in fostering
             creativity, curiosity, and compassion in every child, preparing them
             for a lifetime of success.
           </motion.p>
@@ -64,17 +64,17 @@ const About = () => {
             transition={{ duration: 2, ease: "easeInOut" }}
           >
             <div className=" w-auto h-auto ">
-              <h1 className="text-green-600 font-bold transform -rotate-6">
+              <h1 className="text-[#36C2CE] font-bold transform -rotate-6">
                 AGE GROUP:
               </h1>
               <h2 className="font-bold">2-6 Years</h2>
-              <h1 className="text-green-600 font-bold transform -rotate-6">
+              <h1 className="text-[#36C2CE] font-bold transform -rotate-6">
                 Grade R
               </h1>
               <h2 className=" font-bold transform -rotate-10">5-6 Years</h2>
             </div>
             <div className=" w-auto h-auto ">
-              <h1 className="text-green-600 font-bold">TRADING HOURS:</h1>
+              <h1 className="text-[#36C2CE] font-bold">TRADING HOURS:</h1>
               <h2>7:00am - 4:00pm</h2>
               <h2>Monday - Thursday</h2>
               <h2>Friday 7:00am - 3:00pm</h2>

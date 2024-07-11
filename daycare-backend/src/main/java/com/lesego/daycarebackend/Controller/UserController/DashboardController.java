@@ -17,7 +17,7 @@ public class DashboardController {
 
     @Autowired
     private IDashboardService iDashboardService;
-
+    //Get system stats
     @GetMapping("/stats")
     public ResponseEntity<DashboardStats> getDashboardStats(){
         DashboardStats stats = iDashboardService.getDashboardStats();

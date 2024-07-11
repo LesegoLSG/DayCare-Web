@@ -22,6 +22,7 @@ public class PublicBlogController {
         this.iBlogService = iBlogService;
     }
 
+    //Get a list of blog
     @GetMapping("/getAllBlogs")
     public ResponseEntity<List<Blog>> getAllBlogs(){
         return iBlogService.getAllBlogs();

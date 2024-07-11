@@ -18,12 +18,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
+/**
+ * Service class for managing user-related operations.
+ * This class provides methods for adding, updating, deleting, and retrieving users,
+ * as well as managing user roles and passwords.
+ *
+ * @author Mhlongo Lesego
+ */
 @Service
 public class UserServiceMethods implements IUserServiceMethods {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Add a new user.
+     *
+     * @param image Multipart file containing the user's profile image
+     * @param userJson JSON string representing the user data
+     * @return a success message indicating the user was added
+     */
     @Override
     public String addUser(MultipartFile image, String userJson) {
         //Parse the Json String to a User object
@@ -37,25 +50,27 @@ public class UserServiceMethods implements IUserServiceMethods {
             // Handle JSON parsing exception
             throw new IllegalArgumentException("Invalid user JSON format");
         }
-
         // Set the image data from the multipart file and encode password
         try {
             if(image != null && !image.isEmpty()){
                 user.setImage(ImageUtils.compressImage(image.getBytes()));
             }
-
         } catch (IOException e) {
             // Handle file processing exception
             throw new IllegalArgumentException("Error processing image file");
         }
-
-
-
         // Save the user to the database
         userRepository.save(user);
         return "User added successfully:" + user.getFirstName();
     }
-
+    /**
+     * Update an existing user.
+     *
+     * @param id the ID of the user to update
+     * @param image Multipart file containing the new profile image
+     * @param userJson JSON string representing the new user data
+     * @return a ResponseEntity indicating the result of the update operation
+     */
     @Override
     public ResponseEntity<String> updateUser(int id, MultipartFile image, String userJson) {
         Optional<User> optionalUser = userRepository.findById(id);
@@ -95,7 +110,12 @@ public class UserServiceMethods implements IUserServiceMethods {
         }
         return null;
     }
-
+    /**
+     * Delete a user by ID.
+     *
+     * @param id the ID of the user to delete
+     * @return a ResponseEntity indicating the result of the delete operation
+     */
     @Override
     public ResponseEntity<String> deleteUser(int id) {
         Optional<User> user = userRepository.findById(id);
@@ -106,14 +126,24 @@ public class UserServiceMethods implements IUserServiceMethods {
            return ResponseEntity.notFound().build();
        }
     }
-
+    /**
+     * Get the role of a user by their email.
+     *
+     * @param email the email of the user
+     * @return the role of the user
+     */
     @Override
     public String getRoleFromUserEmail(String email) {
         System.out.println("Service email:" + email);
         User user = userRepository.findByEmail(email).orElseThrow();
         return user.getRole().name();
     }
-
+    /**
+     * Get user information by ID.
+     *
+     * @param id the ID of the user
+     * @return a UserInformation object containing the user's details
+     */
     @Override
     public UserInformation getUserById(int id) {
         User user = userRepository.findById(id).orElseThrow();
@@ -137,7 +167,13 @@ public class UserServiceMethods implements IUserServiceMethods {
 
 
     }
-
+    /**
+     * Update the password of a user.
+     *
+     * @param id the ID of the user
+     * @param passwordJson JSON string containing the new password
+     * @return a ResponseEntity indicating the result of the update operation
+     */
     @Override
     public ResponseEntity<String> updateUserPassword(int id, String passwordJson) {
         Optional<User> optionalUser = userRepository.findById(id);
@@ -163,9 +199,9 @@ public class UserServiceMethods implements IUserServiceMethods {
 
 
     /**
+     * Get a list of all users.
      *
-     * @return list of users
-     * Method to return all users
+     * @return a list of UserInformation objects representing all users
      */
     @Override
     public List<UserInformation> getAllUsers() {

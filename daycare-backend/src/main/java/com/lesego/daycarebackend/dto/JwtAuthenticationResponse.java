@@ -1,5 +1,9 @@
 package com.lesego.daycarebackend.dto;
 
+/**
+ * Data transfer object (DTO) representing a JWT authentication response.
+ * @author Mhlongo Lesego
+ */
 public class JwtAuthenticationResponse {
 
     private String token;

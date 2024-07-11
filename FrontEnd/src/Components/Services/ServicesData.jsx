@@ -1,14 +1,11 @@
-import TestingImage from "../../Assets/TestingImage.jpg";
-import Lesego from "../../Assets/Lesego.png";
-import EmptyUser from "../../Assets/EmptyUser.png";
 import Lottie from "lottie-react";
 
 import animationArts from "./AnimationJSON/Arts.json";
 import booksAnimation from "./AnimationJSON/Book.json";
 import mealData from "./AnimationJSON/Meal.json";
-import funWalkData from "./AnimationJSON/Funwalk.json";
+import Play from "./AnimationJSON/Play.json";
 import musicData from "./AnimationJSON/Music.json";
-import socialData from "./AnimationJSON/Social.json";
+import SocialDev from "./AnimationJSON/SocialDev.json";
 
 import EarlyChildhoodEdu from "../../Assets/ServicesImages/EarlyChildhoodEdu.jpg";
 import Art from "../../Assets/ServicesImages/Art.jpg";
@@ -100,7 +97,7 @@ const serviceData = [
     extendedDescription:
       "Outdoor play is an integral part of our curriculum, providing children with opportunities to explore the natural world, engage in physical activity, and develop a sense of environmental stewardship. Through supervised outdoor adventures, children learn to appreciate the beauty of nature, build resilience, and develop important social skills such as cooperation and teamwork.",
     imageMain: OutdoorPlaying,
-    animation: <Lottie animationData={funWalkData} />,
+    animation: <Lottie animationData={Play} />,
     colorStyling: "purple",
     keyFeatures: [
       "Supervised outdoor adventures",
@@ -212,7 +209,7 @@ const serviceData = [
     extendedDescription:
       "Building strong social and emotional skills is crucial for children's success in school and life. In our program, children engage in activities that promote self-awareness, empathy, and effective communication. They learn to recognize and manage their emotions, resolve conflicts peacefully, and develop healthy relationships with peers and adults.",
     imageMain: SocialDevelopment,
-    animation: <Lottie animationData={socialData} />,
+    animation: <Lottie animationData={SocialDev} />,
     colorStyling: "yellow",
     keyFeatures: [
       "Promotes self-awareness and empathy",
