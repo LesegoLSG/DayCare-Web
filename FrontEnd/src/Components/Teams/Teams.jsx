@@ -8,7 +8,7 @@ const Teams = () => {
   return (
     <section className="bg-white w-full h-auto flex flex-col justify-center items-center relative py-16">
       <div className="flex flex-col justify-center items-center">
-        <h1 className="h2 my-2 text-[#36C2CE]">Meet the Team</h1>
+        <h1 className="h2 my-2 text-touch">Meet the Team</h1>
         <motion.h2
           initial={{ rotateX: 0 }}
           whileInView={{ rotateX: "360deg" }}

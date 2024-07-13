@@ -24,7 +24,7 @@ const SideBar = () => {
   const Menus = [
     {
       title: "Dashboard",
-      link: "/portal/dashboard",
+      link: "/portal",
       icon: <MdOutlineDashboard />,
     },
     { title: "Users", link: "/portal/users", icon: <FaUserFriends /> },

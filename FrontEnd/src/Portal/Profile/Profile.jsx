@@ -103,7 +103,7 @@ const Profile = () => {
             />
           </div>
         ) : (
-          <div className="bg-gray-200 w-full grid sm:grid-cols-1 md:grid-cols-2">
+          <div className=" w-full grid sm:grid-cols-1 md:grid-cols-2">
             {/* Profile picture */}
             <div className=" w-full h-auto flex flex-col justify-center items-center">
               <div>

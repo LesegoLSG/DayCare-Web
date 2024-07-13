@@ -24,9 +24,9 @@ const Footer = () => {
             <div className="mb-5">
               <h4 className="text-2xl pb-4">Locate Us</h4>
               <p className="text-gray-500">
-                1330 Mosia Street
+                122D East Street
                 <br />
-                Soweto <br />
+                Johannesburg <br />
                 1868 <br /> <br />
                 <strong>Phone:</strong> +27 119328945
                 <br />

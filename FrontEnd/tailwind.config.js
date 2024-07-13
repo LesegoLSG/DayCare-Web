@@ -10,7 +10,8 @@ export default {
         primary: '#DDE6ED',
         secondary: '#9DB2BF',
         balance: '#526D82',
-        action: '#27374D'
+        action: '#27374D',
+        touch:'#36C2CE'
       }
     },
   },

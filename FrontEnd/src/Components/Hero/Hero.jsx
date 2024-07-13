@@ -67,7 +67,7 @@ const Hero = () => {
         </Slide>
         <div className="welcome-text">
           <h1 className="font-bold text-2xl mb-2">Welcome To</h1>
-          <h1 className="font-bold text-6xl font-serif mb-2 text-[#36C2CE]">
+          <h1 className="font-bold text-6xl font-serif mb-2 text-touch">
             Star Bright
           </h1>
           <h1 className="font-bold text-2xl">Daycare Center</h1>

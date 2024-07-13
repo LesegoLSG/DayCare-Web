@@ -49,7 +49,7 @@ const Testimonials = () => {
       className="bg-primary w-full h-auto relative py-16"
     >
       <div className="flex flex-col justify-center">
-        <h1 className="h2 my-2 text-[#36C2CE]">What People Say</h1>
+        <h1 className="h2 my-2 text-touch">What People Say</h1>
         <motion.h2
           initial={{ rotateX: 0 }}
           whileInView={{ rotateX: "360deg" }}

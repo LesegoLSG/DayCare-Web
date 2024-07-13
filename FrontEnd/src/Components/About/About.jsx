@@ -25,7 +25,7 @@ const About = () => {
       className="bg-white w-full h-auto pt-20 px-6 md:px-12 relative py-16"
     >
       <div className="flex flex-col justify-center">
-        <h1 className="h2 my- text-[#36C2CE]">Our Journey</h1>
+        <h1 className="h2 my- text-touch">Our Journey</h1>
         <motion.h2
           initial={{ rotateX: 0 }}
           whileInView={{ rotateX: "360deg" }}

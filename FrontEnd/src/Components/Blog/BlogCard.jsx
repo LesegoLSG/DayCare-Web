@@ -15,7 +15,7 @@ const BlogCard = ({ singleBlog }) => {
   };
 
   return (
-    <div className="bg-white shadow-xl shadow-black w-[18rem] h-auto flex flex-col mx-auto my-2">
+    <div className="bg-white shadow-xl shadow-black w-[18rem] h-auto flex flex-col mx-auto my-2 rounded-b-lg">
       {/* Card Image */}
       <div
         className="w-full h-[10rem] bg-cover bg-center"

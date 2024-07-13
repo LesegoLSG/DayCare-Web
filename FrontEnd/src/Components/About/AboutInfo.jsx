@@ -8,7 +8,7 @@ const AboutInfo = () => {
   return (
     <section className="about-info-container bg-white w-full h-auto pt-20 px-6 md:px-12">
       <div className="flex flex-col justify-center items-center">
-        <h1 className="h2 my-2">About Us</h1>
+        <h1 className="h2 my-2 text-touch">About Us</h1>
         <h2 className="h3">Discover Our Story of Nurturing and Growth</h2>
       </div>
       <div className="about-info-content w-full h-auto grid sm:grid-cols-1 md:grid-cols-2 p-6">

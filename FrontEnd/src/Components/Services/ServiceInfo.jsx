@@ -13,7 +13,7 @@ const ServiceInfo = () => {
   return (
     <section className="bg-primary w-full h-auto py-10 flex flex-col items-center">
       <div className="w-full max-w-6xl bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-4xl font-extrabold mb-6 text-center text-gray-800">
+        <h1 className="text-4xl font-extrabold mb-6 text-center text-touch">
           {service.title}
         </h1>
         <div className="flex flex-col lg:flex-row items-center lg:items-start lg:space-x-8">

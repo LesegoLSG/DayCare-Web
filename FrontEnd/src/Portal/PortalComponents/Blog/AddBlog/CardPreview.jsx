@@ -4,12 +4,21 @@ import { IoPersonOutline } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoMdShare } from "react-icons/io";
 import { IoMdCloseCircleOutline } from "react-icons/io";
+import DefaultBlogImage from "../../../../Assets/DefaultBlogImage.png";
 
-const CardPreview = ({ onClose, blog }) => {
+const CardPreview = ({ onClose, blog, cardImage }) => {
+  if (!blog) return null;
+
+  const imageUrl = cardImage
+    ? URL.createObjectURL(cardImage)
+    : DefaultBlogImage;
+
   const truncateText = (text, maxLength) => {
     if (text.length <= maxLength) return text;
     return text.slice(0, maxLength) + "...";
   };
+
+  console.log("cardImage: ", cardImage);
 
   return (
     <div
@@ -28,7 +37,7 @@ const CardPreview = ({ onClose, blog }) => {
           <div
             className="w-full h-[10rem] bg-cover bg-center relative"
             style={{
-              backgroundImage: `url('data:image/**;base64,${blog.cardImage}')`,
+              backgroundImage: `url(${imageUrl})`,
             }}
           />
           {/* Card content */}
@@ -51,12 +60,8 @@ const CardPreview = ({ onClose, blog }) => {
                 <span>
                   <IoPersonOutline />
                 </span>
-                <span className="text-xs text-gray-600">
-                  {blog.user.firstName}
-                </span>
-                <span className="text-xs text-gray-600 mx-1">
-                  {blog.user.lastName}
-                </span>
+                <span className="text-xs text-gray-600">{"Lesego"}</span>
+                <span className="text-xs text-gray-600 mx-1">{"Mhlongo"}</span>
               </div>
             </div>
 

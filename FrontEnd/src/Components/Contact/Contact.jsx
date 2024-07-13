@@ -107,7 +107,7 @@ const Contact = () => {
   return (
     <section id="contact" className="bg-primary w-full h-auto pt-20 py-16">
       <div className="flex flex-col justify-center items-center">
-        <h1 className="h2 my-2 text-[#36C2CE]">Get in Touch</h1>
+        <h1 className="h2 my-2 text-touch">Get in Touch</h1>
         <motion.h2
           initial={{ rotateX: 0 }}
           whileInView={{ rotateX: "360deg" }}

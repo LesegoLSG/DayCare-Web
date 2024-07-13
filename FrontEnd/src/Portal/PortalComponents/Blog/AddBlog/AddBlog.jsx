@@ -110,6 +110,7 @@ const AddBlog = () => {
         />
         <BlogForm
           blog={blog}
+          cardImage={cardImage}
           handleInputChange={handleInputChange}
           onClose={handleClosePreviewModal}
           isPreviewCard={isPreviewCard}

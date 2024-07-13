@@ -1,10 +1,16 @@
-import React from 'react';
-import BlogContent from './BlogContent';
-import CardPreview from './CardPreview';
+import React from "react";
+import BlogContent from "./BlogContent";
+import CardPreview from "./CardPreview";
 
 const BlogForm = ({
-  onClose, blog, handleInputChange, isPreviewCard,
-  handleOpenModal, handleOpenPreviewModal, submitBlog
+  onClose,
+  blog,
+  handleInputChange,
+  isPreviewCard,
+  handleOpenModal,
+  handleOpenPreviewModal,
+  submitBlog,
+  cardImage,
 }) => {
   if (!blog) return null; // Return null if blog is not available
 
@@ -15,7 +21,7 @@ const BlogForm = ({
         <label className="label text-start">Status:</label>
         <select
           name="status"
-          value={blog.status || ''}
+          value={blog.status || ""}
           onChange={handleInputChange}
           className="inputField"
         >
@@ -28,7 +34,7 @@ const BlogForm = ({
         <label className="label text-start">Category:</label>
         <select
           name="category"
-          value={blog.category || ''}
+          value={blog.category || ""}
           onChange={handleInputChange}
           className="inputField"
         >
@@ -50,7 +56,7 @@ const BlogForm = ({
         <label className="label text-start">Date:</label>
         <input
           name="date"
-          value={blog.date || ''}
+          value={blog.date || ""}
           onChange={handleInputChange}
           className="inputField"
           type="date"
@@ -60,7 +66,7 @@ const BlogForm = ({
         <label className="label text-start">Title:</label>
         <input
           name="title"
-          value={blog.title || ''}
+          value={blog.title || ""}
           onChange={handleInputChange}
           className="inputField"
           type="text"
@@ -70,13 +76,15 @@ const BlogForm = ({
         <label className="label text-start">Topic:</label>
         <input
           name="topic"
-          value={blog.topic || ''}
+          value={blog.topic || ""}
           onChange={handleInputChange}
           className="inputField"
           type="text"
         />
 
-        {isPreviewCard && <CardPreview onClose={onClose} blog={blog} />}
+        {isPreviewCard && (
+          <CardPreview onClose={onClose} blog={blog} cardImage={cardImage} />
+        )}
 
         <div className="flex justify-between items-center mt-6">
           <button
