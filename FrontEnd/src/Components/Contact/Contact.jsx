@@ -130,7 +130,7 @@ const Contact = () => {
           </h2>
           <div className="flex items-center mb-4">
             <FiMail className="text-gray-600 text-lg" />
-            <span className="ml-2">lesegomhlongo78@gmail.com</span>
+            <span className="text-center">lesegomhlongo78@gmail.com</span>
           </div>
           <div className="flex items-center mb-4">
             <FiPhone className="text-gray-600 text-lg" />
