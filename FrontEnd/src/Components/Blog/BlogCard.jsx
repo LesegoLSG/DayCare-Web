@@ -25,11 +25,6 @@ const BlogCard = ({ singleBlog }) => {
       ></div>
       {/* Card content */}
       <div className=" w-full h-auto  md:h-auto flex flex-col justify-center items-center ">
-        {/* title */}
-        <div className="  w-full h-auto flex justify-start items-start pb-2 px-2">
-          <h1 className="text-lg font-semibold">{singleBlog.title}</h1>
-        </div>
-
         {/* icon text */}
         <div className=" w-full  h-auto flex flex-row justify-start items-start px-2">
           <div className="flex flex-row justify-start items-start ">
@@ -47,6 +42,12 @@ const BlogCard = ({ singleBlog }) => {
               {singleBlog.user.firstName} {singleBlog.user.lastName}
             </span>
           </div>
+        </div>
+        {/* title */}
+        <div className="  w-full h-auto flex justify-start items-start pb-2 px-2">
+          <h1 className="text-lg font-semibold text-start">
+            {singleBlog.title}
+          </h1>
         </div>
 
         {/* Description */}
