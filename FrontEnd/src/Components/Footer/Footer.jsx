@@ -28,9 +28,9 @@ const Footer = () => {
                 <br />
                 Johannesburg <br />
                 1868 <br /> <br />
-                <strong>Phone:</strong> +27 119328945
+                <strong>Phone:</strong> +27 64 037 3089
                 <br />
-                <strong>Email:</strong>mamoriti@gmail.com
+                <strong>Email:</strong>lesegomhlongo78@gmail.com
                 <br />
               </p>
             </div>
