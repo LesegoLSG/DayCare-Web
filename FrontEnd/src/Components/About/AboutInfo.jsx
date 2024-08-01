@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import PlayingKid from "../../Assets/PlayingKid.png";
-
 import { motion } from "framer-motion";
 import NavBarAlt from "../NavBar/NavBarAlt";
 import Footer from "../Footer/Footer";
