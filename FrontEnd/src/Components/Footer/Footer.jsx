@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   IoLogoFacebook,
   IoLogoWhatsapp,
@@ -8,6 +8,8 @@ import {
 import { MdOutlineMailOutline } from "react-icons/md";
 
 const Footer = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   //Scroll to a selected section
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
@@ -16,9 +18,13 @@ const Footer = () => {
     }
   };
 
+  const handleHomeNavigate = () => {
+    navigate("/");
+  };
+
   return (
     <footer>
-      <div className="p-10 bg-gray-800 text-gray-200">
+      <div className="p-4 bg-gray-800 text-gray-200">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
             <div className="mb-5">
@@ -36,32 +42,44 @@ const Footer = () => {
             </div>
             <div className="mb-5">
               <h4 className="text-2xl pb-4">Organization</h4>
-              <ul>
-                <li
-                  className="pb-4 cursor-pointer"
-                  onClick={() => scrollToSection("home")}
-                >
-                  Home
-                </li>
-                <li
-                  className="pb-4 cursor-pointer"
-                  onClick={() => scrollToSection("about")}
-                >
-                  About
-                </li>
-                <li
-                  className="pb-4 cursor-pointer"
-                  onClick={() => scrollToSection("services")}
-                >
-                  Services
-                </li>
-                <li
-                  className="pb-4 cursor-pointer"
-                  onClick={() => scrollToSection("blog")}
-                >
-                  Blog
-                </li>
-              </ul>
+              {/* display links based on the url */}
+              {location.pathname == "/" ? (
+                <ul>
+                  <li
+                    className="pb-4 cursor-pointer"
+                    onClick={() => scrollToSection("home")}
+                  >
+                    Home
+                  </li>
+                  <li
+                    className="pb-4 cursor-pointer"
+                    onClick={() => scrollToSection("about")}
+                  >
+                    About
+                  </li>
+                  <li
+                    className="pb-4 cursor-pointer"
+                    onClick={() => scrollToSection("services")}
+                  >
+                    Services
+                  </li>
+                  <li
+                    className="pb-4 cursor-pointer"
+                    onClick={() => scrollToSection("blog")}
+                  >
+                    Blog
+                  </li>
+                </ul>
+              ) : (
+                <ul>
+                  <li
+                    className="pb-4 cursor-pointer"
+                    onClick={handleHomeNavigate}
+                  >
+                    Home
+                  </li>
+                </ul>
+              )}
             </div>
             <div className="mb-5">
               <h4 className="text-2xl pb-4">Important Links</h4>

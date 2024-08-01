@@ -117,7 +117,7 @@ const Contact = () => {
           Let's Connect and Grow Together
         </motion.h2>
       </div>
-      <div className="container mx-auto flex justify-center items-center  py-16 px-12 md:px-0">
+      <div className="container mx-auto flex justify-center items-center  py-16 px-4 md:px-0">
         <motion.div
           initial={{ y: 50 }}
           whileInView={{ y: 0 }}

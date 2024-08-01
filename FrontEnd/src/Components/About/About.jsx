@@ -13,8 +13,15 @@ import { useInView } from "react-intersection-observer";
 import Lottie from "lottie-react";
 import animationData from "./KidsAnimation.json";
 import { useNavigate } from "react-router-dom";
+import { scrollToTop } from "../../ReusableComponents/ScrollToTop";
+
 const About = () => {
   const navigate = useNavigate();
+
+  const handleMoreInfo = () => {
+    navigate("/aboutInfo");
+    scrollToTop();
+  };
 
   return (
     <motion.section
@@ -22,7 +29,7 @@ const About = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       id="about"
-      className="bg-white w-full h-auto pt-20 px-6 md:px-12 relative py-16"
+      className="bg-white w-full h-auto pt-20 px-2 md:px-12 relative py-16"
     >
       <div className="flex flex-col justify-center">
         <h1 className="h2 my- text-touch">Our Journey</h1>
@@ -35,7 +42,7 @@ const About = () => {
           Discover Our Story of Nurturing and Growth
         </motion.h2>
       </div>
-      <div className=" w-full h-auto grid sm:grid-cols-1 md:grid-cols-2 p-6 py-16">
+      <div className=" w-full h-auto grid sm:grid-cols-1 md:grid-cols-2 p-2 py-16">
         <motion.div
           initial={{ scale: 0 }}
           whileInView={{ scale: 1 }}
@@ -82,7 +89,7 @@ const About = () => {
             </div>
           </motion.div>
 
-          <button className=" button" onClick={() => navigate("/aboutInfo")}>
+          <button className=" button" onClick={handleMoreInfo}>
             Learn More
           </button>
         </div>

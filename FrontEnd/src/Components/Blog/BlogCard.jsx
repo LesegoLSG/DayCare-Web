@@ -1,12 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { MdDateRange } from "react-icons/md";
 import { IoPersonOutline } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoMdShare } from "react-icons/io";
+import { scrollToTop } from "../../ReusableComponents/ScrollToTop";
 
 const BlogCard = ({ singleBlog }) => {
-  // const { id, image, title, briefDescription, date, author, reactions } = singleBlog;
+  const navigate = useNavigate();
 
   // Function to truncate text with ellipsis
   const truncateText = (text, maxLength) => {
@@ -14,8 +16,13 @@ const BlogCard = ({ singleBlog }) => {
     return text.slice(0, maxLength) + "...";
   };
 
+  const handleNavigateBlog = () => {
+    scrollToTop();
+    navigate(`/bloginfo/${singleBlog.id}`);
+  };
+
   return (
-    <div className="bg-white shadow-xl shadow-black w-[18rem] h-auto flex flex-col mx-auto my-2 rounded-b-lg">
+    <div className="bg-white shadow-xl shadow-black w-[20rem] md:w-[18rem] h-auto flex flex-col mx-auto my-2 rounded-b-lg">
       {/* Card Image */}
       <div
         className="w-full h-[10rem] bg-cover bg-center"
@@ -56,9 +63,9 @@ const BlogCard = ({ singleBlog }) => {
         </div>
         {/* controls */}
         <div className=" w-full h-auto flex justify-between items-center px-2 py-1">
-          <Link to={`/bloginfo/${singleBlog.id}`} className="button">
+          <button onClick={handleNavigateBlog} className="button">
             Read More
-          </Link>
+          </button>
           {/* <div className=" rounded-full p-2 border-2 border-black cursor-pointer  mr-1 mb-1">
                         <IoMdShare className="text-xl" />
                     </div> */}

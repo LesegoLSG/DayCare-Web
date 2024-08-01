@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { scrollToTop } from "../../ReusableComponents/ScrollToTop";
 
 const ServicesCard = ({ singleService, onOpenModal, index }) => {
   const {
@@ -18,6 +19,10 @@ const ServicesCard = ({ singleService, onOpenModal, index }) => {
 
   // Calculate translateY value based on index
   // const translateY = `${index * -10}px`; // Adjust this value as needed for the desired spacing
+  const handleNavigate = () => {
+    navigate(`/servicedetails/${singleService.id}`);
+    scrollToTop();
+  };
 
   return (
     <div
@@ -29,10 +34,7 @@ const ServicesCard = ({ singleService, onOpenModal, index }) => {
       </div>
       <h1 className="text-base font-semibold mt-6">{title}</h1>
       <p>{briefDescription}</p>
-      <button
-        className="button"
-        onClick={() => navigate(`/servicedetails/${singleService.id}`)}
-      >
+      <button className="button" onClick={handleNavigate}>
         Read More
       </button>
     </div>
