@@ -19,7 +19,7 @@ const BlogInfo = () => {
     <>
       <NavBarAlt />
 
-      <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md mt-12 md:mt-6">
+      <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md mt-12 mb-6 md:mt-6">
         <div
           className=" w-full h-80 rounded-t-lg"
           style={{

@@ -8,13 +8,13 @@ import Footer from "../Footer/Footer";
 const AboutInfo = () => {
   const navigate = useNavigate();
   return (
-    <section className="about-info-container bg-white w-full h-auto pt-20 px-2 md:px-12">
+    <section className="about-info-container bg-white w-full h-auto ">
       <NavBarAlt />
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center pt-20 px-2 md:px-12">
         <h1 className="h2 my-2 text-touch">About Us</h1>
         <h2 className="h3">Discover Our Story of Nurturing and Growth</h2>
       </div>
-      <div className="about-info-content w-full h-auto grid sm:grid-cols-1 md:grid-cols-2 p-2">
+      <div className="about-info-content w-full h-auto grid sm:grid-cols-1 md:grid-cols-2 px-2 py-10 ">
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
           whileInView={{ opacity: 100, scale: 1 }}
