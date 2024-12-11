@@ -59,14 +59,7 @@ const NavBar = () => {
       <div className="md:px-10 py-4 px-7 md:flex justify-between items-center bg-white ">
         {/* Logo */}
         <div className="flex cursor-pointer items-center gap-2">
-          <img
-            src={Logo1}
-            alt="Logo1"
-            className="w-28"
-            onClick={scrollToHome}
-          />
-          {/* <IoLogoChrome className="w-7 h-7 text-primary " />
-                  <span className="font-bold">Less-Ego</span> */}
+          <h1 className="text-xl text-touch font-bold">StarBright</h1>
         </div>
         {/* Menu Icons */}
         <div

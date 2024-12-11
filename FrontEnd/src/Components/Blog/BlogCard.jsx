@@ -33,15 +33,15 @@ const BlogCard = ({ singleBlog }) => {
       {/* Card content */}
       <div className=" w-full h-auto  md:h-auto flex flex-col justify-center items-center ">
         {/* icon text */}
-        <div className=" w-full  h-auto flex flex-row justify-start items-start px-2">
-          <div className="flex flex-row justify-start items-start ">
+        <div className=" w-full  h-auto flex flex-row justify-start items-start gap-2 px-2 py-1">
+          <div className="flex flex-row justify-start items-start gap-1">
             <span>
               <MdDateRange />
             </span>
             <span className="text-xs text-gray-600">{singleBlog.date}</span>
           </div>
 
-          <div className="flex flex-row justify-start items-start mx-1">
+          <div className="flex flex-row justify-start items-start mx-1 gap-1">
             <span>
               <IoPersonOutline />
             </span>
@@ -50,17 +50,19 @@ const BlogCard = ({ singleBlog }) => {
             </span>
           </div>
         </div>
-        {/* title */}
-        <div className="  w-full h-auto flex justify-start items-start pb-2 px-2">
-          <h1 className="text-lg font-semibold text-start">
-            {singleBlog.title}
-          </h1>
-        </div>
 
         {/* Description */}
         <div className=" w-full max-h-20 flex justify-start items-start pb-2 px-2">
-          <p className="text-left">{truncateText(singleBlog.topic, 100)}</p>
+          <p className="text-left font-semibold">
+            {truncateText(singleBlog.topic, 100)}
+          </p>
         </div>
+
+        {/* title */}
+        <div className="  w-full h-auto flex justify-start items-start pb-2 px-2">
+          <h1 className="text-base text-start">{singleBlog.title}</h1>
+        </div>
+
         {/* controls */}
         <div className=" w-full h-auto flex justify-between items-center px-2 py-1">
           <button onClick={handleNavigateBlog} className="button">

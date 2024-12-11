@@ -5,7 +5,7 @@ import AuthService from "../AuthService/AuthService";
 
 //Base url
 const axiosPrivateInstance = axios.create({
-  baseURL: "https://backenddaycareapp.onrender.com/api/v1",
+  baseURL: "http://localhost:8080/api/v1",
 });
 //Attaches an end point with a bear token, but validating expiration time for a token and refreshes the token before a request is sent to the server
 axiosPrivateInstance.interceptors.request.use(
