@@ -12,41 +12,32 @@ import { IoSearchOutline } from "react-icons/io5";
 import "./Blog.css";
 import SearchBar from "../../ReusableComponents/SearchBar/SearchBar";
 import { motion } from "framer-motion";
-
 import { useBlogs } from "../../Contexts/BlogContext";
 
 const Blog = () => {
-  // const [blogs,setBlogs] = useState([]);
   const { blogs, setBlogs } = useBlogs();
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
-
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 6;
-
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchBlogs = async () => {
+    setIsLoading(true); // Set loading to true before the request
     try {
-      //  setIsLoading(true);
       const response = await axiosInstance.get("/publicBlog/getAllBlogs");
-      console.log("Response public:", response);
       setBlogs(response.data);
-
-      //  setIsLoading(false);
     } catch (error) {
-      console.log("Error fetching blogs:", error);
+      console.error("Error fetching blogs:", error);
+    } finally {
+      setIsLoading(false); // Set loading to false after the request
     }
   };
-  console.log("Blog view posts:", blogs);
-  // useEffect hook to fetch users when component mounts
+
   useEffect(() => {
     fetchBlogs();
   }, []);
 
-  console.log("In Blog blogs:", blogs);
-
-  // Filter blogs based on search term
   const categories = [...new Set(blogs.map((blog) => blog.category))];
   const filteredBlogs = blogs.filter((blog) => {
     const searchTerm = search.toLowerCase();
@@ -102,9 +93,15 @@ const Blog = () => {
         </motion.h2>
       </div>
       <div className="w-full h-auto flex flex-col justify-center items-center md:flex-col my-4  py-16">
-        {isLoading && <LoadingModal />}
-        {/* <BlogScroller /> */}
-
+        {isLoading && <LoadingModal />} {/* Show spinner when loading */}
+        {!isLoading && blogs.length === 0 && (
+          <div className="w-full h-full flex justify-center items-center">
+            <h1 className="text-base font-semibold text-center">
+              Our system is currently down due to maintenance, please try again
+              later.
+            </h1>
+          </div>
+        )}
         <div className="w-full">
           <CategorySlider
             categories={categories}
@@ -112,48 +109,34 @@ const Blog = () => {
             handleCategoryFilter={handleCategoryFilter}
           />
         </div>
-        {/* Searchbar component*/}
         <div className="w-full flex justify-center items-center px-16 my-4 md:justify-end">
           <SearchBar setSearch={setSearch} />
         </div>
       </div>
-      <div className=" w-full h-auto px-2 md:px-12 pb-20">
-        <div className=" w-full md:flex md:flex-row h-auto ">
-          {/* Left side */}
-          <div className=" w-full md:w-3/4 ">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {records.map((myBlogData, index) => (
-                <BlogCard key={index} singleBlog={myBlogData} />
-              ))}
-            </div>
-            <div className="flex justify-center items-center my-4">
-              <Pagination
-                handlePreviousPage={handlePreviousPage}
-                handleNextPage={handleNextPage}
-                currentPage={currentPage}
-                totalPages={totalPages}
-                setCurrentPage={setCurrentPage}
-              />
+      {!isLoading &&
+        blogs.length > 0 && ( // Show blogs only when not loading and blogs exist
+          <div className=" w-full h-auto px-2 md:px-12 pb-20">
+            <div className=" w-full md:flex md:flex-row h-auto ">
+              <div className=" w-full md:w-3/4 ">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {records.map((myBlogData, index) => (
+                    <BlogCard key={index} singleBlog={myBlogData} />
+                  ))}
+                </div>
+                <div className="flex justify-center items-center my-4">
+                  <Pagination
+                    handlePreviousPage={handlePreviousPage}
+                    handleNextPage={handleNextPage}
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    setCurrentPage={setCurrentPage}
+                  />
+                </div>
+              </div>
+              <BlogSideBar blogs={blogs} />
             </div>
           </div>
-          {/* right side */}
-          <BlogSideBar blogs={blogs} />
-        </div>
-      </div>
-
-      <div class="custom-shape-divider-bottom-1717894530">
-        <svg
-          data-name="Layer 1"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-            class="shape-fill"
-          ></path>
-        </svg>
-      </div>
+        )}
     </section>
   );
 };

@@ -32,7 +32,7 @@ const BlogSideBar = ({ blogs }) => {
         </div>
         {/* Upcoming Events */}
         <div className="p-4">
-          <h1 className="text-lg font-bold mb-1">Upcoming Events</h1>
+          <h1 className="text-start text-lg font-bold mb-1">Upcoming Events</h1>
           <div className="">
             {upcomingBlogs.map((upcoming, index) => (
               <React.Fragment key={index}>
